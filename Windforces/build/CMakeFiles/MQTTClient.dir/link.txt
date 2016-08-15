@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g   CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o CMakeFiles/MQTTClient.dir/main.cpp.o  -o MQTTClient -rdynamic /usr/local/lib/libwiringPi.so -lpthread /usr/local/lib/libpaho-mqtt3c.so -Wl,-rpath,/usr/local/lib 

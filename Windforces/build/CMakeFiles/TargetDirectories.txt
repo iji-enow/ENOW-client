@@ -1,0 +1,3 @@
+/home/ubuntu/Project/C/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/Project/C/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/Project/C/build/CMakeFiles/MQTTClient.dir
