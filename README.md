@@ -1,4 +1,8 @@
-# enow-api
+# ENOW API
 
-hello!
-ENOW-api
+Javascript api for ENOW
+
+##settings
+
+##Usage
+
