@@ -10,6 +10,14 @@ from org.jython.pythonSrc import StreamToLogger
 from body import eventHandler
 from postCode import postProcess
 
+'''
+List : Global Variables
+    Descriptions : 
+        threadExit : A variable for detecting whether a thread executing the body source has exited"
+        loggerStdout : A variable logging the stream passed out on STDOUT
+        loggerStderr : A variable logging the stream passed out on STDERR
+        lock = A semaphore assigned from thread
+'''
 threadExit = False
 loggerStdout = 0
 loggerStderr = 0
@@ -22,6 +30,7 @@ def eventHandlerFacade(_event, _context, _callback):
     global loggerStdout
     global loggerStderr
     global threadExit
+    global lock
     old_stdout = sys.stdout
     old_stderr = sys.stderr
     
@@ -93,9 +102,14 @@ def Main():
     loggerStdout = logging.getLogger("loggerDebug")
     loggerStderr = logging.getLogger("loggerError")
     
-    debugFileHandler = logging.FileHandler("./log/stdin")
+    CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+    
+    loggerStdoutFilePath = os.path.join(CURRENT_DIR, 'log')
+    loggerStderrFilePath = os.path.join(CURRENT_DIR, 'log')
+    
+    debugFileHandler = logging.FileHandler(str(loggerStdoutFilePath) + "/stdout")
     debugFileHandler.setLevel(logging.DEBUG)
-    errorFileHandler = logging.FileHandler("./log/stderr")
+    errorFileHandler = logging.FileHandler(str(loggerStderrFilePath) + "/stderr")
     errorFileHandler.setLevel(logging.ERROR)
     
     formatterDebug = logging.Formatter(formatDebug)
@@ -116,6 +130,7 @@ def Main():
         if threadExit == True:
             lock.release()
             break
+        lock.release()
     
     postProcess(_event, _context, _callback)
     

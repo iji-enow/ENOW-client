@@ -1,6 +1,12 @@
 from org.jython.interfaces import BuildingType
 from org.jython.runtimePackage import main
 
+'''
+Class : Building
+    Description : 
+     Actual class implementing interface of BuildingType
+'''
+
 class Building(BuildingType):
     def __init__(self):
         self.source = None
@@ -30,6 +36,11 @@ class Building(BuildingType):
         self.payload = str(_payload) 
     
     def run(self):
+        '''
+        Function : run
+            Description : 
+             A bridge connecting the actual part of implementation and the method shown outside
+        '''
         if self.parameter is not None and self.payload is not None and self.payload is not None:
             self.main = main(_source=self.source,
                              _parameter=self.parameter,
