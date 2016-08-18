@@ -3,9 +3,14 @@ import thread
 import json
 import logging
 import os
-from enow.jython.pythonSrc.body import eventHandler
-from enow.jython.pythonSrc.postCode import postProcess
-from enow.jython.pythonSrc.StreamToLogger import StreamToLogger
+
+fileDir = os.path.dirname(os.path.realpath('__file__'))
+modulePath = os.path.join(fileDir, 'src/enow/jython/pythonSrc')
+sys.path.append(modulePath)
+
+from body import eventHandler
+from postCode import postProcess
+from StreamToLogger import StreamToLogger
 '''
 List : Global Variables
     Descriptions : 
@@ -15,26 +20,34 @@ List : Global Variables
         lock = A semaphore assigned from thread
 '''
 threadExit = False
-loggerStdout = 0
-loggerStderr = 0
 lock = 0
 
 def kilobytes(megabytes):
     return megabytes * 1024 * 1024
 
 def eventHandlerFacade(_event, _context, _callback):
-    global loggerStdout
-    global loggerStderr
     global threadExit
     global lock
     old_stdout = sys.stdout
     old_stderr = sys.stderr
     
-    logger = StreamToLogger(loggerStdout, logging.DEBUG)
-    sys.stdout = logger
+    CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+    loggerStdoutFilePath = os.path.join(CURRENT_DIR, 'log', 'log.txt')
     
-    logger = StreamToLogger(loggerStderr, logging.ERROR)
-    sys.stderr = logger
+    logging.basicConfig(
+                       level=logging.DEBUG,
+                       format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
+                       filename=loggerStdoutFilePath,
+                       filemode='a'
+                       )  
+ 
+    stdout_logger = logging.getLogger('STDOUT')
+    sl = StreamToLogger(stdout_logger, logging.INFO)
+    sys.stdout = sl
+ 
+    stderr_logger = logging.getLogger('STDERR')
+    sl = StreamToLogger(stderr_logger, logging.ERROR)
+    sys.stderr = sl
     
     eventHandler(_event, _context, _callback)
     
@@ -86,7 +99,7 @@ def Main():
     _context["function_name"] = ""
     _context["function_version"] = ""
     _context["invoked_ERN"] = ""
-    _context["memory_limit_in_mb"] = 0
+    _context["memory_limit_in_mb"] = 64
     _context["topicName"] = ""
     _context["deviceID"] = ""
     _context["parameter"] = parameterDump
@@ -100,38 +113,11 @@ def Main():
     
     stackSize = []
     stackSize.append(kilobytes(_context["memory_limit_in_mb"]))
-    thread.stack_size(stackSize)
+    thread.stack_size(kilobytes(64))
     
     """
     setting up a logger for debugging
     """
-    formatDebug = '%(levelname)s:%(message)s'
-    formatError = '%(levelname)s:%(module)s:%(funcName)s in line no (%(lineno)s) : %(message)s'
-    
-    global loggerStdout
-    global loggerStderr
-    
-    loggerStdout = logging.getLogger("loggerDebug")
-    loggerStderr = logging.getLogger("loggerError")
-    
-    CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
-    
-    loggerStdoutFilePath = os.path.join(CURRENT_DIR, 'log')
-    loggerStderrFilePath = os.path.join(CURRENT_DIR, 'log')
-    
-    debugFileHandler = logging.FileHandler(str(loggerStdoutFilePath) + "/stdout")
-    debugFileHandler.setLevel(logging.DEBUG)
-    errorFileHandler = logging.FileHandler(str(loggerStderrFilePath) + "/stderr")
-    errorFileHandler.setLevel(logging.ERROR)
-    
-    formatterDebug = logging.Formatter(formatDebug)
-    formatterError = logging.Formatter(formatError)
-    debugFileHandler.setFormatter(formatterDebug)
-    errorFileHandler.setFormatter(formatterError)
-    
-    loggerStdout.addHandler(debugFileHandler)
-    loggerStderr.addHandler(errorFileHandler)
-    
     try:
         thread.start_new_thread(eventHandlerFacade, (_event, _context, _callback))
     except:

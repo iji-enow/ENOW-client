@@ -36,27 +36,30 @@ class sourceControl:
         if not self.preCode or not self.body or self.postCode:
             print("At least one of the source is empty\n")
             
-        CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+        fileDir = os.path.dirname(os.path.realpath('__file__'))
         
-        pathPreCode = os.path.join(CURRENT_DIR + '..' + 'pythonSrc', 'preCode.py')
-        pathbodyCode = os.path.join(CURRENT_DIR + '..' + 'pythonSrc', 'body.py')
-        pathPostCode = os.path.join(CURRENT_DIR + '..' + 'pythonSrc', 'postCode.py')
-        fPreCode = open(str(pathPreCode), "r+")
-        fBodyCode = open(str(pathbodyCode), "r+")
-        fPostCode = open(str(pathPostCode), "r+")
+        pathPreCode = os.path.join(fileDir, 'src/enow/jython/pythonSrc/preCode.py')
+        pathbodyCode = os.path.join(fileDir, 'src/enow/jython/pythonSrc/body.py')
+        pathPostCode = os.path.join(fileDir, 'src/enow/jython/pythonSrc/preCode.py')
+#         fPreCode = open(pathPreCode, "r+")
+        fBodyCode = open(pathbodyCode, "r+")
+#         fPostCode = open(pathPostCode, "r+")
         
-        fPreCode.seek(0)
+#         fPreCode.seek(0)
         fBodyCode.seek(0)
-        fPostCode.seek(0)
+#         fPostCode.seek(0)
+
+        fBodyCode.truncate()
+        fBodyCode.seek(0)
         
-        if self.preCode:
-            fPreCode.writelines(self.preCode)
+#         if self.preCode:
+#             fPreCode.writelines(self.preCode)
         fBodyCode.writelines(self.body)
-        if self.postCode:
-            fPostCode.writelines(self.postCode)
+#         if self.postCode:
+#             fPostCode.writelines(self.postCode)
         
-        fPreCode.close()
+#         fPreCode.close()
         fBodyCode.close()
-        fPostCode.close()
+#         fPostCode.close()
         
         

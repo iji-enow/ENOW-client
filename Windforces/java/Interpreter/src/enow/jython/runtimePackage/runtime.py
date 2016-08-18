@@ -7,8 +7,6 @@ Class : runtime
 class runtime:
     
     def __init__(self):
-        self.fStdout.seek(0)
-        self.fStderr.seek(0)
         self.resultString = "" 
     '''
     Function : run(...)
@@ -24,10 +22,11 @@ class runtime:
         command = []
         command.append(jythonPath)
         command.append("-u")
-        command.append("./pythonSrc/preCode.py")
+        command.append("./src/enow/jython/pythonSrc/preCode.py")
         
         process = Popen(args=command,
                     stdin=PIPE,
+                    stdout=PIPE,
                     bufsize=1)
         
         print >> process.stdin, _payloads
@@ -36,6 +35,7 @@ class runtime:
         process.stdin.close()
         for line in iter(process.stdout.readline, ''):
             self.resultString += line
+            
         process.stdout.close()
         rc = process.wait()
         

@@ -32,11 +32,12 @@ public class entry{
 			
 			String PARAMETER = (String)jsonObject.get("PARAMETER");
 			String SOURCE = (String)jsonObject.get("SOURCE");
-			String PAYLOAD = (String)jsonObject.get("PAYLOAD");
+			JSONObject PAYLOAD = (JSONObject)jsonObject.get("PAYLOAD");
+			String PAYLOAD_STR = PAYLOAD.toString();
 			
 			building.setParameter(PARAMETER);
 			building.setcode(SOURCE);
-			building.setPayload(PAYLOAD);
+			building.setPayload(PAYLOAD_STR);
 			
 			result = building.run();
 		}

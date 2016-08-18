@@ -50,11 +50,11 @@ class Building(BuildingType):
              A bridge connecting the actual part of implementation and the method shown outside
         '''
         if self.parameter is not None and self.code is not None and self.payload is not None:
+            print("Running Jython program")
             self.main = runtimeMain(_source=self.code,
                              _parameter=self.parameter,
                              _payload=self.payload)
-            
-            self.controlSource()
+            self.main.controllSource()
             self.result = self.main.run()
             return self.result
         else:
