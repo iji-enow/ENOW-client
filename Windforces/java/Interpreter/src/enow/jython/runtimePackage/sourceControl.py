@@ -21,7 +21,7 @@ class sourceControl:
         Unless there is a reason to modify both the preCode and postCode,
         do not put anything on both the preCode and postCode parameter.
     '''
-    def __init__(self, preCode = None, body, postCode = None):
+    def __init__(self, preCode = None, body = None, postCode = None):
         self.preCode = preCode
         self.body = body
         self.postCode = postCode

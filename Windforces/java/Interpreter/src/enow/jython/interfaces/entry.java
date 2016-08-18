@@ -1,17 +1,12 @@
-package org.jython.interfaces;
+package enow.jython.interfaces;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.jython.interfaces.BuildingType;
-import org.jython.interfaces.JythonObjectFactory;
-
+import enow.jython.interfaces.BuildingType;
+import enow.jython.interfaces.JythonObjectFactory;
 
 /*
  * Class : entry
@@ -22,14 +17,16 @@ import org.jython.interfaces.JythonObjectFactory;
 public class entry{
 	public static void main(String[] args){
 		JythonObjectFactory factory = JythonObjectFactory.getInstance();
-		
+		@SuppressWarnings("static-access")
 		BuildingType building = (BuildingType)factory.createObject(BuildingType.class, "Building");
 		
 		JSONParser parser = new JSONParser();
 		String result = new String();
 		
 		try{
-			Object obj = parser.parse(new FileReader("./example.json"));
+			String cwd = System.getProperty("user.dir");
+			cwd += "/src/enow/jython/interfaces/example.json";
+			Object obj = parser.parse(new FileReader(cwd));
 			
 			JSONObject jsonObject = (JSONObject)obj;
 			
@@ -38,7 +35,7 @@ public class entry{
 			String PAYLOAD = (String)jsonObject.get("PAYLOAD");
 			
 			building.setParameter(PARAMETER);
-			building.setSource(SOURCE);
+			building.setcode(SOURCE);
 			building.setPayload(PAYLOAD);
 			
 			result = building.run();

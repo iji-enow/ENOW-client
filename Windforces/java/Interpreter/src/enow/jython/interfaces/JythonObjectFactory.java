@@ -1,4 +1,4 @@
-package org.jython.interfaces;
+package enow.jython.interfaces;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,13 +36,14 @@ public class JythonObjectFactory{
 	
 	public static Object createObject(Object interfaceType, String moduleName){
 		Object javaInt = null;
+		@SuppressWarnings("resource")
 		PythonInterpreter interpreter = new PythonInterpreter();
-		interpreter.exec("from org.jython import " + moduleName);
-		
+		interpreter.exec("from enow.jython." + moduleName + " import " + moduleName);
 		pyObject = interpreter.get(moduleName);
 		
 		try{
 			PyObject newObj = pyObject.__call__();
+			
 			javaInt = newObj.__tojava__(Class.forName(interfaceType.toString().substring(
                     interfaceType.toString().indexOf(" ")+1,
                     interfaceType.toString().length())));

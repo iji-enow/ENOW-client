@@ -3,8 +3,8 @@ Created on 2016. 8. 15.
 
 @author: jeasungpark
 '''
-from sourceControl import sourceControl
-from runtime import runtime
+from enow.jython.runtimePackage.sourceControl import sourceControl
+from enow.jython.runtimePackage.runtime import runtime
 '''
 Class : main
     Description : 

@@ -1,7 +1,0 @@
-{
-	PARAMETER : "-ls -t",
-	SOURCE : "def eventHandler(event, context, callback):\nevent[\"identification\"] = \"modified\"",
-	PAYLOAD : {
-		"identification" : "original"
-	}
-}

@@ -1,4 +1,4 @@
-package org.jython.interfaces;
+package enow.jython.interfaces;
 /*
  * Interface : BuildingType
  * 	 interface for communicating with jython script
@@ -9,12 +9,12 @@ package org.jython.interfaces;
  *  Third, make a factory object and use it as you wish through it
  */
 public interface BuildingType{
-	public String getSource();
+	public String getcode();
 	public String getParameter();
 	public String getPayload();
 	
 	public void setParameter(String _parameter);
-	public void setSource(String _source);
+	public void setcode(String _code);
 	public void setPayload(String _payload);
 	public String run();
 }
