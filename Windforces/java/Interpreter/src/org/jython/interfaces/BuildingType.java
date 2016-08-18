@@ -16,5 +16,5 @@ public interface BuildingType{
 	public void setParameter(String _parameter);
 	public void setSource(String _source);
 	public void setPayload(String _payload);
-	public void run();
+	public String run();
 }

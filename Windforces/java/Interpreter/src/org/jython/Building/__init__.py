@@ -1,11 +1,11 @@
 from org.jython.interfaces import BuildingType
-from org.jython.runtimePackage import main
-
+from __init__ import runtimeMain
 '''
 Class : Building
     Description : 
      Actual class implementing interface of BuildingType
 '''
+
 
 class Building(BuildingType):
     def __init__(self):
@@ -13,7 +13,8 @@ class Building(BuildingType):
         self.parameter = None
         self.payload = None
         self.main = None
-    
+        self.result = None
+        
     def getSource(self):
         if self.source is not None:
             return self.source
@@ -42,11 +43,12 @@ class Building(BuildingType):
              A bridge connecting the actual part of implementation and the method shown outside
         '''
         if self.parameter is not None and self.payload is not None and self.payload is not None:
-            self.main = main(_source=self.source,
+            self.main = runtimeMain(_source=self.source,
                              _parameter=self.parameter,
                              _payload=self.payload)
             self.controlSource()
-            self.main.run()
+            self.result = self.main.run()
+            return self.result
         else:
             print("At least one of the items are not set\n")
         

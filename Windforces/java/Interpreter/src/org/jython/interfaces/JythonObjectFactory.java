@@ -37,7 +37,7 @@ public class JythonObjectFactory{
 	public static Object createObject(Object interfaceType, String moduleName){
 		Object javaInt = null;
 		PythonInterpreter interpreter = new PythonInterpreter();
-		interpreter.exec("from " + moduleName + " import " + moduleName);
+		interpreter.exec("from org.jython import " + moduleName);
 		
 		pyObject = interpreter.get(moduleName);
 		

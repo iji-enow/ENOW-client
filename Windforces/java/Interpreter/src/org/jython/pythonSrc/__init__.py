@@ -2,13 +2,11 @@ import sys
 import thread
 import json
 import logging
-
-from org.jython.pythonSrc import body
-from org.jython.pythonSrc import postCode
-from org.jython.pythonSrc import StreamToLogger
+import os
 
 from body import eventHandler
 from postCode import postProcess
+from StreamToLogger import StreamToLogger
 
 '''
 List : Global Variables
@@ -53,13 +51,28 @@ def eventHandlerFacade(_event, _context, _callback):
 def Main():
     
     jsonDump = ""
+    parameterDump = ""
     while True:
         string = sys.stdin.readline()
         
         if not string:
             break
         
+        if string == "end\n":
+            break
+        
         jsonDump += str(string)
+        
+    while True:
+        string = sys.stdin.readline()
+        
+        if not string:
+            break
+        
+        if string == "end\n":
+            break
+        
+        parameterDump += str(string)
     
     _event = json.loads(jsonDump)
     _context = dict()
@@ -78,6 +91,7 @@ def Main():
     _context["memory_limit_in_mb"] = 0
     _context["topicName"] = ""
     _context["deviceID"] = ""
+    _context["parameter"] = parameterDump
     
     """
     setting up a thread for executing a body code

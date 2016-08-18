@@ -1,2 +1,3 @@
 def eventHandler(event, context, callback):
-    a = 1
+    event["identification"] = "modified"
+    print(context["parameter"])

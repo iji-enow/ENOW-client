@@ -31,6 +31,8 @@ class runtime:
                     bufsize=1)
         
         print >> process.stdin, _payloads
+        print >> process.stdin, "end\n"
+        print >> process.stdin, _args
         process.stdin.close()
         for line in iter(process.stdout.readline, ''):
             self.resultString += line
