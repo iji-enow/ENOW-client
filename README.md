@@ -22,11 +22,11 @@
 
   Another great feature of this project is that you can use python in java context. In order to do so, __Jython__ is the only feasible answer. So you need to get this liberary on your own project.
 
-## ToDo
+## To Do list
 
-- This project aims to run python script on java runtime.
+- [ ]This project aims to run python script on java runtime.
 
-- There are _2_ necessary __key : 'value'__  pairs and _1_ optional __key : 'value'__ pair on the json payload inside your MQTT request.
+- [ ]There are _2_ necessary __key : 'value'__  pairs and _1_ optional __key : 'value'__ pair on the json payload inside your MQTT request.
 
   ```
   {
@@ -38,7 +38,7 @@
   __REQUIRED__ : "PAYLOAD", "SOURCE"
   __OPTIONAL__ : "PARAMETER"
 
-- All you need to do is simple. _Load the pairs and run!_
+- [ ]All you need to do is simple. _Load the pairs and run!_
 
 ## Usage
 
