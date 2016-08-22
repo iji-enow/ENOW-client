@@ -1,3 +1,7 @@
+import something
+
 def eventHandler(event, context, callback):
-	event["identification"] = "modified"
-	print("succeed")
+	event["something"] = "value"
+	print("contents")
+	raise Exception
+	callback["returned"] = "value"
