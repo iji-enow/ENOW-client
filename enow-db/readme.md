@@ -40,6 +40,6 @@ ENOW database with MongoDB
     journal = true
    ```
 
-5. start MongoDB server with command ```$mongod.exe --config d:\mongodb\mongo.config``` in cmd.
+5. start MongoDB server with command ```$mongod.exe --config c:\mongodb\mongo.config``` in cmd.
 
 6. start MongoDB with ```$mongo``` command.
