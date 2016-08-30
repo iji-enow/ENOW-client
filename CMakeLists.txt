@@ -20,8 +20,10 @@ set (CLIENT_VERSION_MINOR 0)
 set (SOURCE_DIR ./)
 
 # Header files
-file(GLOB SOURCE_FILE ./src/*.cpp)
-file(GLOB HEADER_FILE ./header/*.hpp)
+file(GLOB SOURCE_FILE_CPP ./src/*.cpp)
+file(GLOB HEADER_FILE_CPP ./header/*.hpp)
+file(GLOB SOURCE_FILE_C ./src/*.c)
+file(GLOB HEADER_FILE_C ./header/*.h)
 
 # wiringPi selection flag
 option(USE_WIRINGPI
@@ -38,7 +40,7 @@ endif(USE_WIRINGPI)
 find_package(PahoMqtt REQUIRED)
 include_directories(${LIBMQTT_INCLUDE_DIRS})
 # add the executable
-add_executable(MQTTClient ${HEADER_FILE} ${SOURCE_FILE} ./main.cpp)
+add_executable(MQTTClient ${HEADER_FILE_C} ${HEADER_FILE_CPP}  ${SOURCE_FILE_C} ${SOURCE_FILE_CPP} ./main.cpp)
 
 if(USE_WIRINGPI)
 	target_link_libraries(MQTTClient ${WIRINGPI_LIBRARIES})

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu/Project/C
+CMAKE_SOURCE_DIR = /home/ubuntu/Repository/enow-api
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu/Project/C/build
+CMAKE_BINARY_DIR = /home/ubuntu/Repository/enow-api/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Project/C/build/CMakeFiles /home/ubuntu/Project/C/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/enow-api/build/CMakeFiles /home/ubuntu/Repository/enow-api/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Project/C/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/enow-api/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/KISA_SHA256.o: src/KISA_SHA256.c.o
+
+.PHONY : src/KISA_SHA256.o
+
+# target to build an object file
+src/KISA_SHA256.c.o:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o
+.PHONY : src/KISA_SHA256.c.o
+
+src/KISA_SHA256.i: src/KISA_SHA256.c.i
+
+.PHONY : src/KISA_SHA256.i
+
+# target to preprocess a source file
+src/KISA_SHA256.c.i:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i
+.PHONY : src/KISA_SHA256.c.i
+
+src/KISA_SHA256.s: src/KISA_SHA256.c.s
+
+.PHONY : src/KISA_SHA256.s
+
+# target to generate assembly for a file
+src/KISA_SHA256.c.s:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s
+.PHONY : src/KISA_SHA256.c.s
+
 src/MQTTClient.o: src/MQTTClient.cpp.o
 
 .PHONY : src/MQTTClient.o
@@ -189,6 +216,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/KISA_SHA256.o"
+	@echo "... src/KISA_SHA256.i"
+	@echo "... src/KISA_SHA256.s"
 	@echo "... src/MQTTClient.o"
 	@echo "... src/MQTTClient.i"
 	@echo "... src/MQTTClient.s"

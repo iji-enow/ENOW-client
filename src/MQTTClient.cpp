@@ -1,20 +1,37 @@
+/*Copyright [2016] [JeaSung Park]
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License
+*/
 #include "../header/MQTTClient.hpp"
 
 #define ON 1
 #define OFF 0
 
 typedef struct param{
-	char *topic;
+	string topic;
 	int qos;
+
+	MQTTClient *m_client;
 };
 
-MQTTClient objMQTTClient::m_client;
-MQTTClient_deliveryToken objMQTTClient::m_token;
 priority_queue<string> objMQTTClient::m_queue;
 
+static const char status_literal[7] = "status";
 
-#ifndef MQTTClient_willOptions_initializer
-	#define MQTTClient_willOptions_initializer {{'M', 'Q', 'T', 'W'}, 0, NULL, NULL, 1, 1}
+#ifndef my_MQTTClient_willOptions_initializer
+#define INITIALIZED true
+#else
+#define INITIALIZED false
 #endif
 
 /* int createClient(void)
@@ -22,7 +39,7 @@ priority_queue<string> objMQTTClient::m_queue;
  * for creating client object
  * if succeed, the function returns 0
  * if not, it returns an error code 
-*/
+ */
 
 int objMQTTClient::createClient(string _address, string _clientID){
 	int result = 0;
@@ -47,6 +64,14 @@ int objMQTTClient::createClient(string _address, string _clientID){
 	return result;
 }
 
+void objMQTTClient::setTopic(string _topic){
+	m_topic = _topic;
+}
+
+string objMQTTClient::getTopic(void){
+	return m_topic;
+}
+
 /* void setConnectOptions(const MQTTClient_connectOptions *_conn_opts);
  *
  * setter method for connection options
@@ -55,43 +80,17 @@ int objMQTTClient::createClient(string _address, string _clientID){
  * 	You should've set constant fields when creating this object.
  */
 
-void objMQTTClient::setConnectOptions(const MQTTClient_connectOptions &_conn_opts){
-	free(&m_conn_opts);
-	m_conn_opts.keepAliveInterval = _conn_opts.keepAliveInterval;
-	m_conn_opts.cleansession = _conn_opts.cleansession;
-	m_conn_opts.reliable = _conn_opts.reliable;
-	m_conn_opts.will = _conn_opts.will;
-	m_conn_opts.connectTimeout = _conn_opts.connectTimeout;
-	m_conn_opts.retryInterval = _conn_opts.retryInterval;
-	m_conn_opts.ssl = _conn_opts.ssl;
-	m_conn_opts.serverURIcount = _conn_opts.serverURIcount;
-	m_conn_opts.MQTTVersion = _conn_opts.MQTTVersion;
-}
-
-/*
- * getter method for connection options
- * devs need to verify the connection options on their own
- */
-
-MQTTClient_connectOptions objMQTTClient::getConnectOptions(void){
-	return m_conn_opts;
-}
-
-/* 
- * for setting continuous connection between broker and client
- */
-
-void objMQTTClient::setPersistenceConnection(void){
-	m_conn_opts.cleansession = 0;
-}
-
-/*
- * for setting period of the connection at the time
- */
-
-void objMQTTClient::setConnectionInterval(const int _interval){
-	m_conn_opts.keepAliveInterval = _interval;
-}
+void objMQTTClient::setConnectOptions(const int _keepAliverInterval,\
+		const int _cleansession,\ 
+		const int _reliable,\
+		const int _connectTimeout){
+	m_option.keepAliveInterval = _keepAliverInterval;
+	m_option.cleansession = _cleansession;
+	m_option.reliable = _reliable;
+	m_option.connectTimeout = _connectTimeout;
+	m_option.ssl = &m_ssl;
+	m_option.will = &m_will;
+}	
 
 /*
  * for setting a structure of the last will statement
@@ -102,24 +101,22 @@ void objMQTTClient::setConnectionInterval(const int _interval){
  * 	_topicName is a string of characters representing the topic itself published on the broker
  * 	the object checks whether the topic is published or not.
  * 	If topic existed, the object should set the last will statement properly.
- * 	_qos is set 1 for reliable connection.
- * PROGRAMMING GUIDE:
- * 	Before you use this function, you should have declared a macro named,
- * 		MQTTClient_willOptions_initializer
- * 	with 
- * 		{{'M', 'Q', 'T', 'W'}, 0, NULL, NULL, 1, 1}
- * 	in its content. That means you should write something like below
- * 		#define MQTTClient_willOptions_initializer {{'M', 'Q', 'T', 'W'}, 0, NULL, NULL, 1, 1}
- * 	The first field containing NULL pointer should points a character array describing a topic name you want to leave a LWT and the second also points to a character array showing a message of the LWT to the broker.
- *
- * 	
+ * 	_qos is set 1 for reliable connection. 	
  */
 
-bool objMQTTClient::setLWT(void){
-	MQTTClient_willOptions current = MQTTClient_willOptions_initializer;
+bool objMQTTClient::setLWT(const char *_message,\
+		const int _retained,\
+		const char _qos) {
+	if(!m_topicSet){
+		fprintf(stderr, "A topic related to this client is not set\n");
+		return false;
+	}
+	m_will.topicName = (const char *)m_topic.c_str();
+	m_will.message = (const char *)_message;
+	m_will.retained = _retained;
+	m_will.qos = _qos;
 
-	m_conn_opts.will = &current;
-
+	m_option.will = &m_will;
 	return true;
 }
 
@@ -134,11 +131,12 @@ bool objMQTTClient::setLWT(void){
  * _dup is set false, meaning the message is not something duplicated.
  */
 
-bool objMQTTClient::setPayload(const int _payloadlen,\
-	   	const char *_payload,\
-	   	int _qos,\
-	   	int _retained,\
-	   	int _dup){
+bool objMQTTClient::setPayload(MQTTClient_message &m_pubmsg,\
+		const int _payloadlen,\
+		const char *_payload,\
+		int _qos,\
+		int _retained,\
+		int _dup){
 
 	if(_payloadlen == 0 ||\
 			_payload == NULL){
@@ -146,8 +144,8 @@ bool objMQTTClient::setPayload(const int _payloadlen,\
 		return false;
 	}
 
-	sprintf(m_pubmsg.struct_id, "MQTM");
-	m_pubmsg.struct_version = 0;
+	m_pubmsg = MQTTClient_message_initializer;
+
 	if(strlen(_payload) != (size_t)_payloadlen)
 		fprintf(stderr, "Length of the content in _payload(parameter) and _payloadlen(parameter) doesn't match. Be advised!\n");
 
@@ -156,8 +154,6 @@ bool objMQTTClient::setPayload(const int _payloadlen,\
 	m_pubmsg.qos = _qos;
 	m_pubmsg.retained = _retained;
 	m_pubmsg.dup = _dup;
-
-	m_pubmsgSet = true;
 
 	return true;
 }
@@ -175,16 +171,16 @@ bool objMQTTClient::clientConnect(void){
 	}
 
 	if((result = MQTTClient_setCallbacks(m_client,\
-					NULL,\
-					objMQTTClient::connectionLost,\
-					objMQTTClient::messageArrived,\
-					objMQTTClient::delivered)) != MQTTCLIENT_SUCCESS){
+					&m_client,\
+					&objMQTTClient::connectionLost,\
+					&objMQTTClient::messageArrived,\
+					&objMQTTClient::delivered)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "Failed to set callbacks for subscribing messages.\n");
 		return result;
 	}
 
 	if((result = MQTTClient_connect(m_client,\
-					&m_conn_opts)) != MQTTCLIENT_SUCCESS){
+					&m_option)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "Failed to connect, return code %d\n", result);
 		exit(1);
 	}
@@ -204,18 +200,19 @@ bool objMQTTClient::clientConnect(void){
  * 	After all of them are set, the function then publish the message to the broker and waits for response. If the response is successfully delivered to the client, it returns the status of it. 
  */
 
-bool objMQTTClient::publish(string _TOPIC,\
+bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 		unsigned long timeOut){
 	int result = 0;
 	int result_t = 0;
+	MQTTClient_deliveryToken m_token;
 
+	if(!m_topicSet){
+		fprintf(stderr, "A topic related to this client is not set\n");
+		return false;	
+	}
 	if(!m_clientCreated){
 		fprintf(stderr, "Client is not created.\n");
 		return false;
-	}
-	if(!m_pubmsgSet){
-		fprintf(stderr, "Message to be published is not set\n");
-		return false;		
 	}
 	if(!m_clientConnected){
 		fprintf(stderr, "Client is not connected to the broker\n");
@@ -223,7 +220,7 @@ bool objMQTTClient::publish(string _TOPIC,\
 	}
 
 	if((result = MQTTClient_publishMessage(m_client,\
-					_TOPIC.c_str(),\
+					_topic.c_str(),\
 					&m_pubmsg,\
 					&m_token)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "Something went wrong while transferring the message.\n");
@@ -236,9 +233,6 @@ bool objMQTTClient::publish(string _TOPIC,\
 
 	printf("Message with delivery token %d delivered\n", m_token);
 
-	m_TOPIC.insert(_TOPIC);
-	m_pubmsgSet = false;
-
 	return result_t;	
 }
 
@@ -250,10 +244,15 @@ void *objMQTTClient::routine(void *_param){
 	param *p_param = (param *)_param;
 	char ch;
 	int result;
-	printf("Listening topic\n\tTOPIC : %s\n\tQOS : %d\n", p_param->topic, p_param->qos);
+	MQTTClient m_client = *(p_param->m_client);
+
+	cout << "Listening topic" << endl;
+	cout << "\tTOPIC : " << p_param->topic << endl;
+	cout << "\tQOS : " << p_param->qos << endl;
+
 	if((result = MQTTClient_subscribe(m_client,\
-				p_param->topic,\
-				p_param->qos)) != MQTTCLIENT_SUCCESS){
+					p_param->topic.c_str(),\
+					p_param->qos)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "A procedure listening topic was not created with exitcode %d\n", result);
 		pthread_exit(NULL);
 	}
@@ -273,12 +272,16 @@ void *objMQTTClient::routine(void *_param){
  * At last, it doesn't wait for the thread to end.
  */
 
-void objMQTTClient::listen(const char *_topic,\
-		int _qos){
+void objMQTTClient::listen(int _qos){
+	if(!m_topicSet){
+		fprintf(stderr, "A topic related to this client is not set\n");
+		return;
+	}
+
 	param *_param = (param *)malloc(sizeof(param));
-	_param->topic = (char *)malloc(strlen(_topic) + 1);
-	strcpy(_param->topic, _topic);
+	_param->topic = m_topic;;
 	_param->qos = _qos;
+	_param->m_client = &m_client;
 
 	pthread_attr_init(&m_attr);
 	if(pthread_attr_setdetachstate(&m_attr,\
@@ -289,7 +292,7 @@ void objMQTTClient::listen(const char *_topic,\
 
 	if(pthread_create(&m_thread,\
 				&m_attr,\
-				objMQTTClient::routine,\
+				&objMQTTClient::routine,\
 				_param) != 0){
 		fprintf(stderr, "Thread is not created\n");
 		exit(1);
@@ -303,11 +306,9 @@ void objMQTTClient::listen(const char *_topic,\
 /*
  * for checking whether the message is properly delivered.
  */
-
 void objMQTTClient::delivered(void *_context,\
 		MQTTClient_deliveryToken _token_d){
 	printf("Message with token value %d delivery confirmed.\n", _token_d);
-	m_token = _token_d;
 }
 
 /*
@@ -315,17 +316,17 @@ void objMQTTClient::delivered(void *_context,\
  */ 
 
 static int ledControl(int gpio, bool flag){
-	int i;
+	//	int i;
 
 	pinMode(gpio, OUTPUT);
 
 	/*for(i = 0;i < 5;i++){
-		digitalWrite(gpio, HIGH);
-		delay(1000);
-		digitalWrite(gpio, LOW);
-		delay(1000);
-	}
-	*/
+	  digitalWrite(gpio, HIGH);
+	  delay(1000);
+	  digitalWrite(gpio, LOW);
+	  delay(1000);
+	  }
+	  */
 
 	if(flag == ON)
 		digitalWrite(gpio, HIGH);
@@ -335,39 +336,86 @@ static int ledControl(int gpio, bool flag){
 	return 0;
 }
 
+static string fromLocale(const string &localeString){
+	boost::locale::generator generator;
+	generator.locale_cache_enabled(true);
+	std::locale locale = generator(boost::locale::util::get_system_locale());
+	return boost::locale::conv::to_utf<char>(localeString, locale);
+}
+
 int objMQTTClient::messageArrived(void *_context,\
 		char *_topicName,\
 		int _topicLen,\
 		MQTTClient_message *_message){
-	char *p_payload;
+	char *p_payload = NULL,\
+					  *p_token = NULL,\
+					  *p_token_prev = NULL;
+	int code = 0;
 
-	string message;
+	MQTTClient *m_client = (MQTTClient *)_context;
+
+	string message,\
+		status_literal_ascii,\
+		status_literal_utf8;
 	printf("Message arrived.\n");
 	printf("	topic : %s\n", _topicName);
 
 	p_payload = (char *)_message->payload;
-	for(int i = 0;i < _message->payloadlen;i++){
-		message.push_back(*p_payload++);
-	}
-
-	m_queue.push(message);
+	message += p_payload;
 
 	json jsonObject = json::parse(message);
-	
-	for(json::iterator it = jsonObject.begin();it != jsonObject.end();it++){
-		string value = it.value().get<std::string>();
 
-		cout << value << endl;
-		if(value.compare("ON") == 0 ||\
-				value.compare("on") == 0){
-			ledControl(1, ON);
-		}
-		else if(value.compare("OFF") == 0 ||\
-				value.compare("off") == 0){
-			ledControl(1, OFF);
-		}
+	p_token = strtok(_topicName, "/");
+	while(p_token != NULL){
+		p_token_prev = p_token;
+		p_token = strtok(NULL, "/");
+	}
 
-		//cout << it.key() << " : " << it.value() << endl;
+	SHA256_Encrpyt((const BYTE *)status_literal, sizeof(status_literal), (BYTE *)p_token);
+	status_literal_ascii += p_token;
+	status_literal_utf8 = fromLocale(status_literal_ascii);
+
+	if(strcmp(status_literal_utf8.c_str(), p_token_prev) == 0){
+		auto status = jsonObject["status"].get<int>();
+		if(status == 2){
+			MQTTClient_message m_pubmsg = MQTTClient_message_initializer;
+			MQTTClient_deliveryToken m_token;
+
+			jsonObject["status"] = 1;
+			string jsondump = jsonObject.dump();
+			m_pubmsg.payload = (void *)jsondump.c_str();
+			m_pubmsg.payloadlen = strlen(jsondump.c_str());
+
+			if((code = MQTTClient_publishMessage(*m_client,\
+							_topicName,\
+							&m_pubmsg,\
+							&m_token)) != MQTTCLIENT_SUCCESS){
+				fprintf(stderr, "Error while updating the topic \"status\" with error %d\n", code);
+			}
+			code = MQTTClient_waitForCompletion(*m_client,\
+					m_token,\
+					TIMEOUT);
+			printf("Message with delivery token %d delivered\n", m_token);
+		}
+	}
+	else{
+		m_queue.push(message);
+
+		for(json::iterator it = jsonObject.begin();it != jsonObject.end();it++){
+			string value = it.value().get<std::string>();
+
+			cout << value << endl;
+			if(value.compare("ON") == 0 ||\
+					value.compare("on") == 0){
+				ledControl(1, ON);
+			}
+			else if(value.compare("OFF") == 0 ||\
+					value.compare("off") == 0){
+				ledControl(1, OFF);
+			}
+
+			//cout << it.key() << " : " << it.value() << endl;
+		}	
 	}
 
 	MQTTClient_freeMessage(&_message);
@@ -390,7 +438,6 @@ void objMQTTClient::connectionLost( void *_context,\
  */
 
 objMQTTClient::~objMQTTClient(void){
-	free(m_conn_opts.will);
 	MQTTClient_disconnect(m_client, 10000);
 	MQTTClient_destroy(&m_client);
 }
