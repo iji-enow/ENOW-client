@@ -1,7 +1,5 @@
-import something
+import os
 
 def eventHandler(event, context, callback):
-	event["something"] = "value"
-	print("contents")
-	raise Exception
-	callback["returned"] = "value"
+	print("hello")
+	
