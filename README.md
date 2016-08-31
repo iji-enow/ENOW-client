@@ -24,9 +24,9 @@
 
 ## To Do list
 
-- [ ]This project aims to run python script on java runtime.
+- [ ] This project aims to run python script on java runtime.
 
-- [ ]There are _2_ necessary __key : 'value'__  pairs and _1_ optional __key : 'value'__ pair on the json payload inside your MQTT request.
+- [ ] There are _2_ necessary __key : 'value'__  pairs and _1_ optional __key : 'value'__ pair on the json payload inside your MQTT request.
 
   ```
   {
@@ -38,7 +38,7 @@
   __REQUIRED__ : "PAYLOAD", "SOURCE"
   __OPTIONAL__ : "PARAMETER"
 
-- [ ]All you need to do is simple. _Load the pairs and run!_
+- [ ] All you need to do is simple. _Load the pairs and run!_
 
 ## Usage
 
