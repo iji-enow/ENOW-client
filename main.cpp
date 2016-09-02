@@ -1,5 +1,5 @@
 #include <iostream>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 extern "C"{
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +12,7 @@ extern "C"{
 }
 #include <string>
 #include <boost/locale.hpp>
-#include "./header/MQTTClient.hpp"
+#include "./header/MQTTClientPool.hpp"
 
 #define BUFSIZ 4096
 
@@ -30,10 +30,7 @@ static string fromLocale(const string &localeString){
 
 int main(int argc, char **argv){
 	string address,\
-		clientID,\
-		topic,\
-		topic_utf8,\
-		payload;
+		clientID;
 
 	bool addressFlag = false,\
 					   idFlag = false,\
@@ -46,6 +43,8 @@ int main(int argc, char **argv){
 					  *p_SHA256 = NULL,\
 					  *p_token = NULL;
 
+	objMQTTClientPool *p_pool = NULL;
+
 	int c = 0;
 	opterr = 0;
 	json j;
@@ -53,7 +52,7 @@ int main(int argc, char **argv){
 	while(1){
 		static struct option long_options[] = {
 			{"address", required_argument, 0, 'a'},
-			{"topic", required_argument, 0, 't'},
+//			{"topic", required_argument, 0, 't'},
 			{"clientID", required_argument, 0, 'i'},
 			{0, 0, 0, 0}
 		};
@@ -61,7 +60,7 @@ int main(int argc, char **argv){
 		int option_index = 0;
 		c = getopt_long(argc,\
 				argv,\
-				"a:t:i:",\
+				"a:i:",\
 				long_options,\
 				&option_index);
 		
@@ -82,12 +81,12 @@ int main(int argc, char **argv){
 				p_address = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_address, optarg, strlen(optarg) + 1);
 				break;
-			case 't':
+/*			case 't':
 				printf("topic : %s\n", optarg);
 				p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_topic, optarg, strlen(optarg) + 1);
 				break;
-			case 'i':
+*/			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_id, optarg, strlen(optarg) + 1);
@@ -102,23 +101,64 @@ int main(int argc, char **argv){
 	address += p_address;
 	clientID += p_id;
 
-	j["ID"] = "Windforces";
-	j["PASSWORD"] = "success";
-	payload = j.dump();
-	const char *p_payload = payload.c_str();
-
-	p_token = strtok(p_topic, "/");
-	p_SHA256_token = (char *)malloc(sizeof(char) * 256);
-	memset(p_SHA256_token, 0, 256);
-	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ);
+	p_pool = new objMQTTClientPool();
+	p_SHA256_token = (char *)malloc(sizeof(char) * BUFSIZ);
+	memset(p_SHA256_token, 0, BUFSIZ);
+	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ * 4);
 	memset(p_SHA256, 0, BUFSIZ);
 
-	while(p_token != NULL){
-		SHA256_Encrpyt((const BYTE *)p_token, (UINT)strlen(p_token) + 1, (BYTE *)p_SHA256_token);
-		strcat(p_SHA256, "/");
-		strcat(p_SHA256, p_SHA256_token);
-		memset(p_SHA256_token, 0, sizeof(p_SHA256_token));
-		p_token = strtok(NULL, "/");
+	while(true){
+		int index = 0;
+		char linebuffer[BUFSIZ];
+		
+
+		memset(linebuffer, 0, sizeof(linebuffer));
+		while((linebuffer[index++] = cin.get()) != EOF){
+
+		}
+		auto jsonTerminal = json::parse(linebuffer);
+		
+		auto topic = jsonTerminal["topic"].get<string>();
+		auto payload = jsonTerminal["payload"].get<string>();
+		string topic_utf8;
+
+		if(jsonTerminal.find("configuration") != jsonTerminal.end()){
+			auto configuration = jsonTerminal["configuration"].get<object>();
+		}
+
+		p_topic = topic.c_str();
+		memset(p_SHA256_token, 0, BUFSIZ);
+		memset(p_SHA256, 0, 4 * BUFSIZ);
+
+		p_token = strtok(p_topic, "/");
+		while(p_token != NULL){
+			if(strlen(p_token) != 0){
+				SHA256_Encrpyt((const BYTE *)p_token, (UINT)strlen(p_token) + 1, (BYTE *)p_SHA256_token);	
+				strcat(p_SHA256, "/");
+				strcat(p_SHA256, p_SHA256_token);
+				memset(p_SHA256_token, 0, BUFSIZ);
+			}
+			p_token = strtok(NULL, "/");
+		}
+		objMQTTClient client_t;
+
+		topic.clear();
+		topic += p_SHA256;
+		topic_utf8 = fromLocale(topic);
+
+		string myLWT = "My LWT";
+		string myLWTUTF8 = fromLocale(myLWT);
+
+		client_t.createClient(address, clientID);
+		client_t.setConnectOptions(60,\
+				false,\
+				true,\
+				30);
+
+		client_t.setLWT(myLWTUTF8.c_str(),\
+				1,\
+				1);
+		client_t.
 	}
 
 	topic += p_SHA256;
