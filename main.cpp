@@ -107,6 +107,8 @@ int main(int argc, char **argv){
 	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ * 4);
 	memset(p_SHA256, 0, BUFSIZ);
 
+
+
 	while(true){
 		int index = 0;
 		char linebuffer[BUFSIZ];
@@ -140,42 +142,45 @@ int main(int argc, char **argv){
 			}
 			p_token = strtok(NULL, "/");
 		}
-		objMQTTClient client_t;
+		objMQTTClient *p_client;
 
 		topic.clear();
 		topic += p_SHA256;
 		topic_utf8 = fromLocale(topic);
+		
+		if((p_client = p_pool->findClient(topic_utf8)) == NULL){
+			p_client = new objClient();
+			MQTTClient_message msg_t = MQTTClient_message_initializer;
+			string myLWT = "My LWT";
+			string myLWT_utf8 = fromLocale(myLWT);
+			string payload_utf8 = fromLocale(payload);
 
-		string myLWT = "My LWT";
-		string myLWTUTF8 = fromLocale(myLWT);
+			p_client->setTopic(topic_utf8);
+			p_client->createClient(address, clientID);
+			p_client->setConnectionOptions(60,\
+					false,\
+					true,\
+					30);
+			p_client->setLWT(myLWT_utf8.c_str(),\
+					1,\
+					1);
+			p_client->setPayload(msg_t,\
+					strlen(payload_utf8.c_str()),\
+					payload_utf8.c_str());
 
-		client_t.createClient(address, clientID);
-		client_t.setConnectOptions(60,\
-				false,\
-				true,\
-				30);
-
-		client_t.setLWT(myLWTUTF8.c_str(),\
-				1,\
-				1);
-		client_t.
+			p_client->publish(msg_t,\
+					30);
+			p_client->listen();
+		}
+		else{
+			MQTTClient_message msg_t = MQTTClient_message_initializer;
+			string payload_utf8 = fromLocale(payload);
+			p_client->setPayload(msg_t,\
+					strlen(payload_utf8.c_str()),\
+					payload_utf8.c_str());
+			p_client->publish(msg_t,\
+					30);
+			p_client->listen();
+		}
 	}
-
-	topic += p_SHA256;
-	topic_utf8 = fromLocale(topic);
-
-	objMQTTClient *client = new objMQTTClient();
-	client->createClient(address, clientID);
-	client->setPersistenceConnection();
-	client->setConnectionInterval(20);
-	client->clientConnect();
-	client->setPayload(payload.length(),\
-			p_payload);
-	client->publish(topic_utf8,\
-			10000L);
-
-	client->listen(topic_utf8.c_str(),\
-			1);
-
-	return 0;
 }

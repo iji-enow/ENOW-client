@@ -31,13 +31,13 @@ extern "C" {
 #include <stdbool.h>
 #include <sys/types.h>
 
-#include <wiringPi.h>
+//#include <wiringPi.h>
 #include <MQTTClient.h>
 #include <MQTTClientPersistence.h>
 #include "KISA_SHA256.h"
 }
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 #include <boost/locale.hpp>
 
 using namespace std;
@@ -61,6 +61,7 @@ class objMQTTClient{
 		bool m_clientCreated;
 		bool m_clientConnected;
 		bool m_topicSet;
+		bool m_listening;
 
 		pthread_t m_thread;
 		static pthread_mutex_t m_lock;
@@ -74,6 +75,7 @@ class objMQTTClient{
 		   m_clientCreated = false;
 		   m_clientConnected = false;
 		   m_topicSet = false;
+		   m_listening = false;
 	   }
 		~objMQTTClient(void);
 
@@ -109,7 +111,7 @@ class objMQTTClient{
 		static void connectionLost(void *_context,\
 				char *_cause);
 
-		void listen(int _qos = 1);
+		bool listen(int _qos = 1);
 		static void *routine(void *_param);
 
 };

@@ -58,7 +58,7 @@ int objMQTTClient::createClient(string _address, string _clientID){
 		fprintf(stderr, "Connection Failed with Exitcode %i\n", result);
 	}
 
-	wiringPiSetup();
+	//wiringPiSetup();
 
 	m_clientCreated = true;
 	return result;
@@ -272,10 +272,12 @@ void *objMQTTClient::routine(void *_param){
  * At last, it doesn't wait for the thread to end.
  */
 
-void objMQTTClient::listen(int _qos){
+bool objMQTTClient::listen(int _qos){
+	if(m_listening)
+		return false;
 	if(!m_topicSet){
 		fprintf(stderr, "A topic related to this client is not set\n");
-		return;
+		return false;
 	}
 
 	param *_param = (param *)malloc(sizeof(param));
@@ -285,7 +287,7 @@ void objMQTTClient::listen(int _qos){
 
 	pthread_attr_init(&m_attr);
 	if(pthread_attr_setdetachstate(&m_attr,\
-				PTHREAD_CREATE_JOINABLE) != 0){
+				PTHREAD_CREATE_DETACHED) != 0){
 		fprintf(stderr, "A thread listening the topics is not detachable\n");
 		exit(1);
 	}
@@ -298,9 +300,8 @@ void objMQTTClient::listen(int _qos){
 		exit(1);
 	}
 
-	pthread_join(m_thread, NULL);
-
-	pthread_attr_destroy(&m_attr);
+	m_listening = true;
+	return true;
 }
 
 /*
@@ -315,18 +316,18 @@ void objMQTTClient::delivered(void *_context,\
  * for queueing several message
  */ 
 
-static int ledControl(int gpio, bool flag){
+/*static int ledControl(int gpio, bool flag){
 	//	int i;
 
 	pinMode(gpio, OUTPUT);
 
-	/*for(i = 0;i < 5;i++){
+	for(i = 0;i < 5;i++){
 	  digitalWrite(gpio, HIGH);
 	  delay(1000);
 	  digitalWrite(gpio, LOW);
 	  delay(1000);
 	  }
-	  */
+	 
 
 	if(flag == ON)
 		digitalWrite(gpio, HIGH);
@@ -335,6 +336,7 @@ static int ledControl(int gpio, bool flag){
 
 	return 0;
 }
+*/
 
 static string fromLocale(const string &localeString){
 	boost::locale::generator generator;
@@ -398,6 +400,7 @@ int objMQTTClient::messageArrived(void *_context,\
 			printf("Message with delivery token %d delivered\n", m_token);
 		}
 	}
+	/*
 	else{
 		m_queue.push(message);
 
@@ -417,6 +420,7 @@ int objMQTTClient::messageArrived(void *_context,\
 			//cout << it.key() << " : " << it.value() << endl;
 		}	
 	}
+	*/
 
 	MQTTClient_freeMessage(&_message);
 	MQTTClient_free(_topicName);
@@ -440,6 +444,13 @@ void objMQTTClient::connectionLost( void *_context,\
 objMQTTClient::~objMQTTClient(void){
 	MQTTClient_disconnect(m_client, 10000);
 	MQTTClient_destroy(&m_client);
+
+	if(pthread_kill(m_thread, 0) == ESRCH)
+		pthread_attr_destroy(m_attr);
+	else{
+		pthread_kill(m_thread, SIGINT);
+		pthread_attr_destroy(m_attr);
+	}
 }
 
 

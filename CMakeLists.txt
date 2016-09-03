@@ -27,7 +27,7 @@ file(GLOB HEADER_FILE_C ./header/*.h)
 
 # wiringPi selection flag
 option(USE_WIRINGPI
-	"Use wiringPi library" ON)
+	"Use wiringPi library" OFF)
 
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
@@ -36,6 +36,9 @@ if(USE_WIRINGPI)
 	find_package(Threads REQUIRED)
 	include_directories(${WIRINGPI_INCLUDE_DIRS})
 endif(USE_WIRINGPI)
+
+find_package(Boost REQUIRED COMPONENTS locale)
+include_directories(${Boost_INCLUDE_DIRS})
 
 find_package(PahoMqtt REQUIRED)
 include_directories(${LIBMQTT_INCLUDE_DIRS})
@@ -47,4 +50,5 @@ if(USE_WIRINGPI)
 	target_link_libraries(MQTTClient ${CMAKE_THREAD_LIBS_INIT}) 
 endif(USE_WIRINGPI)
 
+target_link_libraries(MQTTClient ${Boost_LOCALE_LIBRARY})
 target_link_libraries(MQTTClient ${LIBMQTT_LIBRARIES})
