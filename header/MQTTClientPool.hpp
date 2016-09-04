@@ -24,8 +24,8 @@ limitations under the License.
 
 class CompFunc {
 	public:
-		bool operator() (objMQTTClient &lhs, objMQTTClient &rhs) {
-			if(lhs.getTopic() < rhs.getTopic())
+		bool operator() (objMQTTClient *lhs, objMQTTClient *rhs) {
+			if(lhs->getTopic() < rhs->getTopic())
 				return true;
 			else
 				return false;
@@ -34,17 +34,15 @@ class CompFunc {
 
 class objMQTTClientPool {
 private:
-	static set<objMQTTClient, CompFunc> m_clientPool;
+	static set<objMQTTClient *, CompFunc> m_clientPool;
 
 public:
 	objMQTTClientPool(){
 		
 	}
 
-	void insertClient(objMQTTClient &_client);
-	objMQTTClient *findClient(string _topic);
+	void insertClient(objMQTTClient *_client);
+	objMQTTClient* findClient(string _topic);
 };
 	
-
-
 #endif

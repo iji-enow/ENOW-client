@@ -1,5 +1,4 @@
 #include <iostream>
-#include <json.hpp>
 extern "C"{
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,19 +6,138 @@ extern "C"{
 #include <unistd.h>
 #include <ctype.h>
 #include <getopt.h>
-
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <ifaddrs.h>
+#include <linux/if_link.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "header/KISA_SHA256.h"
 }
 #include <string>
 #include <boost/locale.hpp>
 #include "./header/MQTTClientPool.hpp"
-
-#define BUFSIZ 4096
+#include "./header/json.hpp"
 
 using namespace std;
 using json = nlohmann::json;
 
 static int verbose_flag;
+
+static const char *p_arch;
+static const char *p_macAddress;
+static int endianess;
+
+void systemCheck(void){
+	int filedes = 0,\
+				  endian_t = 0,\
+				  family_t = 0,\
+				  index_t = 0,\
+				  status_t = 0;
+	unsigned int rx_t = 0,\
+				  tx_t = 0;
+	char *p_buffer = (char *)malloc(sizeof(char) * BUFSIZ);
+	char *p_token = NULL,\
+					*p_arch_t = NULL,\
+					*p_macAddress_t = NULL;
+	char host[NI_MAXHOST];
+	char interface[BUFSIZ],\
+		path[BUFSIZ];
+
+	memset(p_buffer, 0, sizeof(BUFSIZ));
+
+	struct ifaddrs *p_ifaddr = NULL,\
+							   *p_ifa = NULL;
+
+	if((filedes = open("/proc/cpuinfo", O_RDONLY)) == -1){
+		fprintf(stderr, "Error while opening /proc/cpuinfo, consider giving the program root privilege\n");
+		exit(1);
+	}
+	
+	if(read(filedes, p_buffer, BUFSIZ) == -1){
+		fprintf(stderr, "Error while reading /proc/cpuinfo, consider giving the program root privilege\n");
+		exit(1);
+	}
+
+	close(filedes);
+	
+	p_token = strtok(p_buffer, ":\t\n");
+	while(p_token != NULL){
+		if(strcmp(p_token, "model name") == 0){
+			while(1){
+				p_token = strtok(NULL, ":\t\n");
+				if(strlen(p_token) != 0){
+					p_arch_t = (char *)malloc(BUFSIZ * sizeof(char));
+					memset(p_arch_t, 0, BUFSIZ);
+					strcpy(p_arch_t, p_token);
+					p_arch = p_arch_t;
+					break;
+				}
+			}
+			break;
+		}
+		p_token = strtok(NULL, ":\t\n");
+	}
+	
+	endian_t = 1;
+	if(*(char *)&endian_t == 1)
+		endianess = 1;
+	else
+		endianess = 2;
+
+	if(getifaddrs(&p_ifaddr) == -1){
+		perror("getifaddrs");
+		exit(1);
+	}
+
+	for(p_ifa = p_ifaddr, index_t = 0;\
+			p_ifa != NULL;\
+			p_ifa = p_ifa->ifa_next, index_t++){
+
+		if(p_ifa->ifa_addr == NULL)
+			continue;
+		family_t = p_ifa->ifa_addr->sa_family;
+
+		if(family_t == AF_PACKET &&\
+				p_ifa->ifa_data != NULL){
+			struct rtnl_link_stats *p_stats = (struct rtnl_link_stats *)p_ifa->ifa_data;
+
+			if(p_stats->tx_bytes > tx_t ||
+					p_stats->rx_bytes > rx_t){
+				tx_t = p_stats->tx_bytes;
+				rx_t = p_stats->rx_bytes;
+				
+				memset(interface, 0, BUFSIZ);
+				sprintf(interface, "%s", p_ifa->ifa_name);
+			}
+		}
+	}
+	
+	memset(path, 0, BUFSIZ);
+	strcat(path, "/sys/class/net/");
+	strcat(path, interface);
+	strcat(path, "/address");
+
+	if((filedes = open(path, O_RDONLY)) == -1){
+		fprintf(stderr, "Error while opening network interface, consider giving the program root privi    lege\n");
+		exit(1);
+	}
+
+	if(read(filedes, p_buffer, BUFSIZ) == -1){
+		fprintf(stderr, "Error while reading network interface, consider giving the program root privi    lege\n");
+		exit(1);
+	}
+
+	close(filedes);
+	
+	p_token = strtok(p_buffer, "\n");
+	p_macAddress_t = (char *)malloc(BUFSIZ * sizeof(char));
+	strcpy(p_macAddress_t, p_token);
+	p_macAddress = p_macAddress_t;
+}
+
 
 static string fromLocale(const string &localeString){
 	boost::locale::generator generator;
@@ -49,10 +167,12 @@ int main(int argc, char **argv){
 	opterr = 0;
 	json j;
 
+	systemCheck();
+
 	while(1){
 		static struct option long_options[] = {
 			{"address", required_argument, 0, 'a'},
-//			{"topic", required_argument, 0, 't'},
+			//			{"topic", required_argument, 0, 't'},
 			{"clientID", required_argument, 0, 'i'},
 			{0, 0, 0, 0}
 		};
@@ -63,7 +183,7 @@ int main(int argc, char **argv){
 				"a:i:",\
 				long_options,\
 				&option_index);
-		
+
 		if(c == -1)
 			break;
 
@@ -81,12 +201,12 @@ int main(int argc, char **argv){
 				p_address = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_address, optarg, strlen(optarg) + 1);
 				break;
-/*			case 't':
-				printf("topic : %s\n", optarg);
-				p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
-				memcpy(p_topic, optarg, strlen(optarg) + 1);
-				break;
-*/			case 'i':
+				/*			case 't':
+							printf("topic : %s\n", optarg);
+							p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
+							memcpy(p_topic, optarg, strlen(optarg) + 1);
+							break;
+							*/			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_id, optarg, strlen(optarg) + 1);
@@ -107,31 +227,39 @@ int main(int argc, char **argv){
 	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ * 4);
 	memset(p_SHA256, 0, BUFSIZ);
 
-
-
 	while(true){
-		int index = 0;
+		int index = 0,\
+					byte = 0;
 		char linebuffer[BUFSIZ];
-		
+
 
 		memset(linebuffer, 0, sizeof(linebuffer));
-		while((linebuffer[index++] = cin.get()) != EOF){
-
+		while((byte = cin.get()) != EOF){
+			linebuffer[index] = (char)byte;
+			index++;
 		}
 		auto jsonTerminal = json::parse(linebuffer);
-		
+
 		auto topic = jsonTerminal["topic"].get<string>();
 		auto payload = jsonTerminal["payload"].get<string>();
 		string topic_utf8;
 
-		if(jsonTerminal.find("configuration") != jsonTerminal.end()){
-			auto configuration = jsonTerminal["configuration"].get<object>();
+		if(jsonTerminal.find("metadata") == jsonTerminal.end()){
+			jsonTerminal["metadata"]["arch"] = string(p_arch);
+			jsonTerminal["metadata"]["mac_address"] = string(p_macAddress);
+			jsonTerminal["metadata"]["endian"] = endianess;
 		}
 
-		p_topic = topic.c_str();
+		jsonTerminal["parameter"] = string("ls -l");
+
+		string jsonTerminal_str = jsonTerminal.dump();
+
+		p_topic = (char *)malloc(BUFSIZ * sizeof(char));
+		memset(p_topic, 0, BUFSIZ);
 		memset(p_SHA256_token, 0, BUFSIZ);
 		memset(p_SHA256, 0, 4 * BUFSIZ);
 
+		strcpy(p_topic, topic.c_str());
 		p_token = strtok(p_topic, "/");
 		while(p_token != NULL){
 			if(strlen(p_token) != 0){
@@ -147,9 +275,9 @@ int main(int argc, char **argv){
 		topic.clear();
 		topic += p_SHA256;
 		topic_utf8 = fromLocale(topic);
-		
+
 		if((p_client = p_pool->findClient(topic_utf8)) == NULL){
-			p_client = new objClient();
+			p_client = new objMQTTClient();
 			MQTTClient_message msg_t = MQTTClient_message_initializer;
 			string myLWT = "My LWT";
 			string myLWT_utf8 = fromLocale(myLWT);
@@ -157,7 +285,7 @@ int main(int argc, char **argv){
 
 			p_client->setTopic(topic_utf8);
 			p_client->createClient(address, clientID);
-			p_client->setConnectionOptions(60,\
+			p_client->setConnectOptions(60,\
 					false,\
 					true,\
 					30);

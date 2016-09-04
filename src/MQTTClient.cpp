@@ -220,7 +220,7 @@ bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 	}
 
 	if((result = MQTTClient_publishMessage(m_client,\
-					_topic.c_str(),\
+					m_topic.c_str(),\
 					&m_pubmsg,\
 					&m_token)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "Something went wrong while transferring the message.\n");
@@ -446,10 +446,10 @@ objMQTTClient::~objMQTTClient(void){
 	MQTTClient_destroy(&m_client);
 
 	if(pthread_kill(m_thread, 0) == ESRCH)
-		pthread_attr_destroy(m_attr);
+		pthread_attr_destroy(&m_attr);
 	else{
 		pthread_kill(m_thread, SIGINT);
-		pthread_attr_destroy(m_attr);
+		pthread_attr_destroy(&m_attr);
 	}
 }
 

@@ -28,6 +28,8 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
+#include <signal.h>
+#include <unistd.h>
 #include <stdbool.h>
 #include <sys/types.h>
 

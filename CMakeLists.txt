@@ -33,22 +33,21 @@ option(USE_WIRINGPI
 # so that we will find TutorialConfig.h
 if(USE_WIRINGPI)
 	find_package(WiringPi REQUIRED)
-	find_package(Threads REQUIRED)
 	include_directories(${WIRINGPI_INCLUDE_DIRS})
 endif(USE_WIRINGPI)
-
+find_package(Threads REQUIRED)
 find_package(Boost REQUIRED COMPONENTS locale)
 include_directories(${Boost_INCLUDE_DIRS})
-
 find_package(PahoMqtt REQUIRED)
 include_directories(${LIBMQTT_INCLUDE_DIRS})
+
 # add the executable
 add_executable(MQTTClient ${HEADER_FILE_C} ${HEADER_FILE_CPP}  ${SOURCE_FILE_C} ${SOURCE_FILE_CPP} ./main.cpp)
 
 if(USE_WIRINGPI)
 	target_link_libraries(MQTTClient ${WIRINGPI_LIBRARIES})
-	target_link_libraries(MQTTClient ${CMAKE_THREAD_LIBS_INIT}) 
 endif(USE_WIRINGPI)
-
 target_link_libraries(MQTTClient ${Boost_LOCALE_LIBRARY})
 target_link_libraries(MQTTClient ${LIBMQTT_LIBRARIES})
+target_link_libraries(MQTTClient ${CMAKE_THREAD_LIBS_INIT})
+

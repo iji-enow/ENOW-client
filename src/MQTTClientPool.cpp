@@ -16,12 +16,14 @@ limitations under the License.
 
 #include "../header/MQTTClientPool.hpp"
 
-static bool isTopicEqual(objMQTTClient &lhs, objMQTTClient &rhs){
-	return (lhs.getTopic() == rhs.getTopic());
+set<objMQTTClient *, CompFunc> objMQTTClientPool::m_clientPool;
+
+static bool isTopicEqual(objMQTTClient *lhs, objMQTTClient *rhs){
+	return (lhs->getTopic() == rhs->getTopic());
 }
 
-void objMQTTClientPool::insertClient(objMQTTClient &_client) {
-	pair<set<objMQTTClient, CompFunc>::iterator, bool> code;
+void objMQTTClientPool::insertClient(objMQTTClient *_client) {
+	pair<set<objMQTTClient *, CompFunc>::iterator, bool> code;
 
 	code = m_clientPool.insert(_client);
 	if(code.second == false){
@@ -30,8 +32,8 @@ void objMQTTClientPool::insertClient(objMQTTClient &_client) {
 	}
 }
 
-objMQTTClient *objMQTTClientPool::findClient(string _topic) {
-	set<objMQTTClient, CompFunc>::iterator iterator;
+objMQTTClient* objMQTTClientPool::findClient(string _topic) {
+	set<objMQTTClient *, CompFunc>::iterator iterator;
 
 	objMQTTClient *dummy = new objMQTTClient();
 	dummy->setTopic(_topic);
@@ -39,7 +41,7 @@ objMQTTClient *objMQTTClientPool::findClient(string _topic) {
 	iterator = search_n(m_clientPool.begin(),\
 			m_clientPool.end(),\
 			1,\
-			*dummy,\
+			dummy,\
 			isTopicEqual);
 	if(iterator != m_clientPool.end())
 		printf("Found one.\n");
