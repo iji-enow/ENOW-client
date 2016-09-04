@@ -1,0 +1,5 @@
+{
+	"topic" : "/enow/server0/broker0/device0/status",
+	"payload" : "{ \"led\" : 0 }",
+	"parameter" : "-l"
+}

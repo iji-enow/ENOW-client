@@ -66,6 +66,7 @@ int objMQTTClient::createClient(string _address, string _clientID){
 
 void objMQTTClient::setTopic(string _topic){
 	m_topic = _topic;
+	m_topicSet = true;
 }
 
 string objMQTTClient::getTopic(void){
