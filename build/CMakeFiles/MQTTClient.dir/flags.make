@@ -9,7 +9,7 @@ C_DEFINES =
 
 C_INCLUDES = -I/usr/local/include 
 
-CXX_FLAGS =  -std=c++11 -g  
+CXX_FLAGS = -O0 -g  
 
 CXX_DEFINES = 
 

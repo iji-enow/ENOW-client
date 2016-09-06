@@ -17,13 +17,6 @@ limitations under the License
 #define ON 1
 #define OFF 0
 
-typedef struct param{
-	string topic;
-	int qos;
-
-	MQTTClient *m_client;
-};
-
 priority_queue<string> objMQTTClient::m_queue;
 
 static const char status_literal[7] = "status";
@@ -170,6 +163,10 @@ bool objMQTTClient::clientConnect(void){
 		fprintf(stderr, "Client is not created.\n");
 		return false;
 	}
+	if(m_clientConnected){
+		fprintf(stderr, "Client is already connected\n");
+		return false;
+	}
 
 	if((result = MQTTClient_setCallbacks(m_client,\
 					&m_client,\
@@ -245,13 +242,13 @@ void *objMQTTClient::routine(void *_param){
 	param *p_param = (param *)_param;
 	char ch;
 	int result;
-	MQTTClient m_client = *(p_param->m_client);
+	MQTTClient m_client_t = *(p_param->m_client);
 
 	cout << "Listening topic" << endl;
 	cout << "\tTOPIC : " << p_param->topic << endl;
 	cout << "\tQOS : " << p_param->qos << endl;
 
-	if((result = MQTTClient_subscribe(m_client,\
+	if((result = MQTTClient_subscribe(m_client_t,\
 					p_param->topic.c_str(),\
 					p_param->qos)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "A procedure listening topic was not created with exitcode %d\n", result);
@@ -261,6 +258,7 @@ void *objMQTTClient::routine(void *_param){
 		ch = getchar();
 	}while(ch != 'Q' &&\
 			ch != 'q');
+	delete p_param;
 	pthread_exit(NULL);
 }
 
@@ -281,8 +279,8 @@ bool objMQTTClient::listen(int _qos){
 		return false;
 	}
 
-	param *_param = (param *)malloc(sizeof(param));
-	_param->topic = m_topic;;
+	param *_param = new param();
+	_param->topic = m_topic;
 	_param->qos = _qos;
 	_param->m_client = &m_client;
 
@@ -374,6 +372,9 @@ int objMQTTClient::messageArrived(void *_context,\
 		p_token = strtok(NULL, "/");
 	}
 
+	p_token = NULL;
+	p_token = (char *)malloc(sizeof(char) * BUFSIZ);
+
 	SHA256_Encrpyt((const BYTE *)status_literal, sizeof(status_literal), (BYTE *)p_token);
 	status_literal_ascii += p_token;
 	status_literal_utf8 = fromLocale(status_literal_ascii);
@@ -388,6 +389,8 @@ int objMQTTClient::messageArrived(void *_context,\
 			string jsondump = jsonObject.dump();
 			m_pubmsg.payload = (void *)jsondump.c_str();
 			m_pubmsg.payloadlen = strlen(jsondump.c_str());
+
+			printf("Responding to status topic\n");
 
 			if((code = MQTTClient_publishMessage(*m_client,\
 							_topicName,\
@@ -425,6 +428,7 @@ int objMQTTClient::messageArrived(void *_context,\
 
 	MQTTClient_freeMessage(&_message);
 	MQTTClient_free(_topicName);
+	free(p_token);
 	return 1;
 }
 
@@ -443,14 +447,18 @@ void objMQTTClient::connectionLost( void *_context,\
  */
 
 objMQTTClient::~objMQTTClient(void){
-	MQTTClient_disconnect(m_client, 10000);
-	MQTTClient_destroy(&m_client);
+	if(m_clientConnected)
+		MQTTClient_disconnect(m_client, 10000);
+	if(m_clientCreated)
+		MQTTClient_destroy(&m_client);
 
-	if(pthread_kill(m_thread, 0) == ESRCH)
-		pthread_attr_destroy(&m_attr);
-	else{
-		pthread_kill(m_thread, SIGINT);
-		pthread_attr_destroy(&m_attr);
+	if(m_thread){
+		if(pthread_kill(m_thread, 0) == ESRCH)
+			pthread_attr_destroy(&m_attr);
+		else{
+			pthread_kill(m_thread, SIGINT);
+			pthread_attr_destroy(&m_attr);
+		}
 	}
 }
 

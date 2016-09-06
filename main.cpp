@@ -148,7 +148,15 @@ static string fromLocale(const string &localeString){
 
 int main(int argc, char **argv){
 	string address,\
-		clientID;
+		clientID,\
+		topic,\
+		topic_utf8,\
+		jsonTerminal_str,\
+		payload,\
+		w_payload,\
+		payload_utf8,\
+		myLWT,\
+		myLWT_utf8;
 
 	bool addressFlag = false,\
 					   idFlag = false,\
@@ -159,7 +167,8 @@ int main(int argc, char **argv){
 					  *p_topic = NULL,\
 					  *p_SHA256_token = NULL,\
 					  *p_SHA256 = NULL,\
-					  *p_token = NULL;
+					  *p_token = NULL,\
+					  *p_linebuffer = NULL;
 
 	objMQTTClientPool *p_pool = NULL;
 
@@ -226,23 +235,34 @@ int main(int argc, char **argv){
 	memset(p_SHA256_token, 0, BUFSIZ);
 	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ * 4);
 	memset(p_SHA256, 0, BUFSIZ);
+	p_linebuffer = (char *)malloc(sizeof(char) * BUFSIZ);
+	memset(p_linebuffer, 0, BUFSIZ);
+	p_topic = (char *)malloc(BUFSIZ * sizeof(char));
+	memset(p_topic, 0, BUFSIZ);
 
 	while(true){
-		int index = 0,\
-					byte = 0;
-		char linebuffer[BUFSIZ];
+		memset(p_linebuffer, 0, BUFSIZ);
+		memset(p_SHA256, 0, BUFSIZ * 4);
+		memset(p_SHA256_token, 0, BUFSIZ);
+		memset(p_topic, 0, BUFSIZ);
+		topic.clear();
+		payload.clear();
+		payload_utf8.clear();
+		jsonTerminal_str.clear();
+		w_payload.clear();
+		myLWT.clear();
+		myLWT_utf8.clear();
 
-
-		memset(linebuffer, 0, sizeof(linebuffer));
-		while((byte = cin.get()) != EOF){
-			linebuffer[index] = (char)byte;
-			index++;
+		if(fgets(p_linebuffer, BUFSIZ, stdin) == NULL){
+			perror("Error reading input");
+			exit(1);
 		}
-		auto jsonTerminal = json::parse(linebuffer);
+		p_linebuffer[strlen(p_linebuffer) - 1] = 0;
 
-		auto topic = jsonTerminal["topic"].get<string>();
-		auto payload = jsonTerminal["payload"].get<string>();
-		string topic_utf8;
+		json jsonTerminal = json::parse(p_linebuffer);
+
+		topic = jsonTerminal["topic"].get<string>();
+		payload = jsonTerminal["payload"].get<string>();
 
 		if(jsonTerminal.find("metadata") == jsonTerminal.end()){
 			jsonTerminal["metadata"]["arch"] = string(p_arch);
@@ -250,14 +270,7 @@ int main(int argc, char **argv){
 			jsonTerminal["metadata"]["endian"] = endianess;
 		}
 
-		jsonTerminal["parameter"] = string("ls -l");
-
-		string jsonTerminal_str = jsonTerminal.dump();
-
-		p_topic = (char *)malloc(BUFSIZ * sizeof(char));
-		memset(p_topic, 0, BUFSIZ);
-		memset(p_SHA256_token, 0, BUFSIZ);
-		memset(p_SHA256, 0, 4 * BUFSIZ);
+		jsonTerminal_str = jsonTerminal.dump();
 
 		strcpy(p_topic, topic.c_str());
 		p_token = strtok(p_topic, "/");
@@ -272,19 +285,19 @@ int main(int argc, char **argv){
 		}
 		objMQTTClient *p_client;
 
-		topic.clear();
 		topic += p_SHA256;
 		topic_utf8 = fromLocale(topic);
+		w_payload = jsonTerminal.dump();
+		payload_utf8 = fromLocale(w_payload);
 
 		if((p_client = p_pool->findClient(topic_utf8)) == NULL){
 			p_client = new objMQTTClient();
 			MQTTClient_message msg_t = MQTTClient_message_initializer;
-			string myLWT = "My LWT";
-			string myLWT_utf8 = fromLocale(myLWT);
-			string payload_utf8 = fromLocale(payload);
-
+			myLWT = "My LWT";
+			myLWT_utf8 = fromLocale(myLWT);
 			p_client->setTopic(topic_utf8);
 			p_client->createClient(address, clientID);
+			p_client->clientConnect();
 			p_client->setConnectOptions(60,\
 					false,\
 					true,\
@@ -298,17 +311,27 @@ int main(int argc, char **argv){
 
 			p_client->publish(msg_t,\
 					30);
+			sleep(1.0);
 			p_client->listen();
+			
+			p_pool->insertClient(p_client);
 		}
 		else{
 			MQTTClient_message msg_t = MQTTClient_message_initializer;
-			string payload_utf8 = fromLocale(payload);
+			p_client->clientConnect();
 			p_client->setPayload(msg_t,\
 					strlen(payload_utf8.c_str()),\
 					payload_utf8.c_str());
 			p_client->publish(msg_t,\
 					30);
-			p_client->listen();
 		}
 	}
+
+	free(p_address);
+	free(p_id);
+	free(p_topic);
+	free(p_SHA256_token);
+	free(p_SHA256);
+	free(p_linebuffer);
+	return 0;
 }

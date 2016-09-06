@@ -47,10 +47,10 @@ objMQTTClient* objMQTTClientPool::findClient(string _topic) {
 		printf("Found one.\n");
 	else{
 		fprintf(stderr, "No such client that has the topic\n");
-		free(dummy);
+		delete dummy;
 		return NULL;
 	}
-	free(dummy);
+	delete dummy;
 	return *iterator;
 }
 

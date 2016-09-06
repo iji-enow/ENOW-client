@@ -48,6 +48,20 @@ using json = nlohmann::json;
 #define QOS 1
 #define TIMEOUT 10000L
 
+class param{
+	public:
+		string topic;
+		int qos;
+
+		MQTTClient *m_client;
+	public:
+		param(){
+		}
+		~param(){
+		}
+};
+
+
 class objMQTTClient{
 	private:
 		MQTTClient m_client;
@@ -71,14 +85,15 @@ class objMQTTClient{
 
 	public:
 		objMQTTClient()\
-		: m_option(MQTTClient_connectOptions_initializer),\
-	   m_will(MQTTClient_willOptions_initializer),\
-	   m_ssl(MQTTClient_SSLOptions_initializer){
-		   m_clientCreated = false;
-		   m_clientConnected = false;
-		   m_topicSet = false;
-		   m_listening = false;
-	   }
+			: m_option(MQTTClient_connectOptions_initializer),\
+			m_will(MQTTClient_willOptions_initializer),\
+			m_ssl(MQTTClient_SSLOptions_initializer){
+				m_thread = (unsigned long int)0;
+				m_clientCreated = false;
+				m_clientConnected = false;
+				m_topicSet = false;
+				m_listening = false;
+			}
 		~objMQTTClient(void);
 
 		int createClient(string _address, string _clientID);

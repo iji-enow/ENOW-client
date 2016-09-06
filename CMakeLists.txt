@@ -13,6 +13,9 @@ else()
 	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
+set(CMAKE_CXX_FLAGS "-O0")
+set(CMAKE_C_FLAGS"-O0")
+
 # The version number.
 set (CLIENT_VERSION_MAJOR 1)
 set (CLIENT_VERSION_MINOR 0)
