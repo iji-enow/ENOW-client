@@ -22,7 +22,7 @@ extern "C"{
 #include "./json/json.hh"
 
 using namespace std;
-using namespace JSON;
+using json = nlohmann::json;
 
 static int verbose_flag;
 
@@ -174,7 +174,7 @@ int main(int argc, char **argv){
 
 	int c = 0;
 	opterr = 0;
-	Value json;
+	json j;
 
 	systemCheck();
 
