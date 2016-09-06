@@ -275,6 +275,11 @@ pair<map<string, Value>::iterator, bool> Object::insert(const pair<string, Value
     return _object.insert(v);
 }
 
+map<string, Value>::const_iterator Object::find(const string& key) const
+{
+	return _object.find(key);
+}
+
 map<string, Value>::const_iterator Object::begin() const
 {
     return _object.begin();

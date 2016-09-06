@@ -337,7 +337,7 @@ void objMQTTClient::delivered(void *_context,\
 }
 */
 
-static string fromLocale(const string &localeString){
+static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;
 	generator.locale_cache_enabled(true);
 	std::locale locale = generator(boost::locale::util::get_system_locale());
@@ -352,6 +352,7 @@ int objMQTTClient::messageArrived(void *_context,\
 					  *p_token = NULL,\
 					  *p_token_prev = NULL;
 	int code = 0;
+	ostringstream stream;
 
 	MQTTClient *m_client = (MQTTClient *)_context;
 
@@ -364,7 +365,7 @@ int objMQTTClient::messageArrived(void *_context,\
 	p_payload = (char *)_message->payload;
 	message += p_payload;
 
-	json jsonObject = json::parse(message);
+	Value jsonObject = parse_string(message);
 
 	p_token = strtok(_topicName, "/");
 	while(p_token != NULL){
@@ -380,13 +381,16 @@ int objMQTTClient::messageArrived(void *_context,\
 	status_literal_utf8 = fromLocale(status_literal_ascii);
 
 	if(strcmp(status_literal_utf8.c_str(), p_token_prev) == 0){
-		auto status = jsonObject["status"].get<int>();
+		long long int l_status = (long long int)jsonObject["status"];
+		int status = (int)l_status;
 		if(status == 2){
 			MQTTClient_message m_pubmsg = MQTTClient_message_initializer;
 			MQTTClient_deliveryToken m_token;
+			string jsondump;
 
 			jsonObject["status"] = 1;
-			string jsondump = jsonObject.dump();
+			stream << jsonObject;
+			jsondump = stream.str();
 			m_pubmsg.payload = (void *)jsondump.c_str();
 			m_pubmsg.payloadlen = strlen(jsondump.c_str());
 

@@ -80,13 +80,14 @@ namespace JSON
 
         /** Retrieves the ending iterator */
         std::map<std::string, Value>::iterator end();
+
+		std::map<std::string, Value>::const_iterator find(const std::string& key) const;
     
         /** Inserts a field in the object.
             @param v pair <key, value> to insert
             @return an iterator to the inserted object
         */
         std::pair<std::map<std::string, Value>::iterator, bool> insert(const std::pair<std::string, Value>& v);
-
         /** Size of the object. */
         size_t size() const;
 

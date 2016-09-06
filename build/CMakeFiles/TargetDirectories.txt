@@ -1,3 +1,4 @@
 /home/ubuntu/Repository/api/build/CMakeFiles/edit_cache.dir
 /home/ubuntu/Repository/api/build/CMakeFiles/rebuild_cache.dir
 /home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir
+/home/ubuntu/Repository/api/build/CMakeFiles/json.dir

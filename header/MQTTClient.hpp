@@ -23,6 +23,7 @@ limitations under the License.
 #include <queue>
 #include <set>
 #include <functional>
+#include <sstream>
 extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,11 +40,11 @@ extern "C" {
 #include "KISA_SHA256.h"
 }
 
-#include "json.hpp"
+#include "../json/json.hh"
 #include <boost/locale.hpp>
 
 using namespace std;
-using json = nlohmann::json;
+using namespace JSON;
 
 #define QOS 1
 #define TIMEOUT 10000L

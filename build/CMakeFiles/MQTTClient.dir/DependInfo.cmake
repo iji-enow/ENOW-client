@@ -11,6 +11,8 @@ set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  "../json"
+  "json"
   "/usr/local/include"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
@@ -22,11 +24,14 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../json"
+  "json"
   "/usr/local/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/ubuntu/Repository/api/build/CMakeFiles/json.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

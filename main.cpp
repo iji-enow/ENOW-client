@@ -17,6 +17,7 @@ extern "C"{
 #include "header/KISA_SHA256.h"
 }
 #include <string>
+#include <sstream>
 #include <boost/locale.hpp>
 #include "./header/MQTTClientPool.hpp"
 #include "./json/json.hh"
@@ -139,7 +140,7 @@ void systemCheck(void){
 }
 
 
-static string fromLocale(const string &localeString){
+static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;
 	generator.locale_cache_enabled(true);
 	std::locale locale = generator(boost::locale::util::get_system_locale());
@@ -174,7 +175,6 @@ int main(int argc, char **argv){
 
 	int c = 0;
 	opterr = 0;
-	Value json;
 
 	systemCheck();
 
@@ -259,18 +259,22 @@ int main(int argc, char **argv){
 		}
 		p_linebuffer[strlen(p_linebuffer) - 1] = 0;
 
-		json jsonTerminal = json::parse(p_linebuffer);
+		Value json = parse_string(p_linebuffer);
+		Object object = (Object)json;
 
-		topic = jsonTerminal["topic"].get<string>();
-		payload = jsonTerminal["payload"].get<string>();
+		ostringstream stream;
 
-		if(jsonTerminal.find("metadata") == jsonTerminal.end()){
-			jsonTerminal["metadata"]["arch"] = string(p_arch);
-			jsonTerminal["metadata"]["mac_address"] = string(p_macAddress);
-			jsonTerminal["metadata"]["endian"] = endianess;
+		topic = (string)object["topic"];
+		payload = (string)object["payload"];
+
+		if(object.find("metadata") == object.end()){
+			object["metadata"]["arch"] = string(p_arch);
+			object["metadata"]["mac_address"] = string(p_macAddress);
+			object["metadata"]["endian"] = endianess;
 		}
 
-		jsonTerminal_str = jsonTerminal.dump();
+		stream << object << endl;
+		jsonTerminal_str = stream.str();
 
 		strcpy(p_topic, topic.c_str());
 		p_token = strtok(p_topic, "/");
@@ -287,8 +291,7 @@ int main(int argc, char **argv){
 
 		topic += p_SHA256;
 		topic_utf8 = fromLocale(topic);
-		w_payload = jsonTerminal.dump();
-		payload_utf8 = fromLocale(w_payload);
+		payload_utf8 = fromLocale(jsonTerminal_str);
 
 		if((p_client = p_pool->findClient(topic_utf8)) == NULL){
 			p_client = new objMQTTClient();

@@ -14,6 +14,7 @@ endif()
 # Compiler version
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -23,8 +24,7 @@ else()
 	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-set(CMAKE_CXX_FLAGS "-O0")
-set(CMAKE_C_FLAGS"-O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
 
 # The version number.
 set (CLIENT_VERSION_MAJOR 1)
@@ -74,6 +74,10 @@ if(FLEX_FOUND)
 	set_source_files_properties(${FLEX_OUTPUT} PROPERTIES COMPILE_FLAGS "-Wno-deprecated-register")
 endif(FLEX_FOUND)
 
+# add the library
+add_library(json ./json/json_st.cc ${BISON_OUTPUT} ${FLEX_OUTPUT})
+
+
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
 if(USE_WIRINGPI)
@@ -81,13 +85,11 @@ if(USE_WIRINGPI)
 	include_directories(${WIRINGPI_INCLUDE_DIRS})
 endif(USE_WIRINGPI)
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS locale)
+find_package(Boost COMPONENTS locale REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIR})
 find_package(PahoMqtt REQUIRED)
 include_directories(${LIBMQTT_INCLUDE_DIRS})
-
-# add the library
-add_library(json ./json/json_st.cc ${BISON_OUTPUT} ${FLEX_OUTPUT})
 
 # add the executable
 add_executable(MQTTClient ${HEADER_FILE_C} ${HEADER_FILE_CPP}  ${SOURCE_FILE_C} ${SOURCE_FILE_CPP} ./main.cpp)
@@ -95,7 +97,7 @@ add_executable(MQTTClient ${HEADER_FILE_C} ${HEADER_FILE_CPP}  ${SOURCE_FILE_C} 
 if(USE_WIRINGPI)
 	target_link_libraries(MQTTClient ${WIRINGPI_LIBRARIES})
 endif(USE_WIRINGPI)
-target_link_libraries(MQTTClient ${Boost_LOCALE_LIBRARY})
+target_link_libraries(MQTTClient ${Boost_LIBRARIES})
 target_link_libraries(MQTTClient ${LIBMQTT_LIBRARIES})
 target_link_libraries(MQTTClient ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(MQTTClient json)
