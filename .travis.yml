@@ -1,0 +1,16 @@
+install: make get-deps
+language: cpp
+sudo: required
+dist: trusty
+compiler:
+  - clang
+  - gcc
+branches:
+  only:
+  - master
+notifications:
+  email: false
+  slack: ijiteam:E9Rr8nKzl9hTppiVyvYAvzsZ
+env:
+  global:
+  - LANG="en_US.UTF-8"
