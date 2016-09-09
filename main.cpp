@@ -30,6 +30,16 @@ static int verbose_flag;
 static const char *p_arch;
 static const char *p_macAddress;
 static int endianess;
+static objMQTTClientPool *p_pool;
+static string address, clientID;
+ 
+
+/*
+ * A function for checking system-wise data, like
+ * 	System architecture
+ * 	Endianess
+ * 	Mac address for active network interfaces
+ */
 
 void systemCheck(void){
 	int filedes = 0,\
@@ -39,15 +49,20 @@ void systemCheck(void){
 				  status_t = 0;
 	unsigned int rx_t = 0,\
 				  tx_t = 0;
-	char *p_buffer = (char *)malloc(sizeof(char) * BUFSIZ);
 	char *p_token = NULL,\
 					*p_arch_t = NULL,\
 					*p_macAddress_t = NULL;
-	char host[NI_MAXHOST];
-	char interface[BUFSIZ],\
-		path[BUFSIZ];
+	char host[NI_MAXHOST],\
+		interface[BUFSIZ],\
+		path[BUFSIZ],\
+		p_buffer[BUFSIZ];
 
-	memset(p_buffer, 0, sizeof(BUFSIZ));
+	p_arch_t = (char *)malloc(sizeof(char) * BUFSIZ);
+	p_macAddress_t = (char *)malloc(sizeof(char) * BUFSIZ);
+
+	memset(p_arch_t, 0, BUFSIZ);
+	memset(p_macAddress_t, 0, BUFSIZ);
+	memset(p_buffer, 0, BUFSIZ);
 
 	struct ifaddrs *p_ifaddr = NULL,\
 							   *p_ifa = NULL;
@@ -70,7 +85,6 @@ void systemCheck(void){
 			while(1){
 				p_token = strtok(NULL, ":\t\n");
 				if(strlen(p_token) != 0){
-					p_arch_t = (char *)malloc(BUFSIZ * sizeof(char));
 					memset(p_arch_t, 0, BUFSIZ);
 					strcpy(p_arch_t, p_token);
 					p_arch = p_arch_t;
@@ -134,10 +148,14 @@ void systemCheck(void){
 	close(filedes);
 	
 	p_token = strtok(p_buffer, "\n");
-	p_macAddress_t = (char *)malloc(BUFSIZ * sizeof(char));
 	strcpy(p_macAddress_t, p_token);
 	p_macAddress = p_macAddress_t;
 }
+
+/*
+ * A function for converting ASCII string to UTF-8 string
+ * The function uses Boost library, so you probably need to install it.
+ */
 
 
 static std::string fromLocale(const std::string &localeString){
@@ -147,17 +165,65 @@ static std::string fromLocale(const std::string &localeString){
 	return boost::locale::conv::to_utf<char>(localeString, locale);
 }
 
+void preprocess(const string major_topic){
+
+	objMQTTClient *p_client_feedback = NULL;			
+
+	if((p_client_feedback = p_pool->findClient(major_topic)) == NULL){
+
+		string LWT_feedback_str,\
+			LWT_feedback_str_utf8,\
+			initial_str;
+
+		p_client_feedback = new objMQTTClient();
+		MQTTClient_message msg_feedback_t = MQTTClient_message_initializer;
+		initial_str = "Initial Payload";
+		LWT_feedback_str = "A client " + \
+							major_topic + \
+							" listening to topic \"feedback\" stopped unexpectedly";
+		LWT_feedback_str_utf8 = fromLocale(LWT_feedback_str);
+
+		p_client_feedback->setTopic(major_topic);
+		p_client_feedback->createClient(address, clientID + "feedback");
+		p_client_feedback->setConnectOptions(60,\
+				true,\
+				true,\
+				30);
+		p_client_feedback->setLWT(LWT_feedback_str.c_str(),\
+				0,\
+				1);
+		p_client_feedback->clientConnect();
+		p_client_feedback->setPayload(msg_feedback_t,\
+				strlen(initial_str.c_str()),\
+				initial_str.c_str(),\
+				1,\
+				0,\
+				0);
+		p_client_feedback->publish(msg_feedback_t,\
+				string("feedback"),\
+				30);
+		p_client_feedback->listen("feedback");
+
+		p_pool->insertClient(p_client_feedback);
+	}
+}
+
+
+/*
+ * An entry for the whole program
+ * There are 3 main features of this program
+ *	1. Connects the device to any remote broker
+ *	2. Hashes topics and data for security purpose
+ *	3. Creates a thread pool for managing each MQTTClient
+ */
+
 int main(int argc, char **argv){
-	string address,\
-		clientID,\
-		topic,\
+	string topic,\
 		topic_utf8,\
 		jsonTerminal_str,\
 		payload,\
 		w_payload,\
-		payload_utf8,\
-		myLWT,\
-		myLWT_utf8;
+		payload_utf8;
 
 	bool addressFlag = false,\
 					   idFlag = false,\
@@ -165,17 +231,19 @@ int main(int argc, char **argv){
 
 	char *p_address = NULL,\
 					  *p_id = NULL,\
-					  *p_topic = NULL,\
-					  *p_SHA256_token = NULL,\
-					  *p_SHA256 = NULL,\
 					  *p_token = NULL,\
-					  *p_linebuffer = NULL;
+					  *p_token_prev = NULL;
+	char p_SHA256[BUFSIZ],\
+		p_linebuffer[BUFSIZ],\
+		p_topic[BUFSIZ];
 
-	objMQTTClientPool *p_pool = NULL;
+	ostringstream stream;
 
 	int c = 0;
 	opterr = 0;
-
+	/*
+	 * A routine for system proprietary data
+	 */
 	systemCheck();
 
 	while(1){
@@ -231,92 +299,87 @@ int main(int argc, char **argv){
 	clientID += p_id;
 
 	p_pool = new objMQTTClientPool();
-	p_SHA256_token = (char *)malloc(sizeof(char) * BUFSIZ);
-	memset(p_SHA256_token, 0, BUFSIZ);
-	p_SHA256 = (char *)malloc(sizeof(char) * BUFSIZ * 4);
 	memset(p_SHA256, 0, BUFSIZ);
-	p_linebuffer = (char *)malloc(sizeof(char) * BUFSIZ);
 	memset(p_linebuffer, 0, BUFSIZ);
-	p_topic = (char *)malloc(BUFSIZ * sizeof(char));
 	memset(p_topic, 0, BUFSIZ);
+
+	if(setvbuf(stdin, NULL, _IONBF, 4096) != 0){
+		perror("Error setting buffer");
+		exit(1);
+	}
 
 	while(true){
 		memset(p_linebuffer, 0, BUFSIZ);
-		memset(p_SHA256, 0, BUFSIZ * 4);
-		memset(p_SHA256_token, 0, BUFSIZ);
+		memset(p_SHA256, 0, BUFSIZ);
 		memset(p_topic, 0, BUFSIZ);
 		topic.clear();
 		payload.clear();
 		payload_utf8.clear();
 		jsonTerminal_str.clear();
 		w_payload.clear();
-		myLWT.clear();
-		myLWT_utf8.clear();
 
-		if(fgets(p_linebuffer, BUFSIZ, stdin) == NULL){
+		if(ferror(stdin) != 0){
+			perror("Error indicator is set on stdin");
+			exit(1);
+		}
+
+		if(!fgets(p_linebuffer, BUFSIZ, stdin)){
 			perror("Error reading input");
 			exit(1);
 		}
 		p_linebuffer[strlen(p_linebuffer) - 1] = 0;
 
+		if(fflush(stdin) != 0){
+			perror("Error flushing stdin");
+			exit(1);
+		}
+
 		Value json = parse_string(p_linebuffer);
+
+		topic = (string)json["topic"];
+
 		Object object = (Object)json;
 
-		ostringstream stream;
-
-		topic = (string)object["topic"];
-		payload = (string)object["payload"];
-
 		if(object.find("metadata") == object.end()){
-			object["metadata"]["arch"] = string(p_arch);
-			object["metadata"]["mac_address"] = string(p_macAddress);
-			object["metadata"]["endian"] = endianess;
+			Object metadata;
+			json["metadata"] = metadata;
+			json["metadata"]["arch"] = string(p_arch);
+			json["metadata"]["mac_address"] = string(p_macAddress);
+			json["metadata"]["endian"] = endianess;
 		}
 
-		stream << object << endl;
+		object = (Object)json;
+
+		stream.str("");
+		stream.clear();
+		stream << object;
 		jsonTerminal_str = stream.str();
 
-		strcpy(p_topic, topic.c_str());
-		p_token = strtok(p_topic, "/");
-		while(p_token != NULL){
-			if(strlen(p_token) != 0){
-				SHA256_Encrpyt((const BYTE *)p_token, (UINT)strlen(p_token) + 1, (BYTE *)p_SHA256_token);	
-				strcat(p_SHA256, "/");
-				strcat(p_SHA256, p_SHA256_token);
-				memset(p_SHA256_token, 0, BUFSIZ);
-			}
-			p_token = strtok(NULL, "/");
-		}
-		objMQTTClient *p_client;
+		preprocess(topic);
 
-		topic += p_SHA256;
-		topic_utf8 = fromLocale(topic);
+		objMQTTClient *p_client;
 		payload_utf8 = fromLocale(jsonTerminal_str);
 
-		if((p_client = p_pool->findClient(topic_utf8)) == NULL){
+		if((p_client = p_pool->findClient(topic)) == NULL){
 			p_client = new objMQTTClient();
 			MQTTClient_message msg_t = MQTTClient_message_initializer;
-			myLWT = "My LWT";
-			myLWT_utf8 = fromLocale(myLWT);
-			p_client->setTopic(topic_utf8);
-			p_client->createClient(address, clientID);
-			p_client->clientConnect();
+			p_client->setTopic(topic);
+			p_client->createClient(address, clientID + "status");
 			p_client->setConnectOptions(60,\
 					false,\
-					true,\
+					false,\
 					30);
-			p_client->setLWT(myLWT_utf8.c_str(),\
-					1,\
-					1);
+			p_client->clientConnect();
 			p_client->setPayload(msg_t,\
 					strlen(payload_utf8.c_str()),\
-					payload_utf8.c_str());
+					payload_utf8.c_str(),\
+					1,\
+					false,\
+					true);
 
 			p_client->publish(msg_t,\
+					string("status"),\
 					30);
-			sleep(1.0);
-			p_client->listen();
-			
 			p_pool->insertClient(p_client);
 		}
 		else{
@@ -324,17 +387,17 @@ int main(int argc, char **argv){
 			p_client->clientConnect();
 			p_client->setPayload(msg_t,\
 					strlen(payload_utf8.c_str()),\
-					payload_utf8.c_str());
+					payload_utf8.c_str(),\
+					1,\
+					false,\
+					true);
 			p_client->publish(msg_t,\
+					string("status"),\
 					30);
 		}
 	}
 
 	free(p_address);
 	free(p_id);
-	free(p_topic);
-	free(p_SHA256_token);
-	free(p_SHA256);
-	free(p_linebuffer);
 	return 0;
 }

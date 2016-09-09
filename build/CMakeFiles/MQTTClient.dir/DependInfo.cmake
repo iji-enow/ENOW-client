@@ -7,7 +7,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/ubuntu/Repository/api/src/KISA_SHA256.c" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o"
   )
-set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

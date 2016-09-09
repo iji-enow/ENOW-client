@@ -3,7 +3,7 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_FLAGS = -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include -I/usr/local/include -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include  -g  
+C_FLAGS = -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	   
 
 C_DEFINES = 
 

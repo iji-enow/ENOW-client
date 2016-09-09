@@ -49,20 +49,6 @@ using namespace JSON;
 #define QOS 1
 #define TIMEOUT 10000L
 
-class param{
-	public:
-		string topic;
-		int qos;
-
-		MQTTClient *m_client;
-	public:
-		param(){
-		}
-		~param(){
-		}
-};
-
-
 class objMQTTClient{
 	private:
 		MQTTClient m_client;
@@ -80,16 +66,11 @@ class objMQTTClient{
 		bool m_topicSet;
 		bool m_listening;
 
-		pthread_t m_thread;
-		static pthread_mutex_t m_lock;
-		pthread_attr_t m_attr;
-
 	public:
 		objMQTTClient()\
 			: m_option(MQTTClient_connectOptions_initializer),\
 			m_will(MQTTClient_willOptions_initializer),\
 			m_ssl(MQTTClient_SSLOptions_initializer){
-				m_thread = (unsigned long int)0;
 				m_clientCreated = false;
 				m_clientConnected = false;
 				m_topicSet = false;
@@ -114,10 +95,11 @@ class objMQTTClient{
 				const char *_payload,\
 				int _qos = 1,\
 				int _retained = true,\
-				int _dup = false);
+				int _dup = true);
 
 		bool clientConnect(void);
 		bool publish(MQTTClient_message &m_pubmsg,\
+				const string sub_topic,\
 				unsigned long timeOut);
 
 		static void delivered(void *_context,\
@@ -129,9 +111,8 @@ class objMQTTClient{
 		static void connectionLost(void *_context,\
 				char *_cause);
 
-		bool listen(int _qos = 1);
-		static void *routine(void *_param);
-
+		bool listen(const string sub_topic,\
+				int _qos = 1);
 };
 
 #endif

@@ -64,11 +64,11 @@ CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o: ../src/KISA_SHA256.c
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ubuntu/Repository/api/src/KISA_SHA256.c > CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ubuntu/Repository/api/src/KISA_SHA256.c -o CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o.requires:
 
