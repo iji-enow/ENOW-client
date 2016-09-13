@@ -12,8 +12,13 @@ extern "C"{
 #include <ifaddrs.h>
 #include <linux/if_link.h>
 #include <sys/types.h>
+#include <pthread.h>
 #include <sys/stat.h>
+#include <sys/resource.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <fcntl.h>
+#include <errno.h>
 #include "header/KISA_SHA256.h"
 }
 #include <string>
@@ -33,7 +38,6 @@ static int endianess;
 static objMQTTClientPool *p_pool;
 static string address, clientID;
  
-
 /*
  * A function for checking system-wise data, like
  * 	System architecture
@@ -157,7 +161,6 @@ void systemCheck(void){
  * The function uses Boost library, so you probably need to install it.
  */
 
-
 static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;
 	generator.locale_cache_enabled(true);
@@ -208,7 +211,6 @@ void preprocess(const string major_topic){
 	}
 }
 
-
 /*
  * An entry for the whole program
  * There are 3 main features of this program
@@ -235,21 +237,40 @@ int main(int argc, char **argv){
 					  *p_token_prev = NULL;
 	char p_SHA256[BUFSIZ],\
 		p_linebuffer[BUFSIZ],\
-		p_topic[BUFSIZ];
+		p_topic[BUFSIZ],\
+		p_key[11];
 
 	ostringstream stream;
 
-	int c = 0;
+	const rlim_t kernelStackSize = 16L * 1024L * 1024L;
+	struct rlimit limit;
+
+	int c = 0,\
+			result = 0;
 	opterr = 0;
+	key = -1;
 	/*
 	 * A routine for system proprietary data
 	 */
 	systemCheck();
+	/*
+	 * A routine for setting up a stack size for the program
+	 */
+	
+	if((result = getrlimit(RLIMIT_STACK, &limit)) == 0) {
+		if(limit.rlim_cur < kernelStackSize) {
+			limit.rlim_cur = kernelStackSize;
+			if((result = setrlimit(RLIMIT_STACK, &limit)) != 0){
+				fprintf(stderr, "Acquiring the size of a stack for the program failed with exit code %d\n", result);
+			}
+		}
+	}
 
 	while(1){
 		static struct option long_options[] = {
 			{"address", required_argument, 0, 'a'},
 			//			{"topic", required_argument, 0, 't'},
+			{"key", optional_argument, 0, 'k'},
 			{"clientID", required_argument, 0, 'i'},
 			{0, 0, 0, 0}
 		};
@@ -278,22 +299,36 @@ int main(int argc, char **argv){
 				p_address = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_address, optarg, strlen(optarg) + 1);
 				break;
-				/*			case 't':
+							/*case 't':
 							printf("topic : %s\n", optarg);
 							p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 							memcpy(p_topic, optarg, strlen(optarg) + 1);
 							break;
-							*/			case 'i':
+							*/	
+			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_id, optarg, strlen(optarg) + 1);
 				break;
+			case 'k':
+				printf("key for shared memory region : %s\n", optarg);
+				memcpy(p_key, optarg, strlen(optarg) + 1);
+				key = atoi(p_key);
+				break;
 			case '?':
 				break;
 			default:
-				abort();
+				fprintf(stderr, "Please enter any parameter\n");
+				exit(1);
 		}
 	}
+
+	/*
+	 * A routine for sharing memory region among processes
+	 * 	Host program : this
+	 * 	Client program : example program
+	 * 		i.e) human face detection program in OpenCV
+	 */
 
 	address += p_address;
 	clientID += p_id;

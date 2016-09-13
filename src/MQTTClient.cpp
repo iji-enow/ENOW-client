@@ -15,6 +15,14 @@ limitations under the License
 #include "../header/MQTTClient.hpp"
 
 priority_queue<string> objMQTTClient::m_queue;
+MQTTClient objMQTTClient::m_client;
+MQTTClient_connectionOptions objMQTTClient::m_option;
+MQTTClient_willOptions objMQTTClient::m_will;
+MQTTClient_SSLOptions objMQTTClient::m_ssl;
+string objMQTTClient::m_address;
+string objMQTTClient::m_clientID;
+bool objMQTTClient::m_clientCreated;
+bool objMQTTClient::m_clientConnected;
 
 static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;

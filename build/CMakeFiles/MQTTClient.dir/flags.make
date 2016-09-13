@@ -9,7 +9,7 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/ubuntu/Repository/api/json -I/home/ubuntu/Repository/api/build/json -I/usr/local/include 
 
-CXX_FLAGS =  -std=c++11 -O0 -g  
+CXX_FLAGS =  -std=c++11 -O3 -O3 -DNDEBUG  
 
 CXX_DEFINES = 
 

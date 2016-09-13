@@ -51,18 +51,18 @@ using namespace JSON;
 
 class objMQTTClient{
 	private:
-		MQTTClient m_client;
-		MQTTClient_connectOptions m_option;
-		MQTTClient_willOptions m_will;
-		MQTTClient_SSLOptions m_ssl;
+		static MQTTClient m_client;
+		static MQTTClient_connectOptions m_option;
+		static MQTTClient_willOptions m_will;
+		static MQTTClient_SSLOptions m_ssl;
 
-		string m_address;
+		static string m_address;
 		string m_topic;
-		string m_clientID;
+		static string m_clientID;
 		static priority_queue<string> m_queue;
 
-		bool m_clientCreated;
-		bool m_clientConnected;
+		static bool m_clientCreated;
+		static bool m_clientConnected;
 		bool m_topicSet;
 		bool m_listening;
 
@@ -78,11 +78,11 @@ class objMQTTClient{
 			}
 		~objMQTTClient(void);
 
-		int createClient(string _address, string _clientID);
+		static int createClient(string _address, string _clientID);
 		void setTopic(string _topic);
 		string getTopic(void);
 
-		void setConnectOptions(const int _keepAliverInterval,\
+		static void setConnectOptions(const int _keepAliverInterval,\
 				const int _cleansession,\
 				const int _reliable,\
 				const int _connectTimeout);
@@ -97,7 +97,7 @@ class objMQTTClient{
 				int _retained = true,\
 				int _dup = true);
 
-		bool clientConnect(void);
+		static bool clientConnect(void);
 		bool publish(MQTTClient_message &m_pubmsg,\
 				const string sub_topic,\
 				unsigned long timeOut);

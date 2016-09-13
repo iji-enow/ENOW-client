@@ -171,6 +171,8 @@ sys/types.h
 -
 sys/stat.h
 -
+sys/resource.h
+-
 fcntl.h
 -
 header/KISA_SHA256.h
