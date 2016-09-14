@@ -23,6 +23,8 @@ extern "C"{
 }
 #include <string>
 #include <sstream>
+#include <mutex>
+#include <thread>
 #include <boost/locale.hpp>
 #include "./header/MQTTClientPool.hpp"
 #include "./json/json.hh"
@@ -36,8 +38,9 @@ static const char *p_arch;
 static const char *p_macAddress;
 static int endianess;
 static objMQTTClientPool *p_pool;
+static mutex pool_mutex;
 static string address, clientID;
- 
+
 /*
  * A function for checking system-wise data, like
  * 	System architecture
@@ -52,7 +55,7 @@ void systemCheck(void){
 				  index_t = 0,\
 				  status_t = 0;
 	unsigned int rx_t = 0,\
-				  tx_t = 0;
+						tx_t = 0;
 	char *p_token = NULL,\
 					*p_arch_t = NULL,\
 					*p_macAddress_t = NULL;
@@ -75,14 +78,14 @@ void systemCheck(void){
 		fprintf(stderr, "Error while opening /proc/cpuinfo, consider giving the program root privilege\n");
 		exit(1);
 	}
-	
+
 	if(read(filedes, p_buffer, BUFSIZ) == -1){
 		fprintf(stderr, "Error while reading /proc/cpuinfo, consider giving the program root privilege\n");
 		exit(1);
 	}
 
 	close(filedes);
-	
+
 	p_token = strtok(p_buffer, ":\t\n");
 	while(p_token != NULL){
 		if(strcmp(p_token, "model name") == 0){
@@ -99,7 +102,7 @@ void systemCheck(void){
 		}
 		p_token = strtok(NULL, ":\t\n");
 	}
-	
+
 	endian_t = 1;
 	if(*(char *)&endian_t == 1)
 		endianess = 1;
@@ -127,13 +130,13 @@ void systemCheck(void){
 					p_stats->rx_bytes > rx_t){
 				tx_t = p_stats->tx_bytes;
 				rx_t = p_stats->rx_bytes;
-				
+
 				memset(interface, 0, BUFSIZ);
 				sprintf(interface, "%s", p_ifa->ifa_name);
 			}
 		}
 	}
-	
+
 	memset(path, 0, BUFSIZ);
 	strcat(path, "/sys/class/net/");
 	strcat(path, interface);
@@ -150,7 +153,7 @@ void systemCheck(void){
 	}
 
 	close(filedes);
-	
+
 	p_token = strtok(p_buffer, "\n");
 	strcpy(p_macAddress_t, p_token);
 	p_macAddress = p_macAddress_t;
@@ -211,6 +214,60 @@ void preprocess(const string major_topic){
 	}
 }
 
+static void shareMemory(Value &json, string &topic) {
+	Object object = (Object)json;
+	ostringstream stream;
+
+	stream.str("");
+	stream.clear();
+	stream << object;
+	jsonTerminal_str = stream.str();
+
+	preprocess(topic);
+
+	objMQTTClient *p_client;
+	payload_utf8 = fromLocale(jsonTerminal_str);
+
+
+	if((p_client = p_pool->findClient(topic)) == NULL){
+		p_client = new objMQTTClient();
+		MQTTClient_message msg_t = MQTTClient_message_initializer;
+		if(p_pool->initialize()){
+			p_client->createClient(address, clientID + "status");
+			p_client->setConnectOptions(60,\
+					false,\
+					false,\
+					30);
+			p_client->clientConnect();
+		}
+		p_client->setTopic(topic);
+		p_client->setPayload(msg_t,\
+				strlen(payload_utf8.c_str()),\
+				payload_utf8.c_str(),\
+				1,\
+				false,\
+				true);
+
+		p_client->publish(msg_t,\
+				string("status"),\
+				30);
+		p_pool->insertClient(p_client);
+	}
+	else{
+		MQTTClient_message msg_t = MQTTClient_message_initializer;
+		p_client->setPayload(msg_t,\
+				strlen(payload_utf8.c_str()),\
+				payload_utf8.c_str(),\
+				1,\
+				false,\
+				true);
+		p_client->publish(msg_t,\
+				string("status"),\
+				30);
+	}
+
+}
+
 /*
  * An entry for the whole program
  * There are 3 main features of this program
@@ -238,9 +295,7 @@ int main(int argc, char **argv){
 	char p_SHA256[BUFSIZ],\
 		p_linebuffer[BUFSIZ],\
 		p_topic[BUFSIZ],\
-		p_key[11];
-
-	ostringstream stream;
+		p_key[11];;
 
 	const rlim_t kernelStackSize = 16L * 1024L * 1024L;
 	struct rlimit limit;
@@ -256,7 +311,7 @@ int main(int argc, char **argv){
 	/*
 	 * A routine for setting up a stack size for the program
 	 */
-	
+
 	if((result = getrlimit(RLIMIT_STACK, &limit)) == 0) {
 		if(limit.rlim_cur < kernelStackSize) {
 			limit.rlim_cur = kernelStackSize;
@@ -299,12 +354,12 @@ int main(int argc, char **argv){
 				p_address = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_address, optarg, strlen(optarg) + 1);
 				break;
-							/*case 't':
-							printf("topic : %s\n", optarg);
-							p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
-							memcpy(p_topic, optarg, strlen(optarg) + 1);
-							break;
-							*/	
+				/*case 't':
+				  printf("topic : %s\n", optarg);
+				  p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
+				  memcpy(p_topic, optarg, strlen(optarg) + 1);
+				  break;
+				  */	
 			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
@@ -383,53 +438,7 @@ int main(int argc, char **argv){
 			json["metadata"]["endian"] = endianess;
 		}
 
-		object = (Object)json;
 
-		stream.str("");
-		stream.clear();
-		stream << object;
-		jsonTerminal_str = stream.str();
-
-		preprocess(topic);
-
-		objMQTTClient *p_client;
-		payload_utf8 = fromLocale(jsonTerminal_str);
-
-		if((p_client = p_pool->findClient(topic)) == NULL){
-			p_client = new objMQTTClient();
-			MQTTClient_message msg_t = MQTTClient_message_initializer;
-			p_client->setTopic(topic);
-			p_client->createClient(address, clientID + "status");
-			p_client->setConnectOptions(60,\
-					false,\
-					false,\
-					30);
-			p_client->clientConnect();
-			p_client->setPayload(msg_t,\
-					strlen(payload_utf8.c_str()),\
-					payload_utf8.c_str(),\
-					1,\
-					false,\
-					true);
-
-			p_client->publish(msg_t,\
-					string("status"),\
-					30);
-			p_pool->insertClient(p_client);
-		}
-		else{
-			MQTTClient_message msg_t = MQTTClient_message_initializer;
-			p_client->clientConnect();
-			p_client->setPayload(msg_t,\
-					strlen(payload_utf8.c_str()),\
-					payload_utf8.c_str(),\
-					1,\
-					false,\
-					true);
-			p_client->publish(msg_t,\
-					string("status"),\
-					30);
-		}
 	}
 
 	free(p_address);

@@ -17,6 +17,7 @@ limitations under the License.
 #include "../header/MQTTClientPool.hpp"
 
 set<objMQTTClient *, CompFunc> objMQTTClientPool::m_clientPool;
+bool objMQTTClientPool::m_initialized;
 
 static bool isTopicEqual(objMQTTClient *lhs, objMQTTClient *rhs){
 	return (lhs->getTopic() == rhs->getTopic());
@@ -30,6 +31,14 @@ void objMQTTClientPool::insertClient(objMQTTClient *_client) {
 		fprintf(stderr, "The element already has existed\n");
 		return;
 	}
+}
+
+bool objMQTTClientPool::initialize(void){
+	if(m_initialized)
+		return false;
+	else
+		m_initialized = true;
+	return true;
 }
 
 objMQTTClient* objMQTTClientPool::findClient(string _topic) {

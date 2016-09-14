@@ -23,6 +23,8 @@ limitations under the License.
 #include <queue>
 #include <set>
 #include <functional>
+#include <mutex>
+#include <thread>
 #include <sstream>
 extern "C" {
 #include <stdio.h>
@@ -63,6 +65,7 @@ class objMQTTClient{
 
 		static bool m_clientCreated;
 		static bool m_clientConnected;
+		static mutex m_client_mutex;
 		bool m_topicSet;
 		bool m_listening;
 

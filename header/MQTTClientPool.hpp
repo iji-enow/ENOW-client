@@ -35,12 +35,13 @@ class CompFunc {
 class objMQTTClientPool {
 private:
 	static set<objMQTTClient *, CompFunc> m_clientPool;
-
+	static bool m_initialized;
 public:
 	objMQTTClientPool(){
-		
+		m_initialized = false;
 	}
 
+	bool initialize(void);
 	void insertClient(objMQTTClient *_client);
 	objMQTTClient* findClient(string _topic);
 };

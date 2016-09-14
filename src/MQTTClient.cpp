@@ -15,6 +15,7 @@ limitations under the License
 #include "../header/MQTTClient.hpp"
 
 priority_queue<string> objMQTTClient::m_queue;
+mutex objMQTTClient::m_client_mutex;
 MQTTClient objMQTTClient::m_client;
 MQTTClient_connectionOptions objMQTTClient::m_option;
 MQTTClient_willOptions objMQTTClient::m_will;
@@ -205,6 +206,8 @@ bool objMQTTClient::clientConnect(void){
 bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 		const string sub_topic,\
 		unsigned long timeOut){
+	lock_guard<mutex> lock(m_client_mutex);
+
 	int result = 0;
 	int result_t = 0;
 	MQTTClient_deliveryToken m_token;
@@ -256,6 +259,7 @@ bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 
 bool objMQTTClient::listen(const string sub_topic,\
 		int _qos){
+	lock_guard<mutex> lock(m_client_mutex);
 	if(m_listening)
 		return false;
 	if(!m_topicSet){
