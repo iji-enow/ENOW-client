@@ -60,15 +60,15 @@ include CMakeFiles/MQTTClient.dir/flags.make
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o: CMakeFiles/MQTTClient.dir/flags.make
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o: ../src/KISA_SHA256.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o   -c /home/ubuntu/Repository/api/src/KISA_SHA256.c
+	/usr/bin/gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o   -c /home/ubuntu/Repository/api/src/KISA_SHA256.c
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_PREPROCESSED_SOURCE
+	/usr/bin/gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ubuntu/Repository/api/src/KISA_SHA256.c > CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.i
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
+	/usr/bin/gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ubuntu/Repository/api/src/KISA_SHA256.c -o CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.s
 
 CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o.requires:
 
@@ -84,15 +84,15 @@ CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o.provides.build: CMakeFiles/MQTTCli
 CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o: CMakeFiles/MQTTClient.dir/flags.make
 CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o: ../src/MQTTClient.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o -c /home/ubuntu/Repository/api/src/MQTTClient.cpp
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o -c /home/ubuntu/Repository/api/src/MQTTClient.cpp
 
 CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/src/MQTTClient.cpp > CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.i
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/src/MQTTClient.cpp > CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.i
 
 CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/src/MQTTClient.cpp -o CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.s
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/src/MQTTClient.cpp -o CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.s
 
 CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o.requires:
 
@@ -108,15 +108,15 @@ CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o.provides.build: CMakeFiles/MQTTCl
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o: CMakeFiles/MQTTClient.dir/flags.make
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o: ../src/MQTTClientPool.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o -c /home/ubuntu/Repository/api/src/MQTTClientPool.cpp
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o -c /home/ubuntu/Repository/api/src/MQTTClientPool.cpp
 
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/src/MQTTClientPool.cpp > CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.i
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/src/MQTTClientPool.cpp > CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.i
 
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/src/MQTTClientPool.cpp -o CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.s
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/src/MQTTClientPool.cpp -o CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.s
 
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o.requires:
 
@@ -129,18 +129,42 @@ CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o.provides: CMakeFiles/MQTTClie
 CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o.provides.build: CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o
 
 
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o: CMakeFiles/MQTTClient.dir/flags.make
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o: ../src/MQTTIPC.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o -c /home/ubuntu/Repository/api/src/MQTTIPC.cpp
+
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/src/MQTTIPC.cpp > CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.i
+
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/src/MQTTIPC.cpp -o CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.s
+
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.requires:
+
+.PHONY : CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.requires
+
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.provides: CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.requires
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.provides.build
+.PHONY : CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.provides
+
+CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.provides.build: CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o
+
+
 CMakeFiles/MQTTClient.dir/main.cpp.o: CMakeFiles/MQTTClient.dir/flags.make
 CMakeFiles/MQTTClient.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MQTTClient.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/main.cpp.o -c /home/ubuntu/Repository/api/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MQTTClient.dir/main.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MQTTClient.dir/main.cpp.o -c /home/ubuntu/Repository/api/main.cpp
 
 CMakeFiles/MQTTClient.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MQTTClient.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/main.cpp > CMakeFiles/MQTTClient.dir/main.cpp.i
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/Repository/api/main.cpp > CMakeFiles/MQTTClient.dir/main.cpp.i
 
 CMakeFiles/MQTTClient.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MQTTClient.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/main.cpp -o CMakeFiles/MQTTClient.dir/main.cpp.s
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/Repository/api/main.cpp -o CMakeFiles/MQTTClient.dir/main.cpp.s
 
 CMakeFiles/MQTTClient.dir/main.cpp.o.requires:
 
@@ -158,6 +182,7 @@ MQTTClient_OBJECTS = \
 "CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o" \
 "CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o" \
 "CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o" \
+"CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o" \
 "CMakeFiles/MQTTClient.dir/main.cpp.o"
 
 # External object files for target MQTTClient
@@ -166,13 +191,14 @@ MQTTClient_EXTERNAL_OBJECTS =
 MQTTClient: CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o
 MQTTClient: CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o
 MQTTClient: CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o
+MQTTClient: CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o
 MQTTClient: CMakeFiles/MQTTClient.dir/main.cpp.o
 MQTTClient: CMakeFiles/MQTTClient.dir/build.make
-MQTTClient: /usr/local/lib/libboost_locale.so
+MQTTClient: /usr/lib/arm-linux-gnueabihf/libboost_locale.so
 MQTTClient: /usr/local/lib/libpaho-mqtt3cs.so
 MQTTClient: libjson.a
 MQTTClient: CMakeFiles/MQTTClient.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable MQTTClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ubuntu/Repository/api/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable MQTTClient"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MQTTClient.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -183,6 +209,7 @@ CMakeFiles/MQTTClient.dir/build: MQTTClient
 CMakeFiles/MQTTClient.dir/requires: CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o.requires
 CMakeFiles/MQTTClient.dir/requires: CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o.requires
 CMakeFiles/MQTTClient.dir/requires: CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o.requires
+CMakeFiles/MQTTClient.dir/requires: CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o.requires
 CMakeFiles/MQTTClient.dir/requires: CMakeFiles/MQTTClient.dir/main.cpp.o.requires
 
 .PHONY : CMakeFiles/MQTTClient.dir/requires

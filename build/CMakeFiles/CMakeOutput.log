@@ -1,6 +1,19 @@
 The system is: Linux - 3.10.40-ga7da876 - armv7l
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: -I/usr/include/c++/4.8;-I/usr/include/arm-linux-gnueabihf/c++/4.8;-I/usr/include/c++/4.8/backward;-I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include;-I/usr/local/include;-I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed;-I/usr/include/arm-linux-gnueabihf;-I/usr/include;
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/ubuntu/Repository/api/build/CMakeFiles/3.6.2/CompilerIdC/a.out"
+
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /usr/bin/c++ 
+Compiler: /usr/bin/g++ 
 Build flags: 
 Id flags: 
 
@@ -10,72 +23,225 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/ubuntu/Repository/api/build/CMakeFiles/3.6.1/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/ubuntu/Repository/api/build/CMakeFiles/3.6.2/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_693c0/fast"
-/usr/bin/make -f CMakeFiles/cmTC_693c0.dir/build.make CMakeFiles/cmTC_693c0.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_02f3b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_02f3b.dir/build.make CMakeFiles/cmTC_02f3b.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_693c0.dir/testCCompiler.c.o
-/usr/bin/cc    -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -o CMakeFiles/cmTC_693c0.dir/testCCompiler.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_693c0
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_693c0.dir/link.txt --verbose=1
-/usr/bin/cc  -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_693c0.dir/testCCompiler.c.o  -o cmTC_693c0  
+Building C object CMakeFiles/cmTC_02f3b.dir/testCCompiler.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_02f3b.dir/testCCompiler.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_02f3b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02f3b.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_02f3b.dir/testCCompiler.c.o  -o cmTC_02f3b -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1cf7d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1cf7d.dir/build.make CMakeFiles/cmTC_1cf7d.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_5eb65/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5eb65.dir/build.make CMakeFiles/cmTC_5eb65.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1cf7d.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc    -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -o CMakeFiles/cmTC_1cf7d.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_1cf7d
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1cf7d.dir/link.txt --verbose=1
-/usr/bin/cc  -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_1cf7d.dir/CMakeCCompilerABI.c.o  -o cmTC_1cf7d   
+Building C object CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_5eb65
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5eb65.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o  -o cmTC_5eb65 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper
+Target: arm-linux-gnueabihf
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-armhf --with-arch-directory=arm --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf
+Thread model: posix
+gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) 
+COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/
+LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-I' '/usr/include/c++/4.8' '-I' '/usr/include/arm-linux-gnueabihf/c++/4.8' '-I' '/usr/include/c++/4.8/backward' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_5eb65' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_5eb65 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_5eb65/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_5eb65.dir/build.make CMakeFiles/cmTC_5eb65.dir/build]
+  ignore line: [make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_5eb65]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5eb65.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o  -o cmTC_5eb65 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper]
+  ignore line: [Target: arm-linux-gnueabihf]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-armhf --with-arch-directory=arm --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-I' '/usr/include/c++/4.8' '-I' '/usr/include/arm-linux-gnueabihf/c++/4.8' '-I' '/usr/include/c++/4.8/backward' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_5eb65' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_5eb65 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux-armhf.so.3] ==> ignore
+    arg [-X] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_5eb65] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o] ==> ignore
+    arg [-L/usr/lib] ==> dir [/usr/lib]
+    arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib]
+    arg [-L/lib/arm-linux-gnueabihf] ==> dir [/lib/arm-linux-gnueabihf]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..]
+    arg [CMakeFiles/cmTC_5eb65.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8] ==> [/usr/lib/gcc/arm-linux-gnueabihf/4.8]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/arm-linux-gnueabihf] ==> [/lib/arm-linux-gnueabihf]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib;/usr/local/lib;/usr/lib/gcc/arm-linux-gnueabihf/4.8;/usr/lib/arm-linux-gnueabihf;/lib/arm-linux-gnueabihf;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2fb8a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2fb8a.dir/build.make CMakeFiles/cmTC_2fb8a.dir/build
+make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2fb8a.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c11 -o CMakeFiles/cmTC_2fb8a.dir/feature_tests.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_2fb8a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2fb8a.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_2fb8a.dir/feature_tests.c.o  -o cmTC_2fb8a -rdynamic 
+make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f3526/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f3526.dir/build.make CMakeFiles/cmTC_f3526.dir/build
+make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f3526.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c99 -o CMakeFiles/cmTC_f3526.dir/feature_tests.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_f3526
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f3526.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_f3526.dir/feature_tests.c.o  -o cmTC_f3526 -rdynamic 
+make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9bc34/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9bc34.dir/build.make CMakeFiles/cmTC_9bc34.dir/build
+make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9bc34.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c90 -o CMakeFiles/cmTC_9bc34.dir/feature_tests.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_9bc34
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9bc34.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_9bc34.dir/feature_tests.c.o  -o cmTC_9bc34 -rdynamic 
+make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_aafe9/fast"
-/usr/bin/make -f CMakeFiles/cmTC_aafe9.dir/build.make CMakeFiles/cmTC_aafe9.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_cee41/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cee41.dir/build.make CMakeFiles/cmTC_cee41.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_aafe9.dir/testCXXCompiler.cxx.o
-/usr/bin/c++      -o CMakeFiles/cmTC_aafe9.dir/testCXXCompiler.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_aafe9
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aafe9.dir/link.txt --verbose=1
-/usr/bin/c++       -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_aafe9.dir/testCXXCompiler.cxx.o  -o cmTC_aafe9 -rdynamic 
+Building CXX object CMakeFiles/cmTC_cee41.dir/testCXXCompiler.cxx.o
+/usr/bin/g++      -o CMakeFiles/cmTC_cee41.dir/testCXXCompiler.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_cee41
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cee41.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_cee41.dir/testCXXCompiler.cxx.o  -o cmTC_cee41 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_403d5/fast"
-/usr/bin/make -f CMakeFiles/cmTC_403d5.dir/build.make CMakeFiles/cmTC_403d5.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_17ffb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_17ffb.dir/build.make CMakeFiles/cmTC_17ffb.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++      -o CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_403d5
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_403d5.dir/link.txt --verbose=1
-/usr/bin/c++       -L/usr/lib -L/usr/local/lib -v CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_403d5 -rdynamic  
+Building CXX object CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++      -o CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_17ffb
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17ffb.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_17ffb -rdynamic  
 Using built-in specs.
-COLLECT_GCC=/usr/bin/c++
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/lto-wrapper
-Target: armv7l-unknown-linux-gnueabihf
-Configured with: ../gcc-5.3.0/configure --prefix=/usr --with-float=hard --enable-languages=c,c++
+COLLECT_GCC=/usr/bin/g++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper
+Target: arm-linux-gnueabihf
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-armhf --with-arch-directory=arm --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf
 Thread model: posix
-gcc version 5.3.0 (GCC) 
-COMPILER_PATH=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/
-LIBRARY_PATH=/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/
-COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_403d5' '-rdynamic' '-shared-libgcc' '-mfloat-abi=hard' '-mtls-dialect=gnu'
- /usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/collect2 -plugin /usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccaeuyTc.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X -m armelf_linux_eabi -o cmTC_403d5 /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0 -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtend.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crtn.o
+gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) 
+COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/
+LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_17ffb' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_17ffb /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
@@ -83,55 +249,54 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_403d5/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_403d5.dir/build.make CMakeFiles/cmTC_403d5.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_17ffb/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_17ffb.dir/build.make CMakeFiles/cmTC_17ffb.dir/build]
   ignore line: [make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_403d5]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_403d5.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++       -L/usr/lib -L/usr/local/lib -v CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_403d5 -rdynamic  ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++      -o CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_17ffb]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17ffb.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_17ffb -rdynamic  ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/c++]
-  ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/lto-wrapper]
-  ignore line: [Target: armv7l-unknown-linux-gnueabihf]
-  ignore line: [Configured with: ../gcc-5.3.0/configure --prefix=/usr --with-float=hard --enable-languages=c,c++]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper]
+  ignore line: [Target: arm-linux-gnueabihf]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3' --with-bugurl=file:///usr/share/doc/gcc-4.8/README.Bugs --enable-languages=c,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.8 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.8 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --disable-libmudflap --disable-libitm --disable-libquadmath --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-4.8-armhf --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-4.8-armhf --with-arch-directory=arm --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --enable-multilib --disable-sjlj-exceptions --with-arch=armv7-a --with-fpu=vfpv3-d16 --with-float=hard --with-mode=thumb --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf]
   ignore line: [Thread model: posix]
-  ignore line: [gcc version 5.3.0 (GCC) ]
-  ignore line: [COMPILER_PATH=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/]
-  ignore line: [LIBRARY_PATH=/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/:/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_403d5' '-rdynamic' '-shared-libgcc' '-mfloat-abi=hard' '-mtls-dialect=gnu']
-  link line: [ /usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/collect2 -plugin /usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccaeuyTc.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X -m armelf_linux_eabi -o cmTC_403d5 /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0 -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf -L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtend.o /usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crtn.o]
-    arg [/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/collect2] ==> ignore
-    arg [-plugin] ==> ignore
-    arg [/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/usr/libexec/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccaeuyTc.res] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+  ignore line: [gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_17ffb' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_17ffb /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
     arg [--eh-frame-hdr] ==> ignore
     arg [-export-dynamic] ==> ignore
     arg [-dynamic-linker] ==> ignore
     arg [/lib/ld-linux-armhf.so.3] ==> ignore
     arg [-X] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
     arg [-m] ==> ignore
     arg [armelf_linux_eabi] ==> ignore
+    arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_403d5] ==> ignore
-    arg [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
-    arg [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crti.o] ==> ignore
-    arg [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtbegin.o] ==> ignore
+    arg [cmTC_17ffb] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o] ==> ignore
     arg [-L/usr/lib] ==> dir [/usr/lib]
     arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
-    arg [-L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0] ==> dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0]
-    arg [-L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf] ==> dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf]
-    arg [-L/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../..] ==> dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../..]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib]
     arg [-L/lib/arm-linux-gnueabihf] ==> dir [/lib/arm-linux-gnueabihf]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
     arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
-    arg [CMakeFiles/cmTC_403d5.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..]
+    arg [CMakeFiles/cmTC_17ffb.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -139,59 +304,62 @@ Parsed CXX implicit link information from above output:
     arg [-lc] ==> lib [c]
     arg [-lgcc_s] ==> lib [gcc_s]
     arg [-lgcc] ==> lib [gcc]
-    arg [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/crtend.o] ==> ignore
-    arg [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf/crtn.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o] ==> ignore
   remove lib [gcc_s]
   remove lib [gcc]
   remove lib [gcc_s]
   remove lib [gcc]
   collapse library dir [/usr/lib] ==> [/usr/lib]
   collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
-  collapse library dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0] ==> [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0]
-  collapse library dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
-  collapse library dir [/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../..] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8] ==> [/usr/lib/gcc/arm-linux-gnueabihf/4.8]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib] ==> [/usr/lib]
   collapse library dir [/lib/arm-linux-gnueabihf] ==> [/lib/arm-linux-gnueabihf]
+  collapse library dir [/lib/../lib] ==> [/lib]
   collapse library dir [/usr/lib/arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> [/usr/lib]
   implicit libs: [stdc++;m;c]
-  implicit dirs: [/usr/lib;/usr/local/lib;/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0;/usr/lib/arm-linux-gnueabihf;/lib/arm-linux-gnueabihf]
+  implicit dirs: [/usr/lib;/usr/local/lib;/usr/lib/gcc/arm-linux-gnueabihf/4.8;/usr/lib/arm-linux-gnueabihf;/lib/arm-linux-gnueabihf;/lib]
   implicit fwks: []
 
 
 
 
-Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Detecting CXX [-std=c++1y] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_22ba1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_22ba1.dir/build.make CMakeFiles/cmTC_22ba1.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_04c43/fast"
+/usr/bin/make -f CMakeFiles/cmTC_04c43.dir/build.make CMakeFiles/cmTC_04c43.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_22ba1.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_22ba1.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_22ba1
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22ba1.dir/link.txt --verbose=1
-/usr/bin/c++       -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_22ba1.dir/feature_tests.cxx.o  -o cmTC_22ba1 -rdynamic 
+Building CXX object CMakeFiles/cmTC_04c43.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++1y -o CMakeFiles/cmTC_04c43.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_04c43
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04c43.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_04c43.dir/feature_tests.cxx.o  -o cmTC_04c43 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
-    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
     Feature record: CXX_FEATURE:1cxx_alias_templates
     Feature record: CXX_FEATURE:1cxx_alignas
     Feature record: CXX_FEATURE:1cxx_alignof
     Feature record: CXX_FEATURE:1cxx_attributes
-    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
     Feature record: CXX_FEATURE:1cxx_auto_type
-    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_binary_literals
     Feature record: CXX_FEATURE:1cxx_constexpr
-    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
     Feature record: CXX_FEATURE:1cxx_decltype
-    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
     Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
     Feature record: CXX_FEATURE:1cxx_default_function_template_args
     Feature record: CXX_FEATURE:1cxx_defaulted_functions
     Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
     Feature record: CXX_FEATURE:1cxx_delegating_constructors
     Feature record: CXX_FEATURE:1cxx_deleted_functions
-    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_digit_separators
     Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
     Feature record: CXX_FEATURE:1cxx_explicit_conversions
     Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
@@ -199,11 +367,11 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
     Feature record: CXX_FEATURE:1cxx_final
     Feature record: CXX_FEATURE:1cxx_func_identifier
     Feature record: CXX_FEATURE:1cxx_generalized_initializers
-    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
     Feature record: CXX_FEATURE:1cxx_inheriting_constructors
     Feature record: CXX_FEATURE:1cxx_inline_namespaces
     Feature record: CXX_FEATURE:1cxx_lambdas
-    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
     Feature record: CXX_FEATURE:1cxx_local_type_template_args
     Feature record: CXX_FEATURE:1cxx_long_long_type
     Feature record: CXX_FEATURE:1cxx_noexcept
@@ -213,8 +381,8 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
     Feature record: CXX_FEATURE:1cxx_range_for
     Feature record: CXX_FEATURE:1cxx_raw_string_literals
     Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
-    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
-    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
     Feature record: CXX_FEATURE:1cxx_right_angle_brackets
     Feature record: CXX_FEATURE:1cxx_rvalue_references
     Feature record: CXX_FEATURE:1cxx_sizeof_member
@@ -227,7 +395,7 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
     Feature record: CXX_FEATURE:1cxx_uniform_initialization
     Feature record: CXX_FEATURE:1cxx_unrestricted_unions
     Feature record: CXX_FEATURE:1cxx_user_literals
-    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:1cxx_variadic_macros
     Feature record: CXX_FEATURE:1cxx_variadic_templates
 
@@ -235,14 +403,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a20db/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a20db.dir/build.make CMakeFiles/cmTC_a20db.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c45fc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c45fc.dir/build.make CMakeFiles/cmTC_c45fc.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_a20db.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_a20db.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_a20db
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a20db.dir/link.txt --verbose=1
-/usr/bin/c++       -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_a20db.dir/feature_tests.cxx.o  -o cmTC_a20db -rdynamic 
+Building CXX object CMakeFiles/cmTC_c45fc.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++11 -o CMakeFiles/cmTC_c45fc.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c45fc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c45fc.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_c45fc.dir/feature_tests.cxx.o  -o cmTC_c45fc -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
@@ -308,14 +476,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_148ab/fast"
-/usr/bin/make -f CMakeFiles/cmTC_148ab.dir/build.make CMakeFiles/cmTC_148ab.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c1f83/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c1f83.dir/build.make CMakeFiles/cmTC_c1f83.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_148ab.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_148ab.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_148ab
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_148ab.dir/link.txt --verbose=1
-/usr/bin/c++       -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_148ab.dir/feature_tests.cxx.o  -o cmTC_148ab -rdynamic 
+Building CXX object CMakeFiles/cmTC_c1f83.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++98 -o CMakeFiles/cmTC_c1f83.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c1f83
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1f83.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_c1f83.dir/feature_tests.cxx.o  -o cmTC_c1f83 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
@@ -379,14 +547,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTm
 Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX11 succeeded with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_bf362/fast"
-/usr/bin/make -f CMakeFiles/cmTC_bf362.dir/build.make CMakeFiles/cmTC_bf362.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_05cd4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_05cd4.dir/build.make CMakeFiles/cmTC_05cd4.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_bf362.dir/src.cxx.o
-/usr/bin/c++     -DCOMPILER_SUPPORTS_CXX11   -std=c++11 -o CMakeFiles/cmTC_bf362.dir/src.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/src.cxx
-Linking CXX executable cmTC_bf362
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bf362.dir/link.txt --verbose=1
-/usr/bin/c++    -DCOMPILER_SUPPORTS_CXX11   -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_bf362.dir/src.cxx.o  -o cmTC_bf362 -rdynamic 
+Building CXX object CMakeFiles/cmTC_05cd4.dir/src.cxx.o
+/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX11   -std=c++11 -o CMakeFiles/cmTC_05cd4.dir/src.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_05cd4
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_05cd4.dir/link.txt --verbose=1
+/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX11   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_05cd4.dir/src.cxx.o  -o cmTC_05cd4 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -394,14 +562,14 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX0X succeeded with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e6881/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e6881.dir/build.make CMakeFiles/cmTC_e6881.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_7f22c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7f22c.dir/build.make CMakeFiles/cmTC_7f22c.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_e6881.dir/src.cxx.o
-/usr/bin/c++     -DCOMPILER_SUPPORTS_CXX0X   -std=c++0x -o CMakeFiles/cmTC_e6881.dir/src.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/src.cxx
-Linking CXX executable cmTC_e6881
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e6881.dir/link.txt --verbose=1
-/usr/bin/c++    -DCOMPILER_SUPPORTS_CXX0X   -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_e6881.dir/src.cxx.o  -o cmTC_e6881 -rdynamic 
+Building CXX object CMakeFiles/cmTC_7f22c.dir/src.cxx.o
+/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX0X   -std=c++0x -o CMakeFiles/cmTC_7f22c.dir/src.cxx.o -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_7f22c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7f22c.dir/link.txt --verbose=1
+/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX0X   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_7f22c.dir/src.cxx.o  -o cmTC_7f22c -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -409,28 +577,28 @@ int main() { return 0; }
 Determining if the include file pthread.h exists passed with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_22230/fast"
-/usr/bin/make -f CMakeFiles/cmTC_22230.dir/build.make CMakeFiles/cmTC_22230.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_5d1e5/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5d1e5.dir/build.make CMakeFiles/cmTC_5d1e5.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_22230.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -o CMakeFiles/cmTC_22230.dir/CheckIncludeFile.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
-Linking C executable cmTC_22230
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22230.dir/link.txt --verbose=1
-/usr/bin/cc  -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	     -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_22230.dir/CheckIncludeFile.c.o  -o cmTC_22230  
+Building C object CMakeFiles/cmTC_5d1e5.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_5d1e5.dir/CheckIncludeFile.c.o   -c /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_5d1e5
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5d1e5.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_5d1e5.dir/CheckIncludeFile.c.o  -o cmTC_5d1e5 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_d3f59/fast"
-/usr/bin/make -f CMakeFiles/cmTC_d3f59.dir/build.make CMakeFiles/cmTC_d3f59.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_1f1dd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1f1dd.dir/build.make CMakeFiles/cmTC_1f1dd.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_d3f59.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	  -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d3f59.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.6/Modules/CheckFunctionExists.c
-Linking C executable cmTC_d3f59
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3f59.dir/link.txt --verbose=1
-/usr/bin/cc  -I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/armv7l-unknown-linux-gnueabihf/. 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/../../../../include/c++/5.3.0/backward 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include 	-I/usr/local/include 	-I/usr/lib/gcc/armv7l-unknown-linux-gnueabihf/5.3.0/include-fixed 	-I/usr/include/arm-linux-gnueabihf 	-I/usr/include 	  -DCHECK_FUNCTION_EXISTS=pthread_create   -L/usr/lib -L/usr/local/lib  CMakeFiles/cmTC_d3f59.dir/CheckFunctionExists.c.o  -o cmTC_d3f59  -lpthread 
+Building C object CMakeFiles/cmTC_1f1dd.dir/CheckFunctionExists.c.o
+/usr/bin/gcc    -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_1f1dd.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1f1dd
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f1dd.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/include/c++/4.8 -I/usr/include/arm-linux-gnueabihf/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_1f1dd.dir/CheckFunctionExists.c.o  -o cmTC_1f1dd -rdynamic -lpthread 
 make[1]: Leaving directory `/home/ubuntu/Repository/api/build/CMakeFiles/CMakeTmp'
 
 

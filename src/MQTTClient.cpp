@@ -15,15 +15,14 @@ limitations under the License
 #include "../header/MQTTClient.hpp"
 
 priority_queue<string> objMQTTClient::m_queue;
-mutex objMQTTClient::m_client_mutex;
-MQTTClient objMQTTClient::m_client;
-MQTTClient_connectionOptions objMQTTClient::m_option;
-MQTTClient_willOptions objMQTTClient::m_will;
-MQTTClient_SSLOptions objMQTTClient::m_ssl;
+MQTTClient objMQTTClient::m_client = NULL;
+MQTTClient_connectOptions objMQTTClient::m_option = MQTTClient_connectOptions_initializer;
+MQTTClient_willOptions objMQTTClient::m_will = MQTTClient_willOptions_initializer;
+MQTTClient_SSLOptions objMQTTClient::m_ssl = MQTTClient_SSLOptions_initializer;
 string objMQTTClient::m_address;
 string objMQTTClient::m_clientID;
-bool objMQTTClient::m_clientCreated;
-bool objMQTTClient::m_clientConnected;
+bool objMQTTClient::m_clientCreated = false;
+bool objMQTTClient::m_clientConnected = false;
 
 static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;
@@ -87,8 +86,8 @@ void objMQTTClient::setConnectOptions(const int _keepAliverInterval,\
 	m_option.cleansession = _cleansession;
 	m_option.reliable = _reliable;
 	m_option.connectTimeout = _connectTimeout;
-	m_option.ssl = &m_ssl;
-	m_option.will = &m_will;
+	/*m_option.ssl = &m_ssl;
+	m_option.will = &m_will;*/
 }	
 
 /*
@@ -174,7 +173,7 @@ bool objMQTTClient::clientConnect(void){
 	}
 
 	if((result = MQTTClient_setCallbacks(m_client,\
-					&m_client,\
+					NULL,\
 					&objMQTTClient::connectionLost,\
 					&objMQTTClient::messageArrived,\
 					&objMQTTClient::delivered)) != MQTTCLIENT_SUCCESS){
@@ -206,8 +205,6 @@ bool objMQTTClient::clientConnect(void){
 bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 		const string sub_topic,\
 		unsigned long timeOut){
-	lock_guard<mutex> lock(m_client_mutex);
-
 	int result = 0;
 	int result_t = 0;
 	MQTTClient_deliveryToken m_token;
@@ -259,7 +256,6 @@ bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 
 bool objMQTTClient::listen(const string sub_topic,\
 		int _qos){
-	lock_guard<mutex> lock(m_client_mutex);
 	if(m_listening)
 		return false;
 	if(!m_topicSet){
@@ -315,7 +311,6 @@ int objMQTTClient::messageArrived(void *_context,\
 	 * Confirming the contents of a message
 	 */
 
-	MQTTClient *m_client = (MQTTClient *)_context;
 	printf("Message arrived.\n");
 	printf("	topic : %s\n", _topicName);
 	p_payload = (char *)_message->payload;
@@ -380,13 +375,13 @@ int objMQTTClient::messageArrived(void *_context,\
 			 */
 
 			printf("Responding to status topic\n");
-			if((code = MQTTClient_publishMessage(*m_client,\
+			if((code = MQTTClient_publishMessage(m_client,\
 							response_str_SHA256_utf8.c_str(),\
 							&m_pubmsg,\
 							&m_token)) != MQTTCLIENT_SUCCESS){
 				fprintf(stderr, "Error while updating the topic \"status\" with error %d\n", code);
 			}
-			code = MQTTClient_waitForCompletion(*m_client,\
+			code = MQTTClient_waitForCompletion(m_client,\
 					m_token,\
 					TIMEOUT);
 			printf("Message with delivery token %d delivered\n", m_token);
@@ -414,11 +409,13 @@ void objMQTTClient::connectionLost( void *_context,\
  * for destructing the object
  */
 
-objMQTTClient::~objMQTTClient(void){
+void objMQTTClient::disconnect(void){
 	if(m_clientConnected)
 		MQTTClient_disconnect(m_client, 10000);
 	if(m_clientCreated)
 		MQTTClient_destroy(&m_client);
 }
 
+objMQTTClient::~objMQTTClient(void){
 
+}

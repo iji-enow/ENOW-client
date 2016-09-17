@@ -18,13 +18,14 @@ extern "C"{
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <errno.h>
 #include "header/KISA_SHA256.h"
 }
 #include <string>
 #include <sstream>
-#include <mutex>
 #include <thread>
+#include <mutex>
 #include <boost/locale.hpp>
 #include "./header/MQTTClientPool.hpp"
 #include "./json/json.hh"
@@ -37,8 +38,9 @@ static int verbose_flag;
 static const char *p_arch;
 static const char *p_macAddress;
 static int endianess;
-static objMQTTClientPool *p_pool;
 static mutex pool_mutex;
+static objMQTTClientPool *p_pool;
+static objMQTTClient *leaderObject = NULL;
 static string address, clientID;
 
 /*
@@ -171,34 +173,24 @@ static std::string fromLocale(const std::string &localeString){
 	return boost::locale::conv::to_utf<char>(localeString, locale);
 }
 
-void preprocess(const string major_topic){
+/*
+   A function for setting up connection between feedback and alive topic.
+*/
+
+void preprocess(const string &major_topic){
 
 	objMQTTClient *p_client_feedback = NULL;			
 
+	pool_mutex.lock();
 	if((p_client_feedback = p_pool->findClient(major_topic)) == NULL){
-
-		string LWT_feedback_str,\
-			LWT_feedback_str_utf8,\
-			initial_str;
+		pool_mutex.unlock();
+		string initial_str;
 
 		p_client_feedback = new objMQTTClient();
 		MQTTClient_message msg_feedback_t = MQTTClient_message_initializer;
 		initial_str = "Initial Payload";
-		LWT_feedback_str = "A client " + \
-							major_topic + \
-							" listening to topic \"feedback\" stopped unexpectedly";
-		LWT_feedback_str_utf8 = fromLocale(LWT_feedback_str);
 
 		p_client_feedback->setTopic(major_topic);
-		p_client_feedback->createClient(address, clientID + "feedback");
-		p_client_feedback->setConnectOptions(60,\
-				true,\
-				true,\
-				30);
-		p_client_feedback->setLWT(LWT_feedback_str.c_str(),\
-				0,\
-				1);
-		p_client_feedback->clientConnect();
 		p_client_feedback->setPayload(msg_feedback_t,\
 				strlen(initial_str.c_str()),\
 				initial_str.c_str(),\
@@ -210,62 +202,111 @@ void preprocess(const string major_topic){
 				30);
 		p_client_feedback->listen("feedback");
 
+		pool_mutex.lock();
 		p_pool->insertClient(p_client_feedback);
+		pool_mutex.unlock();
 	}
 }
 
-static void shareMemory(Value &json, string &topic) {
-	Object object = (Object)json;
+/*
+   A function communicating with another process sharing the same memory region
+*/
+
+static void shareMemory(string _payload, string _topic, long long int _key) {
+	objMQTTClient *p_client = NULL;
 	ostringstream stream;
 
-	stream.str("");
-	stream.clear();
-	stream << object;
-	jsonTerminal_str = stream.str();
+	char c,\
+		buffer[BUFSIZ];
+	int sharedMemoryID = 0,
+		index = 0;
+	key_t key = (key_t)_key;
+	void *sharedMemoryRegion = NULL;
+	char *currentAddress = NULL;
+	string payload,\
+		   payload_utf8;
+	Value json = parse_string(_payload);
 
-	preprocess(topic);
+	pool_mutex.lock();
+	if((p_client = p_pool->findClient(_topic)) != NULL){
+		pool_mutex.unlock();
 
-	objMQTTClient *p_client;
-	payload_utf8 = fromLocale(jsonTerminal_str);
-
-
-	if((p_client = p_pool->findClient(topic)) == NULL){
-		p_client = new objMQTTClient();
-		MQTTClient_message msg_t = MQTTClient_message_initializer;
-		if(p_pool->initialize()){
-			p_client->createClient(address, clientID + "status");
-			p_client->setConnectOptions(60,\
-					false,\
-					false,\
-					30);
-			p_client->clientConnect();
+		if((sharedMemoryID = shmget(key,\
+						BUFSIZ,\
+						IPC_CREAT | 0600)) < 0){
+			perror("shmget");
 		}
-		p_client->setTopic(topic);
-		p_client->setPayload(msg_t,\
-				strlen(payload_utf8.c_str()),\
-				payload_utf8.c_str(),\
-				1,\
-				false,\
-				true);
+		else{
+			if((sharedMemoryRegion = shmat(sharedMemoryID,\
+							(void *)0,\
+							0)) == (void *)-1){
+				perror("shmat");
+			}else{
+				currentAddress = (char *)sharedMemoryRegion;
+				*currentAddress = '!';
 
-		p_client->publish(msg_t,\
-				string("status"),\
-				30);
-		p_pool->insertClient(p_client);
+				while(true){
+					index = 0;
+					stream.str("");
+					stream.clear();
+					payload.clear();
+					payload_utf8.clear();
+
+					cout << "Sending a message to broker" << endl;
+					cout << "	TOPIC : " << _topic << endl;
+				
+					currentAddress = (char *)sharedMemoryRegion;
+
+					while(*currentAddress != '?')
+						sleep(1);
+
+					currentAddress = (char *)sharedMemoryRegion;
+					currentAddress++;
+					while(*currentAddress != '\0'){
+						buffer[index] = (char)*currentAddress;
+						index++;
+						currentAddress++;
+					}
+
+					currentAddress = (char *)sharedMemoryRegion;
+					*currentAddress = '!';
+
+					json["payload"] = string(buffer);
+					stream << json;
+					payload = stream.str();
+					payload_utf8 = fromLocale(payload);
+
+					cout << "	PAYLOAD : " << payload_utf8 << endl;
+					MQTTClient_message msg_t = MQTTClient_message_initializer;
+
+					p_client->setPayload(msg_t,\
+							strlen(payload_utf8.c_str()),\
+							payload_utf8.c_str(),\
+							1,\
+							false,\
+							true);
+
+					p_client->publish(msg_t,\
+							string("status"),\
+							30);
+
+				}
+			}
+		}
 	}
 	else{
-		MQTTClient_message msg_t = MQTTClient_message_initializer;
-		p_client->setPayload(msg_t,\
-				strlen(payload_utf8.c_str()),\
-				payload_utf8.c_str(),\
-				1,\
-				false,\
-				true);
-		p_client->publish(msg_t,\
-				string("status"),\
-				30);
+		pool_mutex.unlock();
+		fprintf(stderr, "Sharing memory space has failed\n");
 	}
+}
 
+static void signalHandler(int signo) {
+	if(signo == SIGINT) {
+		if(leaderObject != NULL) {
+			leaderObject->disconnect();
+			delete leaderObject;
+		}
+	}
 }
 
 /*
@@ -278,11 +319,7 @@ static void shareMemory(Value &json, string &topic) {
 
 int main(int argc, char **argv){
 	string topic,\
-		topic_utf8,\
-		jsonTerminal_str,\
-		payload,\
-		w_payload,\
-		payload_utf8;
+		jsonTerminal_str;
 
 	bool addressFlag = false,\
 					   idFlag = false,\
@@ -294,14 +331,13 @@ int main(int argc, char **argv){
 					  *p_token_prev = NULL;
 	char p_SHA256[BUFSIZ],\
 		p_linebuffer[BUFSIZ],\
-		p_topic[BUFSIZ],\
-		p_key[11];;
+		p_topic[BUFSIZ];
 
 	const rlim_t kernelStackSize = 16L * 1024L * 1024L;
 	struct rlimit limit;
-
 	int c = 0,\
 			result = 0;
+	long long int key = 0;
 	opterr = 0;
 	key = -1;
 	/*
@@ -325,7 +361,6 @@ int main(int argc, char **argv){
 		static struct option long_options[] = {
 			{"address", required_argument, 0, 'a'},
 			//			{"topic", required_argument, 0, 't'},
-			{"key", optional_argument, 0, 'k'},
 			{"clientID", required_argument, 0, 'i'},
 			{0, 0, 0, 0}
 		};
@@ -359,16 +394,11 @@ int main(int argc, char **argv){
 				  p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				  memcpy(p_topic, optarg, strlen(optarg) + 1);
 				  break;
-				  */	
+				 */	
 			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_id, optarg, strlen(optarg) + 1);
-				break;
-			case 'k':
-				printf("key for shared memory region : %s\n", optarg);
-				memcpy(p_key, optarg, strlen(optarg) + 1);
-				key = atoi(p_key);
 				break;
 			case '?':
 				break;
@@ -398,15 +428,14 @@ int main(int argc, char **argv){
 		exit(1);
 	}
 
+	signal(SIGINT, signalHandler);
+
 	while(true){
 		memset(p_linebuffer, 0, BUFSIZ);
 		memset(p_SHA256, 0, BUFSIZ);
 		memset(p_topic, 0, BUFSIZ);
 		topic.clear();
-		payload.clear();
-		payload_utf8.clear();
 		jsonTerminal_str.clear();
-		w_payload.clear();
 
 		if(ferror(stdin) != 0){
 			perror("Error indicator is set on stdin");
@@ -427,8 +456,11 @@ int main(int argc, char **argv){
 		Value json = parse_string(p_linebuffer);
 
 		topic = (string)json["topic"];
+		key = (long long int)json["key"];
 
 		Object object = (Object)json;
+		ostringstream stream;
+		string payload;
 
 		if(object.find("metadata") == object.end()){
 			Object metadata;
@@ -438,7 +470,24 @@ int main(int argc, char **argv){
 			json["metadata"]["endian"] = endianess;
 		}
 
+		stream << json;
+		payload = stream.str();
 
+		if(p_pool->initialize()){
+			leaderObject = new objMQTTClient();
+			leaderObject->createClient(address, clientID);
+			leaderObject->setTopic(string(""));
+			leaderObject->setConnectOptions(90,\
+					true,\
+					false,\
+					60);
+			leaderObject->clientConnect();
+		}
+
+		thread preprocess_thread{preprocess, ref(topic)};
+		preprocess_thread.join();
+		thread client_thread {shareMemory, payload, topic, key};
+		client_thread.detach();
 	}
 
 	free(p_address);

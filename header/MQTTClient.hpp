@@ -23,7 +23,6 @@ limitations under the License.
 #include <queue>
 #include <set>
 #include <functional>
-#include <mutex>
 #include <thread>
 #include <sstream>
 extern "C" {
@@ -65,17 +64,11 @@ class objMQTTClient{
 
 		static bool m_clientCreated;
 		static bool m_clientConnected;
-		static mutex m_client_mutex;
 		bool m_topicSet;
 		bool m_listening;
 
 	public:
-		objMQTTClient()\
-			: m_option(MQTTClient_connectOptions_initializer),\
-			m_will(MQTTClient_willOptions_initializer),\
-			m_ssl(MQTTClient_SSLOptions_initializer){
-				m_clientCreated = false;
-				m_clientConnected = false;
+		objMQTTClient() {
 				m_topicSet = false;
 				m_listening = false;
 			}
@@ -101,6 +94,7 @@ class objMQTTClient{
 				int _dup = true);
 
 		static bool clientConnect(void);
+		static void disconnect(void);
 		bool publish(MQTTClient_message &m_pubmsg,\
 				const string sub_topic,\
 				unsigned long timeOut);

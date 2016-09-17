@@ -19,6 +19,7 @@ limitations under the License.
 
 #include <utility>
 #include <algorithm>
+#include <atomic>
 
 #include "MQTTClient.hpp"
 

@@ -325,6 +325,33 @@ src/MQTTClientPool.cpp.s:
 	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.s
 .PHONY : src/MQTTClientPool.cpp.s
 
+src/MQTTIPC.o: src/MQTTIPC.cpp.o
+
+.PHONY : src/MQTTIPC.o
+
+# target to build an object file
+src/MQTTIPC.cpp.o:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o
+.PHONY : src/MQTTIPC.cpp.o
+
+src/MQTTIPC.i: src/MQTTIPC.cpp.i
+
+.PHONY : src/MQTTIPC.i
+
+# target to preprocess a source file
+src/MQTTIPC.cpp.i:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.i
+.PHONY : src/MQTTIPC.cpp.i
+
+src/MQTTIPC.s: src/MQTTIPC.cpp.s
+
+.PHONY : src/MQTTIPC.s
+
+# target to generate assembly for a file
+src/MQTTIPC.cpp.s:
+	$(MAKE) -f CMakeFiles/MQTTClient.dir/build.make CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.s
+.PHONY : src/MQTTIPC.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -356,6 +383,9 @@ help:
 	@echo "... src/MQTTClientPool.o"
 	@echo "... src/MQTTClientPool.i"
 	@echo "... src/MQTTClientPool.s"
+	@echo "... src/MQTTIPC.o"
+	@echo "... src/MQTTIPC.i"
+	@echo "... src/MQTTIPC.s"
 .PHONY : help
 
 
