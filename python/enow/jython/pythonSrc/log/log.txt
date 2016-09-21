@@ -1,0 +1,44 @@
+2016-08-18 22:45:12,206:INFO:STDOUT:succeed
+2016-08-20 14:54:26,361:INFO:STDOUT:succeed
+2016-09-18 22:30:34,014:INFO:STDOUT:None
+2016-09-18 22:30:46,136:INFO:STDOUT:None
+2016-09-18 22:32:13,734:INFO:STDOUT:None
+2016-09-18 22:34:46,898:INFO:STDOUT:None
+2016-09-18 22:35:40,238:INFO:STDOUT:None
+2016-09-18 22:36:25,904:INFO:STDOUT:None
+2016-09-18 22:40:37,965:ERROR:STDERR:Unhandled exception in thread started by
+2016-09-18 22:40:37,965:ERROR:STDERR:<function eventHandlerFacade at 0x102c50e60>
+2016-09-18 22:40:37,965:ERROR:STDERR:Traceback (most recent call last):
+2016-09-18 22:40:37,965:ERROR:STDERR:  File "/Users/jeasungpark/Repository/storm/multilang/resources/enow/jython/pythonSrc/preCode.py", line 53, in eventHandlerFacade
+2016-09-18 22:40:37,965:ERROR:STDERR:eventHandler(_event, _context, _callback)
+2016-09-18 22:40:37,965:ERROR:STDERR:  File "/Users/jeasungpark/Repository/storm/multilang/resources/enow/jython/pythonSrc/body.py", line 3, in eventHandler
+2016-09-18 22:40:37,966:ERROR:STDERR:jsonString = json.dump(event)
+2016-09-18 22:40:37,966:ERROR:STDERR:TypeError
+2016-09-18 22:40:37,966:ERROR:STDERR::
+2016-09-18 22:40:37,966:ERROR:STDERR:dump() takes at least 2 arguments (1 given)
+2016-09-18 22:40:48,855:ERROR:STDERR:Traceback (most recent call last):
+2016-09-18 22:40:48,855:ERROR:STDERR:  File "/Users/jeasungpark/Repository/storm/multilang/resources/enow/jython/pythonSrc/preCode.py", line 155, in <module>
+2016-09-18 22:40:48,855:ERROR:STDERR:Main()
+2016-09-18 22:40:48,855:ERROR:STDERR:  File "/Users/jeasungpark/Repository/storm/multilang/resources/enow/jython/pythonSrc/preCode.py", line 142, in Main
+2016-09-18 22:40:48,855:ERROR:STDERR:lock.acquire()
+2016-09-18 22:40:48,855:ERROR:STDERR:KeyboardInterrupt
+2016-09-18 22:42:38,614:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:42:38,614:INFO:STDOUT:None
+2016-09-18 22:44:14,433:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:44:14,433:INFO:STDOUT:OK
+2016-09-18 22:45:51,604:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:45:51,604:INFO:STDOUT:OK
+2016-09-18 22:46:19,831:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:46:19,832:INFO:STDOUT:OK
+2016-09-18 22:46:32,237:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:46:32,237:INFO:STDOUT:OK
+2016-09-18 22:47:36,259:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:47:36,259:INFO:STDOUT:OK
+2016-09-18 22:47:57,326:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:47:57,326:INFO:STDOUT:OK
+2016-09-18 22:48:07,434:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:48:07,435:INFO:STDOUT:OK
+2016-09-18 22:49:25,792:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:49:25,793:INFO:STDOUT:OK
+2016-09-18 22:51:48,762:INFO:STDOUT:{"present": "person"}
+2016-09-18 22:51:48,763:INFO:STDOUT:OK
