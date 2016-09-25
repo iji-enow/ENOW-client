@@ -1,0 +1,4 @@
+{
+"PARAMETER" : "-ls -t",
+"SOURCE" : "def eventHandler(event, context, callback):\n\tif event[\"present\"] == \"person\":\n\t\tprint(\"OK\")\n\telse:\n\t\tprint(\"None\")",
+}
