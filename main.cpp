@@ -42,6 +42,7 @@ static mutex pool_mutex;
 static objMQTTClientPool *p_pool;
 static objMQTTClient *leaderObject = NULL;
 static string address, clientID;
+static key_t globalKey;
 
 /*
  * A function for checking system-wise data, like
@@ -179,15 +180,22 @@ static std::string fromLocale(const std::string &localeString){
 
 void preprocess(const string &major_topic){
 
-	objMQTTClient *p_client_feedback = NULL;			
+	objMQTTClient *p_client_feedback = NULL;
 
 	pool_mutex.lock();
 	if((p_client_feedback = p_pool->findClient(major_topic)) == NULL){
 		pool_mutex.unlock();
 		string initial_str;
+		char feedback_str[BUFSIZ] = "/feedback";
+		char alive_str[BUFSIZ] = "/alive/request";
+		char *const subtopic_list[2] = {feedback_str,\
+			alive_str\
+		};
 
 		p_client_feedback = new objMQTTClient();
+
 		MQTTClient_message msg_feedback_t = MQTTClient_message_initializer;
+		MQTTClient_message msg_alive_t = MQTTClient_message_initializer;
 		initial_str = "Initial Payload";
 
 		p_client_feedback->setTopic(major_topic);
@@ -197,10 +205,20 @@ void preprocess(const string &major_topic){
 				1,\
 				0,\
 				0);
+		p_client_feedback->setPayload(msg_alive_t,\
+				strlen(initial_str.c_str()),\
+				initial_str.c_str(),\
+				1,\
+				0,\
+				0);
 		p_client_feedback->publish(msg_feedback_t,\
-				string("feedback"),\
+				string("/feedback"),\
 				30);
-		p_client_feedback->listen("feedback");
+		p_client_feedback->publish(msg_alive_t,\
+				string("/alive/request"),\
+				30);
+		p_client_feedback->listenMany(subtopic_list,\
+				2);
 
 		pool_mutex.lock();
 		p_pool->insertClient(p_client_feedback);
@@ -271,7 +289,9 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 					currentAddress = (char *)sharedMemoryRegion;
 					*currentAddress = '!';
 
-					json["payload"] = string(buffer);
+					Value object = parse_string(string(buffer));
+
+					json["payload"] = object;
 					stream << json;
 					payload = stream.str();
 					payload_utf8 = fromLocale(payload);
@@ -287,7 +307,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 							true);
 
 					p_client->publish(msg_t,\
-							string("status"),\
+							string("/status"),\
 							30);
 
 				}
@@ -333,6 +353,10 @@ int main(int argc, char **argv){
 		p_linebuffer[BUFSIZ],\
 		p_topic[BUFSIZ];
 
+	const char *trustStore = "/etc/pki/tls/certs/lesstif-rootca.crt";
+	const char *keyStore = "/etc/pki/tls/certs/lesstif.com.crt";
+	const char *passPhrase = "Poiu8756.";
+
 	const rlim_t kernelStackSize = 16L * 1024L * 1024L;
 	struct rlimit limit;
 	int c = 0,\
@@ -360,7 +384,7 @@ int main(int argc, char **argv){
 	while(1){
 		static struct option long_options[] = {
 			{"address", required_argument, 0, 'a'},
-			//			{"topic", required_argument, 0, 't'},
+			{"key", required_argument, 0, 'k'},
 			{"clientID", required_argument, 0, 'i'},
 			{0, 0, 0, 0}
 		};
@@ -389,12 +413,10 @@ int main(int argc, char **argv){
 				p_address = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
 				memcpy(p_address, optarg, strlen(optarg) + 1);
 				break;
-				/*case 't':
-				  printf("topic : %s\n", optarg);
-				  p_topic = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
-				  memcpy(p_topic, optarg, strlen(optarg) + 1);
-				  break;
-				 */	
+			case 'k':
+				printf("key : %s\n", optarg);
+				globalKey = (key_t)atoi(optarg);
+				break;
 			case 'i':
 				printf("client id : %s\n", optarg);
 				p_id = (char *)malloc(sizeof(char) * (strlen(optarg) + 1));
@@ -474,13 +496,16 @@ int main(int argc, char **argv){
 		payload = stream.str();
 
 		if(p_pool->initialize()){
-			leaderObject = new objMQTTClient();
+			leaderObject = new objMQTTClient(globalKey);
 			leaderObject->createClient(address, clientID);
 			leaderObject->setTopic(string(""));
 			leaderObject->setConnectOptions(90,\
 					true,\
 					false,\
 					60);
+			leaderObject->setSSLOptions(trustStore,\
+					keyStore,\
+					passPhrase);
 			leaderObject->clientConnect();
 		}
 

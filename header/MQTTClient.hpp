@@ -24,6 +24,7 @@ limitations under the License.
 #include <set>
 #include <functional>
 #include <thread>
+#include <mutex>
 #include <sstream>
 extern "C" {
 #include <stdio.h>
@@ -32,6 +33,9 @@ extern "C" {
 #include <pthread.h>
 #include <signal.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <stdbool.h>
 #include <sys/types.h>
 
@@ -60,18 +64,45 @@ class objMQTTClient{
 		static string m_address;
 		string m_topic;
 		static string m_clientID;
+		static mutex m_transfer_mutex;
 		static priority_queue<string> m_queue;
 
 		static bool m_clientCreated;
 		static bool m_clientConnected;
 		bool m_topicSet;
 		bool m_listening;
+		static bool m_onTransfer;
+
+		static void *m_sharedMemoryRegion;
+		static int m_sharedMemoryID;
+		static char *m_currentAddress;
+		static key_t m_sharedKey;
 
 	public:
 		objMQTTClient() {
-				m_topicSet = false;
-				m_listening = false;
+			m_topicSet = false;
+			m_listening = false;
+		}
+		objMQTTClient(key_t _key) {
+			m_sharedKey = _key;
+			m_topicSet = false;
+			m_listening = false;
+			m_onTransfer = false;
+
+			if((m_sharedMemoryID = shmget(m_sharedKey,\
+							BUFSIZ,\
+							IPC_CREAT | 0600)) < 0){
+				perror("shmget");
+				exit(1);
 			}
+			if((m_sharedMemoryRegion = shmat(m_sharedMemoryID,\
+							(void *)0,\
+							0)) == (void *)-1){
+				perror("shmat");
+				exit(1);
+			}
+		}
+
 		~objMQTTClient(void);
 
 		static int createClient(string _address, string _clientID);
@@ -82,6 +113,9 @@ class objMQTTClient{
 				const int _cleansession,\
 				const int _reliable,\
 				const int _connectTimeout);
+		static void setSSLOptions(const char *_trustStore,\
+				const char *_keyStore,\
+				const char *_privateKey);
 		bool setLWT(const char *_message = NULL,\
 				const int _retained = 1,\
 				const char _qos =  1);
@@ -98,6 +132,9 @@ class objMQTTClient{
 		bool publish(MQTTClient_message &m_pubmsg,\
 				const string sub_topic,\
 				unsigned long timeOut);
+		static void makeTopic(const string &major_topic,\
+				const string &minor_topic,\
+				string &result);
 
 		static void delivered(void *_context,\
 				MQTTClient_deliveryToken _token_d);
@@ -109,6 +146,9 @@ class objMQTTClient{
 				char *_cause);
 
 		bool listen(const string sub_topic,\
+				int _qos = 1);
+		bool listenMany(char *const* _topic,\
+				int _size,\
 				int _qos = 1);
 };
 

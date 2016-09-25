@@ -15,6 +15,7 @@ limitations under the License
 #include "../header/MQTTClient.hpp"
 
 priority_queue<string> objMQTTClient::m_queue;
+mutex objMQTTClient::m_transfer_mutex;
 MQTTClient objMQTTClient::m_client = NULL;
 MQTTClient_connectOptions objMQTTClient::m_option = MQTTClient_connectOptions_initializer;
 MQTTClient_willOptions objMQTTClient::m_will = MQTTClient_willOptions_initializer;
@@ -23,6 +24,18 @@ string objMQTTClient::m_address;
 string objMQTTClient::m_clientID;
 bool objMQTTClient::m_clientCreated = false;
 bool objMQTTClient::m_clientConnected = false;
+bool objMQTTClient::m_onTransfer;
+void *objMQTTClient::m_sharedMemoryRegion = NULL;
+int objMQTTClient::m_sharedMemoryID = 0;
+char *objMQTTClient::m_currentAddress = NULL;
+key_t objMQTTClient::m_sharedKey = (key_t)0;
+
+static char fromDecToHex(char input){
+	if(input >= 0 && input <= 9)
+		return input + 48;
+	else
+		return input + 87;
+}
 
 static std::string fromLocale(const std::string &localeString){
 	boost::locale::generator generator;
@@ -87,8 +100,19 @@ void objMQTTClient::setConnectOptions(const int _keepAliverInterval,\
 	m_option.reliable = _reliable;
 	m_option.connectTimeout = _connectTimeout;
 	/*m_option.ssl = &m_ssl;
-	m_option.will = &m_will;*/
-}	
+	  m_option.will = &m_will;*/
+}
+
+void objMQTTClient::setSSLOptions(const char *_trustStore,\
+		const char *_keyStore,\
+		const char *_privateKey){
+
+	m_ssl.trustStore = _trustStore;
+	m_ssl.keyStore = _keyStore;
+	m_ssl.privateKey = _privateKey;
+
+	m_option.ssl = &m_ssl;
+}
 
 /*
  * for setting a structure of the last will statement
@@ -208,12 +232,12 @@ bool objMQTTClient::publish(MQTTClient_message &m_pubmsg,\
 	int result = 0;
 	int result_t = 0;
 	MQTTClient_deliveryToken m_token;
-	char p_SHA256[BUFSIZ];
-	string w_topic = m_topic + "/" + sub_topic;
-	string topic_SHA256_utf8;
+	string topic_SHA256_utf8 = fromLocale(m_topic + sub_topic);
 
-	SHA256_Encrpyt((const BYTE *)w_topic.c_str(), (UINT)strlen(w_topic.c_str()) + 1, (BYTE *)p_SHA256);
-	topic_SHA256_utf8 = fromLocale(string(p_SHA256));
+	/*makeTopic(m_topic,\
+	  sub_topic,\
+	  topic_SHA256_utf8);
+	 */
 
 	if(!m_topicSet){
 		fprintf(stderr, "A topic related to this client is not set\n");
@@ -264,25 +288,120 @@ bool objMQTTClient::listen(const string sub_topic,\
 	}
 
 	int result = 0;
-	char p_SHA256[BUFSIZ];
-	string w_topic = m_topic + "/" + sub_topic;
-	string topic_SHA256_utf8;
+	string w_topic_str = fromLocale(m_topic + sub_topic);
 
-	SHA256_Encrpyt((const BYTE *)w_topic.c_str(), (UINT)strlen(w_topic.c_str()) + 1, (BYTE *)p_SHA256);
-	topic_SHA256_utf8 = fromLocale(string(p_SHA256));
-	
+	/*makeTopic(m_topic,\
+	  sub_topic,\
+	  topic_SHA256_utf8);
+	 */
+
 	cout << "Listening topic" << endl;
-	cout << "\tTOPIC : " << m_topic << "/" << sub_topic << endl;
+	cout << "\tTOPIC : " << m_topic << sub_topic << endl;
 	cout << "\tQOS : " << _qos << endl;
 
 	if((result = MQTTClient_subscribe(m_client,\
-					topic_SHA256_utf8.c_str(),\
+					w_topic_str.c_str(),\
 					_qos)) != MQTTCLIENT_SUCCESS){
 		fprintf(stderr, "A procedure listening topic was not created with exitcode %d\n", result);
 	}
 
 	m_listening = true;
 	return true;
+}
+
+bool objMQTTClient::listenMany(char *const* _topic,\
+		int _size,\
+		int _qos){
+	int *qos_list = (int *)malloc(sizeof(int) * _size);
+
+	if(m_listening)
+		return false;
+	if(!m_topicSet){
+		fprintf(stderr, "A topic related to this client is not set\n");
+		return false;
+	}
+
+	int result = 0,\
+				 index = 0;
+
+	for(int i = 0;i < _size;i++) {
+		qos_list[index] = _qos;
+
+		char single_topic_backup[BUFSIZ];
+		strcpy(single_topic_backup, _topic[index]);
+		strcpy(_topic[index], m_topic.c_str());
+		strcat(_topic[index], single_topic_backup);
+
+		cout << "Listening topic" << endl;
+		cout << "\tTOPIC : " << string(_topic[index]) << endl;
+		cout << "\tQOS : " << _qos << endl;
+
+		index++;
+	}
+
+	/*makeTopic(m_topic,\
+	  sub_topic,\
+	  topic_SHA256_utf8);
+	 */
+	if((result = MQTTClient_subscribeMany(m_client,\
+					_size,\
+					_topic,\
+					qos_list)) != MQTTCLIENT_SUCCESS){
+		fprintf(stderr, "A procedure listening topic was not created with exitcode %d\n", result);
+	}
+
+	m_listening = true;
+	return true;
+}
+
+void objMQTTClient::makeTopic(const string &major_topic,\
+		const string &minor_topic,
+		string &result){
+	char p_major_topic[BUFSIZ],\
+		p_minor_topic[BUFSIZ],\
+		p_result[BUFSIZ],\
+		p_current[BUFSIZ];
+	char *token = NULL;
+	char upper_bit_mask = 0b11110000;
+	char lower_bit_mask = 0b00001111;
+
+	int w_index = 0,\
+				  index = 0;
+
+	strcpy(p_major_topic, major_topic.c_str());
+	strcpy(p_minor_topic, minor_topic.c_str());
+	strcat(p_major_topic, p_minor_topic);
+	cout << "TOPIC to hash" << endl;
+	cout << "	" << string(p_major_topic) << endl;
+	memset(p_result, 0, BUFSIZ);
+	p_result[w_index++] = '/';
+
+	token = strtok(p_major_topic, "/");
+	while(token != NULL){
+		memset(p_current, 0, BUFSIZ);
+		index = 0;
+
+		SHA256_Encrpyt((const BYTE *)token,\
+				(UINT)strlen(token),\
+				(BYTE *)p_current);
+		while(p_current[index] != 0) {
+			char upper = p_current[index] & upper_bit_mask;
+			char lower = p_current[index] & lower_bit_mask;
+			upper = upper >> 4;
+
+			p_result[w_index++] = fromDecToHex(upper);
+			p_result[w_index++] = fromDecToHex(lower);
+
+			index++;
+		}
+		p_result[w_index++] = '/';
+		token = strtok(NULL, "/");
+	}
+
+	cout << "TOPIC hashed" << endl;
+	cout << "	" << string(p_result) << endl;
+
+	result = fromLocale(string(p_result));
 }
 
 /*
@@ -297,14 +416,15 @@ int objMQTTClient::messageArrived(void *_context,\
 		char *_topicName,\
 		int _topicLen,\
 		MQTTClient_message *_message){
-	char *p_payload = NULL,\
-					  *p_topic = NULL,\
-					  *p_token = NULL;
+	char *p_payload = NULL;
+
 	int code = 0;
 	string topic_str,\
 		request_str_SHA256_utf8,\
 		response_str_SHA256_utf8,\
-		message;
+		feedback_str_SHA256_utf8,\
+		message,\
+		jsondump;
 	ostringstream stream;
 
 	/*
@@ -321,77 +441,98 @@ int objMQTTClient::messageArrived(void *_context,\
 	 */
 
 	Value jsonObject = parse_string(message);
-	p_token = new char[BUFSIZ]();
 	topic_str = (string)jsonObject["topic"];
-	p_topic = (char *)malloc(sizeof(char) * BUFSIZ);
-	memset(p_topic, 0, BUFSIZ);
-	strcpy(p_topic, topic_str.c_str());
-	strcat(p_topic, "/feedback");
-	SHA256_Encrpyt((const BYTE *)p_topic, (UINT)strlen(p_topic) + 1, (BYTE *)p_token);
-	request_str_SHA256_utf8 = fromLocale(string(p_token));
+	request_str_SHA256_utf8 = topic_str + string("/alive/request");
+	feedback_str_SHA256_utf8 = topic_str + string("feedback");
+
+	/*makeTopic(topic_str,\
+	  string("/alive/request"),\
+	  request_str_SHA256_utf8);
+	  makeTopic(topic_str,\
+	  string("/feedback"),\
+	  feedback_str_SHA256_utf8);
+	 */
 
 	/*
 	 * checks whether it is the status topic
 	 */
 
 	if(request_str_SHA256_utf8 == string(_topicName)){
-		long long int l_status = (long long int)jsonObject["status"];
-		int status = (int)l_status;
-		if(status == 2){
-			MQTTClient_message m_pubmsg = MQTTClient_message_initializer;
-			MQTTClient_deliveryToken m_token;
 
-			/*
-			 * dump the jsonObject to a string as payload
-			 */
+		MQTTClient_message m_pubmsg = MQTTClient_message_initializer;
+		MQTTClient_deliveryToken m_token;
 
-			string jsondump;
-			jsonObject["status"] = 1;
+		/*
+		 * dump the jsonObject to a string as payload
+		 */
+
+		stream << jsonObject;
+		jsondump = stream.str();
+		m_pubmsg.payload = (void *)jsondump.c_str();
+		m_pubmsg.payloadlen = strlen(jsondump.c_str());
+
+		/*
+		 * create a topic name for response
+		 */
+
+		response_str_SHA256_utf8 = fromLocale(topic_str + string("/alive/response"));
+
+		/*		
+				makeTopic(topic_str,\
+				string("/alive/response"),\
+				response_str_SHA256_utf8);
+		 */
+
+		/*
+		 *  publish the message to the response topic
+		 * and then, wait.
+		 */
+
+		printf("Responding to status topic\n");
+		if((code = MQTTClient_publishMessage(m_client,\
+						response_str_SHA256_utf8.c_str(),\
+						&m_pubmsg,\
+						&m_token)) != MQTTCLIENT_SUCCESS){
+			fprintf(stderr, "Error while updating the topic \"status\" with error %d\n", code);
+		}
+		code = MQTTClient_waitForCompletion(m_client,\
+				m_token,\
+				TIMEOUT);
+		printf("Message with delivery token %d delivered\n", m_token);
+	}
+	else if(feedback_str_SHA256_utf8 == string(_topicName)) {
+		m_transfer_mutex.lock();
+		if(m_onTransfer){
+			m_transfer_mutex.unlock();
+		}else {
+			m_onTransfer = true;
+			m_transfer_mutex.unlock();
+
 			stream << jsonObject;
 			jsondump = stream.str();
-			m_pubmsg.payload = (void *)jsondump.c_str();
-			m_pubmsg.payloadlen = strlen(jsondump.c_str());
 
-			/*
-			 * create a topic name for response
-			 */
+			m_currentAddress = (char *)m_sharedMemoryRegion;
+			m_currentAddress++;
 
-			memset(p_topic, 0, BUFSIZ);
-			strcpy(p_topic, topic_str.c_str());
-			strcat(p_topic, "/event");
-			memset(p_token, 0, BUFSIZ);
+			memcpy(m_currentAddress, jsondump.c_str(), strlen(jsondump.c_str()) + 1);
 
-			/*
-			 * hash the topic for security purpose 
-			 */
+			m_currentAddress = (char *)m_sharedMemoryRegion;
+			*m_currentAddress = '?';
 
-			
-			SHA256_Encrpyt((const BYTE *)p_topic, (UINT)strlen(p_topic) + 1, (BYTE *)p_token);
-			response_str_SHA256_utf8 = fromLocale(string(p_token));
-
-			/*
-			 *  publish the message to the response topic
-			 * and then, wait.
-			 */
-
-			printf("Responding to status topic\n");
-			if((code = MQTTClient_publishMessage(m_client,\
-							response_str_SHA256_utf8.c_str(),\
-							&m_pubmsg,\
-							&m_token)) != MQTTCLIENT_SUCCESS){
-				fprintf(stderr, "Error while updating the topic \"status\" with error %d\n", code);
+			while(1){
+				if(*m_currentAddress == '!')
+					break;
+				sleep(1);
 			}
-			code = MQTTClient_waitForCompletion(m_client,\
-					m_token,\
-					TIMEOUT);
-			printf("Message with delivery token %d delivered\n", m_token);
 
-		}
+			m_transfer_mutex.lock();
+			m_onTransfer = false;
+			m_transfer_mutex.unlock();
+		}		
 	}
 
 	MQTTClient_freeMessage(&_message);
 	MQTTClient_free(_topicName);
-	delete p_token;
 	return 1;
 }
 
