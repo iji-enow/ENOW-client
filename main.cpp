@@ -186,7 +186,7 @@ void preprocess(const string &major_topic){
 	if((p_client_feedback = p_pool->findClient(major_topic)) == NULL){
 		pool_mutex.unlock();
 		string initial_str;
-		char feedback_str[BUFSIZ] = "/feedback";
+		char feedback_str[BUFSIZ] = "/feed";
 		char alive_str[BUFSIZ] = "/alive/request";
 		char *const subtopic_list[2] = {feedback_str,\
 			alive_str\
@@ -212,7 +212,7 @@ void preprocess(const string &major_topic){
 				0,\
 				0);
 		p_client_feedback->publish(msg_feedback_t,\
-				string("/feedback"),\
+				string("/feed"),\
 				30);
 		p_client_feedback->publish(msg_alive_t,\
 				string("/alive/request"),\

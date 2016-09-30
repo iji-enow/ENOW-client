@@ -444,7 +444,7 @@ int objMQTTClient::messageArrived(void *_context,\
 	Value jsonObject = parse_string(message);
 	topic_str = (string)jsonObject["topic"];
 	request_str_SHA256_utf8 = topic_str + string("/alive/request");
-	feedback_str_SHA256_utf8 = topic_str + string("/feedback");
+	feedback_str_SHA256_utf8 = topic_str + string("/feed");
 
 	/*makeTopic(topic_str,\
 	  string("/alive/request"),\
