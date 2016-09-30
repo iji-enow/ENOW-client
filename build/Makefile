@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu/Repository/api
+CMAKE_SOURCE_DIR = /home/ubuntu/Repository/ENOW-client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu/Repository/api/build
+CMAKE_BINARY_DIR = /home/ubuntu/Repository/ENOW-client/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/api/build/CMakeFiles /home/ubuntu/Repository/api/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/ENOW-client/build/CMakeFiles /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/api/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/Repository/ENOW-client/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

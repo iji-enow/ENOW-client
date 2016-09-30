@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/ubuntu/Repository/api/src/KISA_SHA256.c" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o"
+  "/home/ubuntu/Repository/ENOW-client/src/KISA_SHA256.c" "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir/src/KISA_SHA256.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -16,10 +16,10 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/local/include"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ubuntu/Repository/api/main.cpp" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/main.cpp.o"
-  "/home/ubuntu/Repository/api/src/MQTTClient.cpp" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o"
-  "/home/ubuntu/Repository/api/src/MQTTClientPool.cpp" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o"
-  "/home/ubuntu/Repository/api/src/MQTTIPC.cpp" "/home/ubuntu/Repository/api/build/CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o"
+  "/home/ubuntu/Repository/ENOW-client/main.cpp" "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir/main.cpp.o"
+  "/home/ubuntu/Repository/ENOW-client/src/MQTTClient.cpp" "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir/src/MQTTClient.cpp.o"
+  "/home/ubuntu/Repository/ENOW-client/src/MQTTClientPool.cpp" "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir/src/MQTTClientPool.cpp.o"
+  "/home/ubuntu/Repository/ENOW-client/src/MQTTIPC.cpp" "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir/src/MQTTIPC.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -32,7 +32,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/ubuntu/Repository/api/build/CMakeFiles/json.dir/DependInfo.cmake"
+  "/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/json.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

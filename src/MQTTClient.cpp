@@ -434,6 +434,7 @@ int objMQTTClient::messageArrived(void *_context,\
 	printf("Message arrived.\n");
 	printf("	topic : %s\n", _topicName);
 	p_payload = (char *)_message->payload;
+	p_payload[_message->payloadlen] = 0;
 	message += p_payload;
 
 	/*
@@ -443,7 +444,7 @@ int objMQTTClient::messageArrived(void *_context,\
 	Value jsonObject = parse_string(message);
 	topic_str = (string)jsonObject["topic"];
 	request_str_SHA256_utf8 = topic_str + string("/alive/request");
-	feedback_str_SHA256_utf8 = topic_str + string("feedback");
+	feedback_str_SHA256_utf8 = topic_str + string("/feedback");
 
 	/*makeTopic(topic_str,\
 	  string("/alive/request"),\
@@ -501,6 +502,7 @@ int objMQTTClient::messageArrived(void *_context,\
 		printf("Message with delivery token %d delivered\n", m_token);
 	}
 	else if(feedback_str_SHA256_utf8 == string(_topicName)) {
+		printf("Acquired feedback\n");
 		m_transfer_mutex.lock();
 		if(m_onTransfer){
 			m_transfer_mutex.unlock();
@@ -528,7 +530,8 @@ int objMQTTClient::messageArrived(void *_context,\
 			m_transfer_mutex.lock();
 			m_onTransfer = false;
 			m_transfer_mutex.unlock();
-		}		
+		}
+		printf("Feedback processing completed\n");		
 	}
 
 	MQTTClient_freeMessage(&_message);
