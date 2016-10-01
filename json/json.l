@@ -5,7 +5,6 @@
     {
         int yylex();
     }
-
 	// Needed for std::stoll and std::stold
 	#include <string>
     

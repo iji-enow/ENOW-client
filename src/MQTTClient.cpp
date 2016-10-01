@@ -416,16 +416,17 @@ int objMQTTClient::messageArrived(void *_context,\
 		char *_topicName,\
 		int _topicLen,\
 		MQTTClient_message *_message){
-	char *p_payload = NULL;
+	char *p_payload = NULL,\
+					  *p_topic_prev = NULL,\
+					  *p_topic_prev_prev = NULL,\
+					  *p_topic_w = NULL;
 
 	int code = 0;
 	string topic_str,\
 		request_str_SHA256_utf8,\
 		response_str_SHA256_utf8,\
 		feedback_str_SHA256_utf8,\
-		message,\
-		jsondump;
-	ostringstream stream;
+		message;
 
 	/*
 	 * Confirming the contents of a message
@@ -440,49 +441,39 @@ int objMQTTClient::messageArrived(void *_context,\
 	/*
 	 * Verify the topic of a message
 	 */
-
-	Value jsonObject = parse_string(message);
-	topic_str = (string)jsonObject["topic"];
-	request_str_SHA256_utf8 = topic_str + string("/alive/request");
-	feedback_str_SHA256_utf8 = topic_str + string("/feed");
-
-	/*makeTopic(topic_str,\
-	  string("/alive/request"),\
-	  request_str_SHA256_utf8);
-	  makeTopic(topic_str,\
-	  string("/feedback"),\
-	  feedback_str_SHA256_utf8);
-	 */
+	p_topic_w = (char *)malloc(sizeof(char) * (strlen(_topicName) + 2));
+	strcpy(p_topic_w, _topicName);
+	p_topic_prev = strtok(p_topic_w, "/");
+	while(p_topic_prev != NULL) {
+		p_topic_prev_prev = p_topic_prev;
+		p_topic_prev = strtok(NULL, "/");
+	}
 
 	/*
 	 * checks whether it is the status topic
 	 */
 
-	if(request_str_SHA256_utf8 == string(_topicName)){
+	if( strcmp(p_topic_prev_prev, "request") == 0 ){
 
 		MQTTClient_message m_pubmsg = MQTTClient_message_initializer;
 		MQTTClient_deliveryToken m_token;
 
 		/*
-		 * dump the jsonObject to a string as payload
-		 */
+		   make a message to return
+		*/
 
-		stream << jsonObject;
-		jsondump = stream.str();
-		m_pubmsg.payload = (void *)jsondump.c_str();
-		m_pubmsg.payloadlen = strlen(jsondump.c_str());
-
+		m_pubmsg.payload = (void *)p_payload;
+		m_pubmsg.payloadlen = strlen(p_payload);
+		m_pubmsg.qos = 1;
+			
 		/*
 		 * create a topic name for response
 		 */
 
-		response_str_SHA256_utf8 = fromLocale(topic_str + string("/alive/response"));
-
-		/*		
-				makeTopic(topic_str,\
-				string("/alive/response"),\
-				response_str_SHA256_utf8);
-		 */
+		strcpy(p_topic_w, _topicName);
+		strcpy(&(p_topic_w[strlen(_topicName) - 7]), "response");
+		p_topic_w[strlen(_topicName) + 1] = 0;
+		response_str_SHA256_utf8 = fromLocale(string(p_topic_w));
 
 		/*
 		 *  publish the message to the response topic
@@ -501,7 +492,7 @@ int objMQTTClient::messageArrived(void *_context,\
 				TIMEOUT);
 		printf("Message with delivery token %d delivered\n", m_token);
 	}
-	else if(feedback_str_SHA256_utf8 == string(_topicName)) {
+	else if( strcmp(p_topic_prev, "feed") == 0 ) {
 		printf("Acquired feedback\n");
 		m_transfer_mutex.lock();
 		if(m_onTransfer){
@@ -510,13 +501,10 @@ int objMQTTClient::messageArrived(void *_context,\
 			m_onTransfer = true;
 			m_transfer_mutex.unlock();
 
-			stream << jsonObject;
-			jsondump = stream.str();
-
 			m_currentAddress = (char *)m_sharedMemoryRegion;
 			m_currentAddress++;
 
-			memcpy(m_currentAddress, jsondump.c_str(), strlen(jsondump.c_str()) + 1);
+			memcpy(m_currentAddress, p_payload, strlen(p_payload) + 1);
 
 			m_currentAddress = (char *)m_sharedMemoryRegion;
 			*m_currentAddress = '?';
@@ -536,6 +524,7 @@ int objMQTTClient::messageArrived(void *_context,\
 
 	MQTTClient_freeMessage(&_message);
 	MQTTClient_free(_topicName);
+	free(p_topic_w);
 	return 1;
 }
 
