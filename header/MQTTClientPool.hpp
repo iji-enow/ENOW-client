@@ -14,6 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+========================================
+	Class : objMQTTClientPool
+========================================
+	Description :
+		  A class managing list of objMQTTClients
+		 The class supports query function to retrieve objMQTTClient in the list
+*/
+
 #ifndef _MQTT_CLIENT_POOL_
 #define _MQTT_CLIENT_POOL_
 
@@ -46,5 +55,5 @@ public:
 	void insertClient(objMQTTClient *_client);
 	objMQTTClient* findClient(string _topic);
 };
-	
+
 #endif
