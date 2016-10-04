@@ -27,4 +27,67 @@ Prerequisite
 How to use it
 ==========
 
-  The client program is
+Installation
+----------
+* After installing all of the libraries in the __Prerequisite__ section, all you need to do to install the program is simple.</br>    
+
+```
+$ cd ENOW-client/
+$ mkdir build
+$ cd build
+$ cmake --DCMAKE_BUILD_TYPE=Release ../
+$ mkdir json
+$ make -j($nproc)
+```
+
+Running
+----------
+
+The client program needs 3 command-line arguments.</br>
+
+__`command-line arguments` :__
+```
+-a, --address : The ipv4 address of the broker
+-k, --key : The key for allocating and identifing IPC resource
+-i, --clientID : The identification name transferred to the broker to identify the device you're using now
+```
+
+The following example shows how the program run
+
+```
+$ sudo ./MQTTClient -a tcp://192.168.1.77 -i ENOW -k 7777
+```
+
+Registering your program
+----------
+After running the MQTTClient, you need to register your program. The way how to do this is as follow
+
+1. Register __PROGRAM PROFILE__
+
+The MQTTClient takes a json STRING as an input. 2 key-value pairs should be in the json STRING.
+
+```JSON
+{ "topic" : "topicToSend", "key" : key }
+```
+
+* The type of __"topic"__ is string
+* The type of __"key"__ is integer
+
+The following example should clarify the input string above
+
+ex)
+```JSON
+{ "topic" : enow/serverID/brokerID/deviceID", "key" : 1234 }
+```
+
+After finishing entering the input, the program automatically allocate an IPC resource in your operating system.
+
+2. Make your own program
+
+The MQTTClient makes use of shared memory in most of the System V Unix operating system. So you should map the IPC resource previously allocated in the first step.
+
+The following example shows how to make your own program.
+
+```
+
+```
