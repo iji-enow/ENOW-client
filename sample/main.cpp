@@ -14,6 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+========================================
+	WebcamFaceDetectionSample
+========================================
+	Description :
+		 WebcamFaceDetectionSample is a sample program that demonstrate how to
+		 use MQTTClient program. The program first detects any human face and
+		 sends it to the broker connected with MQTTClient
+	Command line arguments :
+	 	* 1st arguments : Default camera number
+		* 2nd arguments : key value mapped with allocated IPC resource
+*/
+
 extern "C"{
 #include <stdio.h>
 #include <stdlib.h>
@@ -116,7 +129,7 @@ static void shareMemory(void) {
 		transfer_mutex.unlock();
 
 		cout << "GOT FACE; ON TRANSFER->" << onTransfer << endl;
-			
+
 		char *currentAddress = (char *)sharedMemoryRegion;
 		currentAddress++;
 

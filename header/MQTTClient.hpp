@@ -14,6 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+========================================
+	Class : objMQTTClient
+========================================
+	Description :
+		  A class for communicating with broker connected to it.
+		 The class has static member variable m_client. The reason why the
+		 variable is static is because there should be only one connection
+*/
+
 #ifndef _MQTT_CLIENT_
 #define _MQTT_CLIENT_
 
@@ -153,4 +163,3 @@ class objMQTTClient{
 };
 
 #endif
-
