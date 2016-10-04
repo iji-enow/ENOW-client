@@ -1,3 +1,5 @@
+![Imgur](http://i.imgur.com/yQaE8Zo.png)
+
 MQTTClient
 =========================
 
@@ -77,7 +79,7 @@ The following example should clarify the input string above
 
 ex)
 ```JSON
-{ "topic" : enow/serverID/brokerID/deviceID", "key" : 1234 }
+{ "topic" : "enow/serverID/brokerID/deviceID", "key" : 1234 }
 ```
 
 After finishing entering the input, the program automatically allocate an IPC resource in your operating system.
