@@ -88,6 +88,77 @@ The MQTTClient makes use of shared memory in most of the System V Unix operating
 
 The following example shows how to make your own program.
 
+ex)
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <errno.h>
+
+int main(void) {
+
+	key_t key = (key_t)5678;
+	int shmid = 0;
+	void *sharedMemoryRegion = NULL;
+	char *currentAddress = NULL;
+
+	if((shmid = shmget(key,\
+					BUFSIZ,\
+					0600)) == -1) {
+		perror("shmget");
+		exit(1);
+	}
+
+	if((sharedMemoryRegion = shmat(shmid,\
+					(void *)0,\
+					0)) == (void *)-1) {
+		perror("shmat");
+		exit(1);
+	}
+    while(1) {
+		currentAddress = (char *)sharedMemoryRegion;
+
+		if(*currentAddress == '?') {
+
+			printf("Message Arrived\n");
+            // Do what you need to do
+			*currentAddress = '!';
+		}
+		else {
+			sleep(1);
+		}
+	}
+    return 0;
+}
 ```
 
+* This __C__ program takes a message published by the broker
+
+ex)
 ```
+import json
+import sysv_ipc
+
+_key = 9012
+_mode = 0600
+_size = 8192
+
+sharedMemory = sysv_ipc.SharedMemory(key = _key, mode = _mode, size = _size)
+
+while True:
+    sharedMemory.write(b"some bytes to send", offset = 1)
+    sharedMemory.write("?", offset = 0)
+
+    while True:
+        l_read_byte = sharedMemory.read(byte_count = 1, offset = 0)
+        if l_read_byte == b"!":
+            break
+```
+
+* This __Python__ program sends some bytes to the broker
+
+After building and running your program, the MQTTClient then publishes the input from the IPC resource allocated and subscribes the feedback
