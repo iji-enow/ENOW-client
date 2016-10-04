@@ -492,7 +492,7 @@ int objMQTTClient::messageArrived(void *_context,\
 				TIMEOUT);
 		printf("Message with delivery token %d delivered\n", m_token);
 	}
-	else if( strcmp(p_topic_prev, "feed") == 0 ) {
+	else if( strcmp(p_topic_prev_prev, "feed") == 0 ) {
 		printf("Acquired feedback\n");
 		m_transfer_mutex.lock();
 		if(m_onTransfer){
