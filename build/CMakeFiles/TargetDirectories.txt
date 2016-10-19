@@ -1,4 +1,0 @@
-/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/edit_cache.dir
-/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/rebuild_cache.dir
-/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/MQTTClient.dir
-/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/json.dir

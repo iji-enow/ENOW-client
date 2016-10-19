@@ -1,3 +1,5 @@
+![Imgur](http://i.imgur.com/yQaE8Zo.png)
+
 MQTTClient
 =========================
 
@@ -27,4 +29,138 @@ Prerequisite
 How to use it
 ==========
 
-  The client program is
+Installation
+----------
+* After installing all of the libraries in the __Prerequisite__ section, all you need to do to install the program is simple.</br>    
+
+```
+$ cd ENOW-client/
+$ mkdir build
+$ cd build
+$ cmake --DCMAKE_BUILD_TYPE=Release ../
+$ mkdir json
+$ make -j($nproc)
+```
+
+Running
+----------
+
+The client program needs 3 command-line arguments.</br>
+
+__`command-line arguments` :__
+```
+-a, --address : The ipv4 address of the broker
+-k, --key : The key for allocating and identifing IPC resource
+-i, --clientID : The identification name transferred to the broker to identify the device you're using now
+```
+
+The following example shows how the program run
+
+```
+$ sudo ./MQTTClient -a tcp://192.168.1.77 -i ENOW -k 7777
+```
+
+Registering your program
+----------
+After running the MQTTClient, you need to register your program. The way how to do this is as follow
+
+1. Register __PROGRAM PROFILE__
+
+The MQTTClient takes a json STRING as an input. 2 key-value pairs should be in the json STRING.
+
+```JSON
+{ "topic" : "topicToSend", "key" : key }
+```
+
+* The type of __"topic"__ is string
+* The type of __"key"__ is integer
+
+The following example should clarify the input string above
+
+ex)
+```JSON
+{ "topic" : "enow/serverID/brokerID/deviceID", "key" : 1234 }
+```
+
+After finishing entering the input, the program automatically allocate an IPC resource in your operating system.
+
+2. Make your own program
+
+The MQTTClient makes use of shared memory in most of the System V Unix operating system. So you should map the IPC resource previously allocated in the first step.
+
+The following example shows how to make your own program.
+
+ex)
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <errno.h>
+
+int main(void) {
+
+	key_t key = (key_t)5678;
+	int shmid = 0;
+	void *sharedMemoryRegion = NULL;
+	char *currentAddress = NULL;
+
+	if((shmid = shmget(key,\
+					BUFSIZ,\
+					0600)) == -1) {
+		perror("shmget");
+		exit(1);
+	}
+
+	if((sharedMemoryRegion = shmat(shmid,\
+					(void *)0,\
+					0)) == (void *)-1) {
+		perror("shmat");
+		exit(1);
+	}
+    while(1) {
+		currentAddress = (char *)sharedMemoryRegion;
+
+		if(*currentAddress == '?') {
+
+			printf("Message Arrived\n");
+            // Do what you need to do
+			*currentAddress = '!';
+		}
+		else {
+			sleep(1);
+		}
+	}
+    return 0;
+}
+```
+
+* This __C__ program takes a message published by the broker
+
+ex)
+```
+import json
+import sysv_ipc
+
+_key = 9012
+_mode = 0600
+_size = 8192
+
+sharedMemory = sysv_ipc.SharedMemory(key = _key, mode = _mode, size = _size)
+
+while True:
+    sharedMemory.write(b"some bytes to send", offset = 1)
+    sharedMemory.write("?", offset = 0)
+
+    while True:
+        l_read_byte = sharedMemory.read(byte_count = 1, offset = 0)
+        if l_read_byte == b"!":
+            break
+```
+
+* This __Python__ program sends some bytes to the broker
+
+After building and running your program, the MQTTClient then publishes the input from the IPC resource allocated and subscribes the feedback

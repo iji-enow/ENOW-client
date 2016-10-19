@@ -1,3 +1,17 @@
+/*Copyright [2016] [JeaSung Park]
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License
+*/
 #include <iostream>
 extern "C"{
 #include <stdio.h>
@@ -45,11 +59,29 @@ static string address, clientID;
 static key_t globalKey;
 
 /*
- * A function for checking system-wise data, like
- * 	System architecture
- * 	Endianess
- * 	Mac address for active network interfaces
- */
+========================================
+	MQTTClient
+========================================
+	Description :
+		 MQTTClient program provides easy access to both primitive devices and
+		IoT devices. It makes use of shared memory in System V Unix
+	Command line arguments :
+	 	* -a(--address) : ipV4 address : port
+		* -i(--clientID) : identification shown on remote broker
+		* -k(--key) : integer value used for establishing shared memory to get
+			response from broker
+*/
+
+/*
+========================================
+	Function : systemCheck
+========================================
+	Description :
+		  A function for checking system-wise data, like
+		 	* 	System architecture
+ 		 	* 	Endianess
+ 		 	* 	Mac address for active network interfaces
+*/
 
 void systemCheck(void){
 	int filedes = 0,\
@@ -163,8 +195,17 @@ void systemCheck(void){
 }
 
 /*
- * A function for converting ASCII string to UTF-8 string
- * The function uses Boost library, so you probably need to install it.
+========================================
+	Function : fromLocale
+========================================
+	Description :
+		 A function for converting ASCII string to UTF-8 string
+		The function uses Boost library, so you probably need to install it.
+	Parameter :
+		* localeString (std::string) : input string containing ASCII character
+		array
+	Return Value :
+		* string containing UTF-8 string
  */
 
 static std::string fromLocale(const std::string &localeString){
@@ -174,9 +215,17 @@ static std::string fromLocale(const std::string &localeString){
 	return boost::locale::conv::to_utf<char>(localeString, locale);
 }
 
+
 /*
-   A function for setting up connection between feedback and alive topic.
-*/
+========================================
+	Function : fromLocale
+========================================
+	Description :
+		 A function for setting up connection between feedback and alive topic.
+	Parameter :
+		* major_topic (std::string) : string containing topic
+			ex) enow/server0/broker0/device0
+ */
 
 void preprocess(const string &major_topic){
 
@@ -227,7 +276,21 @@ void preprocess(const string &major_topic){
 }
 
 /*
-   A function communicating with another process sharing the same memory region
+========================================
+	Function : shareMemory
+========================================
+	Description :
+		 A callback handler dealing with data transferred from another program.
+		The handler creates IPC resource on the operating system and busy-wait
+		for any program sends some data to server.
+	Parameter :
+		* _payload (std::string) : json STRING containing data such as
+			* 	System architecture
+			* 	Endianess
+			* 	Mac address for active network interfaces
+		* _topic : topic set for transferring data
+		* _key : key that identifies the IPC resource mapped with
+			another program
 */
 
 static void shareMemory(string _payload, string _topic, long long int _key) {
@@ -273,7 +336,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 
 					cout << "Sending a message to broker" << endl;
 					cout << "	TOPIC : " << _topic << endl;
-				
+
 					currentAddress = (char *)sharedMemoryRegion;
 
 					while(*currentAddress != '?')
@@ -323,6 +386,17 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 	}
 }
 
+/*
+========================================
+	Function : signalHandler
+========================================
+	Description :
+		 A handler handles SIGINT signal. If raised, the program then disconnect
+		from the broker and exit
+	Parameter :
+		* signo(int) : signal number
+*/
+
 static void signalHandler(int signo) {
 	if(signo == SIGINT) {
 		if(leaderObject != NULL) {
@@ -334,12 +408,16 @@ static void signalHandler(int signo) {
 }
 
 /*
- * An entry for the whole program
- * There are 3 main features of this program
- *	1. Connects the device to any remote broker
- *	2. Hashes topics and data for security purpose
- *	3. Creates a thread pool for managing each MQTTClient
- */
+========================================
+	Function : signalHandler
+========================================
+	Description :
+		 An entry for the whole program
+		There are 3 main features of this program
+			* Connects the device to any remote broker
+			* Hashes topics and data for security purpose
+			* Creates a thread pool for managing each MQTTClient
+*/
 
 int main(int argc, char **argv){
 	string topic,\
