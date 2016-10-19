@@ -28,29 +28,28 @@ The CXX compiler identification is GNU, found in "/home/ubuntu/Repository/ENOW-c
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1c936/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1c936.dir/build.make CMakeFiles/cmTC_1c936.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_6c3d8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6c3d8.dir/build.make CMakeFiles/cmTC_6c3d8.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1c936.dir/testCCompiler.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_1c936.dir/testCCompiler.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_1c936
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1c936.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_1c936.dir/testCCompiler.c.o  -o cmTC_1c936 -rdynamic 
+Building C object CMakeFiles/cmTC_6c3d8.dir/testCCompiler.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_6c3d8.dir/testCCompiler.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_6c3d8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c3d8.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_6c3d8.dir/testCCompiler.c.o  -o cmTC_6c3d8 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a7131/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a7131.dir/build.make CMakeFiles/cmTC_a7131.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_526c8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_526c8.dir/build.make CMakeFiles/cmTC_526c8.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-make[1]: Warning: File `/usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c' has modification time 5.3e+08 s in the future
-Building C object CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_a7131
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a7131.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o  -o cmTC_a7131 -rdynamic  
+Building C object CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_526c8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_526c8.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o  -o cmTC_526c8 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper
@@ -60,9 +59,8 @@ Thread model: posix
 gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) 
 COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/
 LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_a7131' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
- /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_a7131 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
-make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+COLLECT_GCC_OPTIONS='-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_526c8' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_526c8 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -70,15 +68,14 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_a7131/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_a7131.dir/build.make CMakeFiles/cmTC_a7131.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_526c8/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_526c8.dir/build.make CMakeFiles/cmTC_526c8.dir/build]
   ignore line: [make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp']
-  ignore line: [make[1]: Warning: File `/usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c' has modification time 5.3e+08 s in the future]
-  ignore line: [Building C object CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_a7131]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a7131.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o  -o cmTC_a7131 -rdynamic  ]
+  ignore line: [Building C object CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_526c8]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_526c8.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o  -o cmTC_526c8 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/gcc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper]
@@ -88,8 +85,8 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_a7131' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
-  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_a7131 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include' '-I' '/usr/local/include' '-I' '/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed' '-I' '/usr/include/arm-linux-gnueabihf' '-I' '/usr/include' '-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_526c8' '-rdynamic' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_526c8 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2] ==> ignore
     arg [--sysroot=/] ==> ignore
     arg [--build-id] ==> ignore
@@ -104,7 +101,7 @@ Parsed C implicit link information from above output:
     arg [armelf_linux_eabi] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_a7131] ==> ignore
+    arg [cmTC_526c8] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o] ==> ignore
@@ -118,7 +115,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..]
-    arg [CMakeFiles/cmTC_a7131.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_526c8.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -154,14 +151,14 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_827f2/fast"
-/usr/bin/make -f CMakeFiles/cmTC_827f2.dir/build.make CMakeFiles/cmTC_827f2.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_97f3e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_97f3e.dir/build.make CMakeFiles/cmTC_97f3e.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_827f2.dir/feature_tests.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c11 -o CMakeFiles/cmTC_827f2.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_827f2
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_827f2.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_827f2.dir/feature_tests.c.o  -o cmTC_827f2 -rdynamic 
+Building C object CMakeFiles/cmTC_97f3e.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c11 -o CMakeFiles/cmTC_97f3e.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_97f3e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_97f3e.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_97f3e.dir/feature_tests.c.o  -o cmTC_97f3e -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -174,14 +171,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0d431/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0d431.dir/build.make CMakeFiles/cmTC_0d431.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_bbb30/fast"
+/usr/bin/make -f CMakeFiles/cmTC_bbb30.dir/build.make CMakeFiles/cmTC_bbb30.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0d431.dir/feature_tests.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c99 -o CMakeFiles/cmTC_0d431.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_0d431
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0d431.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_0d431.dir/feature_tests.c.o  -o cmTC_0d431 -rdynamic 
+Building C object CMakeFiles/cmTC_bbb30.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c99 -o CMakeFiles/cmTC_bbb30.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_bbb30
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bbb30.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_bbb30.dir/feature_tests.c.o  -o cmTC_bbb30 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -194,14 +191,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_6466d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_6466d.dir/build.make CMakeFiles/cmTC_6466d.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_92c0e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_92c0e.dir/build.make CMakeFiles/cmTC_92c0e.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6466d.dir/feature_tests.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c90 -o CMakeFiles/cmTC_6466d.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_6466d
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6466d.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_6466d.dir/feature_tests.c.o  -o cmTC_6466d -rdynamic 
+Building C object CMakeFiles/cmTC_92c0e.dir/feature_tests.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -std=c90 -o CMakeFiles/cmTC_92c0e.dir/feature_tests.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_92c0e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92c0e.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_92c0e.dir/feature_tests.c.o  -o cmTC_92c0e -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -212,29 +209,28 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_5666f/fast"
-/usr/bin/make -f CMakeFiles/cmTC_5666f.dir/build.make CMakeFiles/cmTC_5666f.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_d1056/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d1056.dir/build.make CMakeFiles/cmTC_d1056.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_5666f.dir/testCXXCompiler.cxx.o
-/usr/bin/g++      -o CMakeFiles/cmTC_5666f.dir/testCXXCompiler.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_5666f
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5666f.dir/link.txt --verbose=1
-/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_5666f.dir/testCXXCompiler.cxx.o  -o cmTC_5666f -rdynamic 
+Building CXX object CMakeFiles/cmTC_d1056.dir/testCXXCompiler.cxx.o
+/usr/bin/g++      -o CMakeFiles/cmTC_d1056.dir/testCXXCompiler.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_d1056
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1056.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_d1056.dir/testCXXCompiler.cxx.o  -o cmTC_d1056 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_b8185/fast"
-/usr/bin/make -f CMakeFiles/cmTC_b8185.dir/build.make CMakeFiles/cmTC_b8185.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_19ab8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_19ab8.dir/build.make CMakeFiles/cmTC_19ab8.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-make[1]: Warning: File `/usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp' has modification time 5.3e+08 s in the future
-Building CXX object CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/g++      -o CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_b8185
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b8185.dir/link.txt --verbose=1
-/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b8185 -rdynamic  
+Building CXX object CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++      -o CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_19ab8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_19ab8.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_19ab8 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/g++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper
@@ -244,9 +240,8 @@ Thread model: posix
 gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) 
 COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/
 LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_b8185' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
- /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_b8185 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
-make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_19ab8' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_19ab8 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -254,15 +249,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_b8185/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_b8185.dir/build.make CMakeFiles/cmTC_b8185.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_19ab8/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_19ab8.dir/build.make CMakeFiles/cmTC_19ab8.dir/build]
   ignore line: [make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp']
-  ignore line: [make[1]: Warning: File `/usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp' has modification time 5.3e+08 s in the future]
-  ignore line: [Building CXX object CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/g++      -o CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_b8185]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b8185.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b8185 -rdynamic  ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++      -o CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_19ab8]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_19ab8.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++       -L/usr/lib -L/usr/local/lib  -v CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_19ab8 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.8/lto-wrapper]
@@ -272,8 +266,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.3) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.8/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib/:/lib/arm-linux-gnueabihf/:/lib/../lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/../lib/:/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_b8185' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
-  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_b8185 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-L/usr/lib' '-L/usr/local/lib' '-v' '-o' 'cmTC_19ab8' '-rdynamic' '-shared-libgcc' '-march=armv7-a' '-mfloat-abi=hard' '-mfpu=vfpv3-d16' '-mthumb' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2 --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu --as-needed -m armelf_linux_eabi -z relro -o cmTC_19ab8 /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o -L/usr/lib -L/usr/local/lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8 -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../../lib -L/lib/arm-linux-gnueabihf -L/lib/../lib -L/usr/lib/arm-linux-gnueabihf -L/usr/lib/../lib -L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../.. CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crtn.o]
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/collect2] ==> ignore
     arg [--sysroot=/] ==> ignore
     arg [--build-id] ==> ignore
@@ -288,7 +282,7 @@ Parsed CXX implicit link information from above output:
     arg [armelf_linux_eabi] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_b8185] ==> ignore
+    arg [cmTC_19ab8] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../../arm-linux-gnueabihf/crti.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.8/crtbegin.o] ==> ignore
@@ -302,7 +296,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.8/../../..]
-    arg [CMakeFiles/cmTC_b8185.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_19ab8.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -336,14 +330,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1y] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_51c00/fast"
-/usr/bin/make -f CMakeFiles/cmTC_51c00.dir/build.make CMakeFiles/cmTC_51c00.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_4c32c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4c32c.dir/build.make CMakeFiles/cmTC_4c32c.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_51c00.dir/feature_tests.cxx.o
-/usr/bin/g++     -std=c++1y -o CMakeFiles/cmTC_51c00.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_51c00
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_51c00.dir/link.txt --verbose=1
-/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_51c00.dir/feature_tests.cxx.o  -o cmTC_51c00 -rdynamic 
+Building CXX object CMakeFiles/cmTC_4c32c.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++1y -o CMakeFiles/cmTC_4c32c.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_4c32c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c32c.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_4c32c.dir/feature_tests.cxx.o  -o cmTC_4c32c -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -409,14 +403,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8a0e2/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8a0e2.dir/build.make CMakeFiles/cmTC_8a0e2.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_e4827/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e4827.dir/build.make CMakeFiles/cmTC_e4827.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8a0e2.dir/feature_tests.cxx.o
-/usr/bin/g++     -std=c++11 -o CMakeFiles/cmTC_8a0e2.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_8a0e2
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8a0e2.dir/link.txt --verbose=1
-/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_8a0e2.dir/feature_tests.cxx.o  -o cmTC_8a0e2 -rdynamic 
+Building CXX object CMakeFiles/cmTC_e4827.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++11 -o CMakeFiles/cmTC_e4827.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e4827
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e4827.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_e4827.dir/feature_tests.cxx.o  -o cmTC_e4827 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -482,14 +476,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_da19c/fast"
-/usr/bin/make -f CMakeFiles/cmTC_da19c.dir/build.make CMakeFiles/cmTC_da19c.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_e9847/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e9847.dir/build.make CMakeFiles/cmTC_e9847.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_da19c.dir/feature_tests.cxx.o
-/usr/bin/g++     -std=c++98 -o CMakeFiles/cmTC_da19c.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_da19c
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da19c.dir/link.txt --verbose=1
-/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_da19c.dir/feature_tests.cxx.o  -o cmTC_da19c -rdynamic 
+Building CXX object CMakeFiles/cmTC_e9847.dir/feature_tests.cxx.o
+/usr/bin/g++     -std=c++98 -o CMakeFiles/cmTC_e9847.dir/feature_tests.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e9847
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e9847.dir/link.txt --verbose=1
+/usr/bin/g++       -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_e9847.dir/feature_tests.cxx.o  -o cmTC_e9847 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
@@ -553,14 +547,14 @@ make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles
 Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX11 succeeded with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_07cdf/fast"
-/usr/bin/make -f CMakeFiles/cmTC_07cdf.dir/build.make CMakeFiles/cmTC_07cdf.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_3dfb1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3dfb1.dir/build.make CMakeFiles/cmTC_3dfb1.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_07cdf.dir/src.cxx.o
-/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX11   -std=c++11 -o CMakeFiles/cmTC_07cdf.dir/src.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/src.cxx
-Linking CXX executable cmTC_07cdf
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07cdf.dir/link.txt --verbose=1
-/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX11   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_07cdf.dir/src.cxx.o  -o cmTC_07cdf -rdynamic 
+Building CXX object CMakeFiles/cmTC_3dfb1.dir/src.cxx.o
+/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX11   -std=c++11 -o CMakeFiles/cmTC_3dfb1.dir/src.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_3dfb1
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3dfb1.dir/link.txt --verbose=1
+/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX11   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_3dfb1.dir/src.cxx.o  -o cmTC_3dfb1 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -568,14 +562,14 @@ int main() { return 0; }
 Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX0X succeeded with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a0fc9/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a0fc9.dir/build.make CMakeFiles/cmTC_a0fc9.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_3d4dc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3d4dc.dir/build.make CMakeFiles/cmTC_3d4dc.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_a0fc9.dir/src.cxx.o
-/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX0X   -std=c++0x -o CMakeFiles/cmTC_a0fc9.dir/src.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/src.cxx
-Linking CXX executable cmTC_a0fc9
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a0fc9.dir/link.txt --verbose=1
-/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX0X   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_a0fc9.dir/src.cxx.o  -o cmTC_a0fc9 -rdynamic 
+Building CXX object CMakeFiles/cmTC_3d4dc.dir/src.cxx.o
+/usr/bin/g++     -DCOMPILER_SUPPORTS_CXX0X   -std=c++0x -o CMakeFiles/cmTC_3d4dc.dir/src.cxx.o -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_3d4dc
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3d4dc.dir/link.txt --verbose=1
+/usr/bin/g++    -DCOMPILER_SUPPORTS_CXX0X   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_3d4dc.dir/src.cxx.o  -o cmTC_3d4dc -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 Source file was:
@@ -583,30 +577,28 @@ int main() { return 0; }
 Determining if the include file pthread.h exists passed with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_dd8dc/fast"
-/usr/bin/make -f CMakeFiles/cmTC_dd8dc.dir/build.make CMakeFiles/cmTC_dd8dc.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9db27/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9db27.dir/build.make CMakeFiles/cmTC_9db27.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_dd8dc.dir/CheckIncludeFile.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_dd8dc.dir/CheckIncludeFile.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
-Linking C executable cmTC_dd8dc
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dd8dc.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_dd8dc.dir/CheckIncludeFile.c.o  -o cmTC_dd8dc -rdynamic 
+Building C object CMakeFiles/cmTC_9db27.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -o CMakeFiles/cmTC_9db27.dir/CheckIncludeFile.c.o   -c /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_9db27
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9db27.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include      -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_9db27.dir/CheckIncludeFile.c.o  -o cmTC_9db27 -rdynamic 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_b7944/fast"
-/usr/bin/make -f CMakeFiles/cmTC_b7944.dir/build.make CMakeFiles/cmTC_b7944.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9dab2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9dab2.dir/build.make CMakeFiles/cmTC_9dab2.dir/build
 make[1]: Entering directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
-make[1]: Warning: File `/usr/local/share/cmake-3.6/Modules/CheckFunctionExists.c' has modification time 5.3e+08 s in the future
-Building C object CMakeFiles/cmTC_b7944.dir/CheckFunctionExists.c.o
-/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_b7944.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.6/Modules/CheckFunctionExists.c
-Linking C executable cmTC_b7944
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7944.dir/link.txt --verbose=1
-/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_b7944.dir/CheckFunctionExists.c.o  -o cmTC_b7944 -rdynamic -lpthread 
-make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+Building C object CMakeFiles/cmTC_9dab2.dir/CheckFunctionExists.c.o
+/usr/bin/gcc    -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_9dab2.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_9dab2
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9dab2.dir/link.txt --verbose=1
+/usr/bin/gcc  -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include   -DCHECK_FUNCTION_EXISTS=pthread_create   -L/usr/lib -L/usr/local/lib   CMakeFiles/cmTC_9dab2.dir/CheckFunctionExists.c.o  -o cmTC_9dab2 -rdynamic -lpthread 
 make[1]: Leaving directory `/home/ubuntu/Repository/ENOW-client/build/CMakeFiles/CMakeTmp'
 
 

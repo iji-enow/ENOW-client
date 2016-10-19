@@ -170,10 +170,11 @@ void detect(VideoCapture &capture,\
 				faceCascade,\
 				&faceRegion);
 
-		if(gotFace){
+		/*if(gotFace){
 			thread transfer {shareMemory};
 			transfer.detach();
 		}
+		*/
 
 		if (faceRegion.width > 0) {
 			rectangle(displayedFrame, faceRegion, CV_RGB(255, 255, 0), 2, CV_AA);
@@ -202,7 +203,7 @@ int main(int argc, char *argv[]) {
 	key = atoi(argv[2]);
 	sharedKey = (key_t)key;
 
-	if((sharedMemoryID = shmget(sharedKey,\
+	/*if((sharedMemoryID = shmget(sharedKey,\
 					BUFSIZ,\
 					0600)) < 0){
 		perror("shmget");
@@ -215,6 +216,7 @@ int main(int argc, char *argv[]) {
 		perror("shmat");
 		exit(1);
 	}
+	*/
 
 	initCamera(capture, cameraNumber);
 

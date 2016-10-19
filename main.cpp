@@ -235,7 +235,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 	ostringstream stream;
 
 	char c,\
-		buffer[BUFSIZ];
+		buffer[4194304];
 	int sharedMemoryID = 0,
 		index = 0;
 	key_t key = (key_t)_key;
@@ -250,7 +250,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 		pool_mutex.unlock();
 
 		if((sharedMemoryID = shmget(key,\
-						BUFSIZ,\
+						4194304,\
 						IPC_CREAT | 0600)) < 0){
 			perror("shmget");
 		}
@@ -269,6 +269,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 					stream.clear();
 					payload.clear();
 					payload_utf8.clear();
+					memset(buffer, 0, 4194304);
 
 					cout << "Sending a message to broker" << endl;
 					cout << "	TOPIC : " << _topic << endl;
@@ -289,6 +290,8 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 					currentAddress = (char *)sharedMemoryRegion;
 					*currentAddress = '!';
 
+					cout << string(buffer) << endl;
+
 					Value object = parse_string(string(buffer));
 
 					json["payload"] = object;
@@ -296,7 +299,7 @@ static void shareMemory(string _payload, string _topic, long long int _key) {
 					payload = stream.str();
 					payload_utf8 = fromLocale(payload);
 
-					cout << "	PAYLOAD : " << payload_utf8 << endl;
+					//cout << "	PAYLOAD : " << payload_utf8 << endl;
 					MQTTClient_message msg_t = MQTTClient_message_initializer;
 
 					p_client->setPayload(msg_t,\
@@ -326,6 +329,7 @@ static void signalHandler(int signo) {
 			leaderObject->disconnect();
 			delete leaderObject;
 		}
+		exit(1);
 	}
 }
 
@@ -357,7 +361,7 @@ int main(int argc, char **argv){
 	const char *keyStore = "/etc/pki/tls/certs/lesstif.com.crt";
 	const char *passPhrase = "Poiu8756.";
 
-	const rlim_t kernelStackSize = 16L * 1024L * 1024L;
+	const rlim_t kernelStackSize = 128L * 1024L * 1024L;
 	struct rlimit limit;
 	int c = 0,\
 			result = 0;
